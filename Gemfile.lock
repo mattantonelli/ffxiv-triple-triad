@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/xivapi/xivapi-ruby.git
-  revision: fa48332cf0ba0a223430319079185cd448e56d2f
-  tag: v0.1.1
+  revision: 811bc48ca1ebc13e0a1cd6a653f886fd3e4ec2eb
+  tag: v0.1.2
   specs:
-    xivapi (0.1.1)
+    xivapi (0.1.2)
       rest-client (~> 2.0.2)
 
 GEM
@@ -50,6 +50,9 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    annotate (2.7.4)
+      activerecord (>= 3.2, < 6.0)
+      rake (>= 10.4, < 13.0)
     arel (9.0.0)
     bindex (0.5.0)
     bootsnap (1.3.2)
@@ -191,6 +194,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate
   bootsnap (>= 1.1.0)
   byebug
   coffee-rails (~> 4.2)

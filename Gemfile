@@ -23,6 +23,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'puma', '~> 3.11'
+  gem 'annotate'
 end
 
-gem 'xivapi', git: 'https://github.com/xivapi/xivapi-ruby.git', tag: 'v0.1.1'
+gem 'xivapi', git: 'https://github.com/xivapi/xivapi-ruby.git', tag: 'v0.1.2'
