@@ -10,6 +10,16 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header class="container">
+      <%= render 'layouts/header' %>
+    </header>
+
+    <main role="main" class="container">
+      <%= yield %>
+    </main>
+
+    <footer class="text-center">
+      <span>Created by Raelys Skyborn of Behemoth.</span>
+    </footer>
   </body>
 </html>
