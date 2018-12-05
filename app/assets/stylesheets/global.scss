@@ -1,12 +1,12 @@
 html {
   position: relative;
-  height: 100%;
+  min-height: 100%;
 }
 
 body {
   background-color: #333;
   color: #eee;
-  margin-bottom: 32px;
+  margin-bottom: 40px;
 }
 
 footer {
@@ -18,4 +18,25 @@ footer {
 
 .navbar-dark {
   background-color: #222;
+}
+
+.navbar-expand .navbar-nav .nav-link {
+  padding-right: 1rem;
+}
+
+.table-striped tbody tr:nth-of-type(even), thead {
+  background-color: rgba(0, 0, 0, 0.1)
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0)
+}
+
+table {
+  border-bottom: solid #dee2e6 1px;
+
+  tr {
+    border-left: solid #dee2e6 1px;
+    border-right: solid #dee2e6 1px;
+  }
 }

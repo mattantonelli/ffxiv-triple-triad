@@ -1,0 +1,31 @@
+<div class="col-md-12">
+  <h3>All Cards</h3>
+  <table class="table table-striped mt-4">
+    <thead>
+      <tr>
+        <th scope="col"></th> <!-- Image -->
+        <th scope="col">Name</th>
+        <th scope="col">Type</th>
+        <th scope="col">Rarity</th>
+        <th scope="col">Stats</th>
+        <th scope="col">Source</th>
+        <th scope="col">Sell</th>
+        <th scope="col">Patch</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cards.each do |card| %>
+        <tr>
+          <td><%= small_image(card) %></td>
+          <td><%= card.name %></td>
+          <td><%= card.type.name %></td>
+          <td><%= stars(card) %></td>
+          <td><%= card.stats %></td>
+          <td><%= card.source %></td>
+          <td><%= card.sell_price %></td>
+          <td><%= card.patch %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
