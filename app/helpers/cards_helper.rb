@@ -22,6 +22,9 @@ module CardsHelper
   end
 
   def source(card)
-    card.npc_sources.pluck(:name).join(', ')
+    sources = card.npc_sources.pluck(:name)
+    sources << card.source if card.source
+    sources << "#{number_with_delimiter(card.buy_price)} MGP" if card.buy_price
+    sources.join('<br>').html_safe
   end
 end
