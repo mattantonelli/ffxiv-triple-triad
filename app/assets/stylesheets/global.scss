@@ -25,18 +25,21 @@ footer {
 }
 
 .table-striped tbody tr:nth-of-type(even), thead {
-  background-color: rgba(0, 0, 0, 0.1)
+  background-color: rgba(0, 0, 0, 0.2)
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
-  background-color: rgba(0, 0, 0, 0)
+  background-color: rgba(0, 0, 0, 0.1)
 }
 
-table {
-  border-bottom: solid #dee2e6 1px;
+.table {
+  th, td {
+    vertical-align: middle;
+    border-top: 1px solid #888;
+    border-bottom: 1px solid #888;
+  }
 
-  tr {
-    border-left: solid #dee2e6 1px;
-    border-right: solid #dee2e6 1px;
+  thead th {
+    border-bottom: 2px solid #888;
   }
 }
