@@ -23,6 +23,8 @@ class Card < ApplicationRecord
   belongs_to :type, class_name: 'CardType', foreign_key: :card_type_id
   has_many :npc_rewards
   has_many :npc_sources, through: :npc_rewards, source: :npc
+  has_one :pack_card
+  has_one :pack, through: :pack_card
 
   def stats
     "#{top} #{right} #{bottom} #{left}".gsub(/10/, 'A')

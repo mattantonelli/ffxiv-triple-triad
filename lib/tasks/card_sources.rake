@@ -4,7 +4,7 @@ namespace :card_sources do
     puts 'Setting various card sources'
 
     # Initial
-    Card.where(name: %w(Dodo Sabotender Bomb Mandragora Couerl)).update(source: 'Quest: Triple Triad Trial')
+    Card.where(name: %w(Dodo Sabotender Bomb Mandragora Coeurl)).update(source: 'Quest: Triple Triad Trial')
 
     # Dungeon/Trial/Raid
     Card.find_by(name: 'Zenos yae Galvus').update(source: 'Ala Mhigo')
@@ -74,6 +74,7 @@ namespace :card_sources do
     Card.find_by(name: 'Lakshmi').update(source: 'Emanation, Emanation (Extreme)')
     Card.find_by(name: 'Susano').update(source: 'The Pool of Tribute, The Pool of Tribute (Extreme)')
     Card.find_by(name: 'Shinryu').update(source: "The Royal Menagerie, The Minstrel's Ballad: Shinryu's Domain")
+    Card.find_by(name: 'Sephirot').update(source: 'Containment Bay S1T7, Containment Bay S1T7 (Extreme)')
 
     # Raids
     Card.find_by(name: 'Phlegethon').update(source: 'Labyrinth of the Ancients')
@@ -94,7 +95,7 @@ namespace :card_sources do
     Card.find_by(name: 'Darkscale').update(source: 'FATE: Mogicide / Rastaban Vibration (Churning Mists)')
     Card.find_by(name: 'Fat Chocobo').update(source: 'FATE: Special Tarasque Force (Dravanian Forelands)')
     Card.find_by(name: 'Phoebad').update(source: 'FATE: Tall Tale (The Lochs)')
-    Card.find_by(name: 'Mammoth').update(source: 'FATE: Wham, Bam, Thank You Mammoth (Azim Steppe)')
+    Card.find_by(name: 'Mammoth').update(source: 'FATE: Wham Bam Thank You Mammoth (Azim Steppe)')
 
     # Eureka
     Card.find_by(name: 'Happy Bunny').update(source: 'Eureka Pagos: Silver Coffer')

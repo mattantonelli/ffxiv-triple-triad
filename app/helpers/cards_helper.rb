@@ -23,8 +23,9 @@ module CardsHelper
 
   def source(card)
     sources = card.npc_sources.pluck(:name)
-    sources << card.source if card.source
+    sources << card.source.gsub(/, /, '<br>') if card.source
+    sources << card.pack.name if card.pack
     sources << "#{number_with_delimiter(card.buy_price)} MGP" if card.buy_price
-    sources.join('<br>').html_safe
+    sources.present? ? sources.join('<br>').html_safe : 'TBD'
   end
 end
