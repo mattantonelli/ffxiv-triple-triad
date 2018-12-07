@@ -11,7 +11,9 @@ namespace :cards do
     # Load the base cards
     cards = XIVAPI_CLIENT.content(name: 'TripleTriadCard', columns: CARD_COLUMNS, limit: 1000)
       .each_with_object({}) do |card, h|
-      h[card.id] = { id: card.id, name: card.name, description: card.description }
+      name = card.name
+      name = name.titleize if name =~ /^[a-z]/ # Fix lowercase names
+      h[card.id] = { id: card.id, name: name, description: card.description }
     end
 
     # Add their various stats

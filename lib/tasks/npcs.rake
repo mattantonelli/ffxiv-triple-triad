@@ -48,7 +48,9 @@ namespace :npcs do
     # Add the NPC name
     XIVAPI_CLIENT.content(name: 'ENpcResident', columns: NPC_COLUMNS, ids: npcs.values.pluck(:resident_id)).each do |data|
       id, _ = npcs.find { |id, npc| npc[:resident_id] == data[:id] }
-      npcs[id][:name] = data.name
+      name = data.name
+      name = name.titleize if name =~ /^[a-z]/ # Fix lowercase names
+      npcs[id][:name] = name
     end
 
     # Add their opponent data, then create them along with their decks and rewards
