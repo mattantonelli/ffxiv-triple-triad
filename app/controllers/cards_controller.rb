@@ -1,5 +1,6 @@
 class CardsController < ApplicationController
   def index
-    @cards = Card.all.includes(:npc_sources, :pack).order(id: :desc)
+    @q = Card.all.ransack(params[:q])
+    @cards = @q.result.includes(:npc_sources, :pack).order(id: :desc)
   end
 end

@@ -16,6 +16,19 @@ footer {
   height: 24px;
 }
 
+a, a:hover {
+  color: #eee;
+  text-decoration: underline;
+}
+
+a.nav-link {
+  text-decoration: none;
+}
+
+a.sort_link i {
+  padding-left: 4px;
+}
+
 .navbar-dark {
   background-color: #222;
 }
