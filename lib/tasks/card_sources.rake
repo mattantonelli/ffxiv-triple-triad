@@ -100,9 +100,9 @@ namespace :card_sources do
     # Eureka
     Card.find_by(name: 'Happy Bunny').update(source: 'Eureka Pagos: Silver Coffer')
     Card.find_by(name: 'Yukinko').update(source: 'Eureka Pagos: Eternity FATE')
-    Card.find_by(name: 'Pazuzu').update(source: 'Eureka Anemos: Pazuzu')
-    Card.find_by(name: 'Louhi').update(source: 'Eureka Pagos: Louhi')
-    Card.find_by(name: 'Penthesilea').update(source: 'Eureka Pyros: Penthesilea')
+    Card.find_by(name: 'Pazuzu').update(source: 'Eureka Anemos: Wail in the Willows FATE')
+    Card.find_by(name: 'Louhi').update(source: 'Eureka Pagos: Louhi on Ice FATE')
+    Card.find_by(name: 'Penthesilea').update(source: 'Eureka Pyros: Lost Epic FATE')
 
     # Heaven on High
     Card.find_by(name: 'Wanyudo & Katasharin').update(source: 'Heaven on High: Silver/Gold Sack')

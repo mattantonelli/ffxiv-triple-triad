@@ -2,8 +2,6 @@ require 'csv'
 require 'open-uri'
 
 namespace :npcs do
-  NPC_DATA_URL = 'https://raw.githubusercontent.com/viion/ffxiv-datamining/master/csv/ENpcBase.csv'.freeze
-  NPC_COLUMNS = %w(ID Name).freeze
   LEVEL_DATA_URL = 'https://raw.githubusercontent.com/viion/ffxiv-datamining/master/csv/Level.csv'.freeze
   MAP_COLUMNS = %w(ID PlaceName.Name OffsetX OffsetY SizeFactor).freeze
 
@@ -12,17 +10,19 @@ namespace :npcs do
     puts 'Creating NPCs'
     counts = { npc: NPC.count, npc_card: NPCCard.count, npc_reward: NPCReward.count }
 
-    # Find all of the Triple Triad NPC IDs and create the base NPC object
-    npcs = CSV.read(open(NPC_DATA_URL)).drop(3).each_with_object({}) do |npc, h|
-      npc[3..34].each do |data|
-        id = data.to_i
-        break h[id] = { id: id, resident_id: npc[0].to_i } if id >> 16 == 35
-      end
+    # Find all of the Triple Triad NPC Residents and create the base NPC object
+    puts '  Fetching resident data'
+    npcs = XIVAPI_CLIENT.search(indexes: 'enpcresident', columns: %w(ID Name TripleTriadID),
+                                filters: 'TripleTriadID>0', limit: 200).each_with_object({}) do |npc, h|
+      name = npc.name
+      name = name.titleize if name =~ /^[a-z]/ # Fix lowercase names
+      h[npc.triple_triad_id] = { id: npc.triple_triad_id, resident_id: npc.id, name: name }
     end
 
     resident_ids = npcs.values.pluck(:resident_id)
 
     # Find the associated Level data for each NPC Resident and add the location data
+    puts '  Fetching location data'
     CSV.read(open(LEVEL_DATA_URL)).drop(3).each do |level|
       resident_id = level[-4].to_i
       next unless resident_ids.include?(resident_id)
@@ -45,15 +45,8 @@ namespace :npcs do
       npcs[id][:y] = get_coordinate(npc[:y], map[:y_offset], map[:size_factor])
     end
 
-    # Add the NPC name
-    XIVAPI_CLIENT.content(name: 'ENpcResident', columns: NPC_COLUMNS, ids: npcs.values.pluck(:resident_id)).each do |data|
-      id, _ = npcs.find { |id, npc| npc[:resident_id] == data[:id] }
-      name = data.name
-      name = name.titleize if name =~ /^[a-z]/ # Fix lowercase names
-      npcs[id][:name] = name
-    end
-
     # Add their opponent data, then create them along with their decks and rewards
+    puts '  Fetching opponent data'
     XIVAPI_CLIENT.content(name: 'TripleTriad', columns: '*', ids: npcs.keys).each do |data|
       npcs[data.id].merge!(rules: [data.triple_triad_rule0&.name, data.triple_triad_rule1&.name].compact.join(','),
                            quest: data.previous_quest0&.name)
