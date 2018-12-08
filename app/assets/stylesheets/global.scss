@@ -56,3 +56,31 @@ a.sort_link i {
     border-bottom: 2px solid #888;
   }
 }
+
+.card {
+  background-color: #333;
+
+  .card-header {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  .card-body:not(.card-table) {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .card-table {
+    padding: 0;
+
+    table {
+      margin-bottom: 0;
+
+      tr:first-child td {
+        border-top: none;
+      }
+
+      tr:last-child td {
+        border-bottom: none;
+      }
+    }
+  }
+}
