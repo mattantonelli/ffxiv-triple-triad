@@ -127,6 +127,12 @@ namespace :card_sources do
     Card.find_by(name: 'Roland').update(source: 'Event: Make It Rain (1,000 MGP)')
     Card.find_by(name: 'Gigi').update(source: 'Event: Make It Rain (18,000 MGP)')
 
+    # Tournaments
+    Card.find_by(name: 'Firion').update(source: 'Triple Triad Tournament')
+    Card.find_by(name: 'Cecil Harvey').update(source: 'Triple Triad Tournament')
+    Card.find_by(name: 'Tidus').update(source: 'Triple Triad Tournament')
+    Card.find_by(name: 'Lightning').update(source: 'Triple Triad Tournament')
+
     # Shop prices
     Card.find_by(name: 'Chocobo').update(buy_price: 600)
     Card.find_by(name: 'Opo-opo').update(buy_price: 600)
