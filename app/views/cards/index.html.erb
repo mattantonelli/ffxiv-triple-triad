@@ -11,16 +11,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @cards.each do |card| %>
-        <tr>
-          <td><%= small_image(card) %></td>
-          <td><%= card.name %></td>
-          <td><%= type_image(card) %></td>
-          <td><%= stars(card) %></td>
-          <td><%= render 'cards/stats', card: card %></td>
-          <td><%= source(card) %></td>
-        </tr>
-      <% end %>
+      <%= render 'table_data', cards: @cards %>
     </tbody>
   </table>
 </div>

@@ -1,0 +1,25 @@
+<% cards.each do |card| %>
+  <tr>
+    <td><%= small_image(card) %></td>
+    <td><%= card.name %></td>
+    <td><%= type_image(card) %></td>
+    <td><%= stars(card) %></td>
+    <td>
+      <div class="d-flex flex-column stats">
+        <div class="d-flex justify-content-center">
+          <span><%= stat(card, :top) %></span>
+        </div>
+        <div class="d-flex justify-content-around">
+          <span><%= stat(card, :left) %></span>
+          <span><%= stat(card, :right) %></span>
+        </div>
+        <div class="d-flex justify-content-center">
+          <span><%= stat(card, :bottom) %></span>
+        </div>
+      </div>
+    </td>
+    <% unless local_assigns[:skip_source] %>
+      <td><%= source(card) %></td>
+    <% end %>
+  </tr>
+<% end %>
