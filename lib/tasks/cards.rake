@@ -1,6 +1,6 @@
 namespace :cards do
   CARD_COLUMNS = %w(ID Name Description).freeze
-  RESIDENT_COLUMNS = %w(ID Top Right Bottom Left TripleTriadCardRarity.Stars TripleTriadCardTypeTargetID).freeze
+  RESIDENT_COLUMNS = %w(ID Top Right Bottom Left SortKey TripleTriadCardRarity.Stars TripleTriadCardTypeTargetID).freeze
   ITEM_COLUMNS = %w(AdditionalData GamePatch.Version).freeze
 
   desc 'Create the cards'
@@ -19,7 +19,7 @@ namespace :cards do
     # Add their various stats
     XIVAPI_CLIENT.content(name: 'TripleTriadCardResident', columns: RESIDENT_COLUMNS, limit: 1000).each do |stats|
       cards[stats.id].merge!(top: stats.top, right: stats.right, bottom: stats.bottom, left: stats.left,
-                             stars: stats.triple_triad_card_rarity.stars.to_i,
+                             sort_id: stats.sort_key, stars: stats.triple_triad_card_rarity.stars.to_i,
                              card_type_id: stats.triple_triad_card_type_target_id)
     end
 
@@ -29,8 +29,8 @@ namespace :cards do
     end
 
     # Then set their sale prices and create them
-    cards.each do |id, card|
-      card[:sell_price] = case(card[:stars])
+    cards.each do |id, data|
+      data[:sell_price] = case(data[:stars])
                           when 1 then 100
                           when 2 then 300
                           when 3 then 500
@@ -38,7 +38,11 @@ namespace :cards do
                           when 5 then 1500
                           end
 
-      Card.find_or_create_by!(card)
+      # Find or create the card
+      card = Card.find_or_create_by!(data.except(:sort_id))
+
+      # Then set the sort ID (which has probably changed between patches)
+      card.update!(sort_id: data[:sort_id])
     end
 
     puts "Created #{Card.count - count} new cards"
