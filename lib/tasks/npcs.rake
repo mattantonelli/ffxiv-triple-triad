@@ -48,8 +48,12 @@ namespace :npcs do
     # Add their opponent data, then create them along with their decks and rewards
     puts '  Fetching opponent data'
     XIVAPI_CLIENT.content(name: 'TripleTriad', columns: '*', ids: npcs.keys).each do |data|
-      npcs[data.id].merge!(rules: [data.triple_triad_rule0&.name, data.triple_triad_rule1&.name].compact.join(','),
-                           quest: data.previous_quest0&.name)
+      rules = [data.triple_triad_rule0&.name, data.triple_triad_rule1&.name].compact.join(', ')
+      quest_id = data.previous_quest0&.id
+      # Remove invalid initial characters from quest names (e.g. beast tribe quests)
+      quest_name = data.previous_quest0&.name&.sub(/\A[^a-z0-9]/i, '')&.strip
+
+      npcs[data.id].merge!(rules: rules, quest_id: quest_id, quest: quest_name)
 
       npc = NPC.find_or_create_by!(npcs[data.id])
 
