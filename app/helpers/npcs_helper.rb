@@ -1,6 +1,6 @@
 module NPCsHelper
-  def location(npc)
-    "#{npc.location}<br>(#{npc.x}, #{npc.y})".html_safe
+  def location(npc, inline: false)
+    "#{npc.location}#{inline ? ' ' : '<br>'}(#{npc.x}, #{npc.y})".html_safe
   end
 
   def quest(npc)

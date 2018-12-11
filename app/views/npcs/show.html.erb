@@ -1,2 +1,62 @@
-<h1>NPCs#show</h1>
-<p>Find me in app/views/npcs/show.html.erb</p>
+<div class="row">
+  <div class="col-4 offset-1">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title"><%= @npc.name %></h5>
+      </div>
+      <div class="card-body">
+        <dl>
+          <dt>Location</dt>
+          <dd><%= location(@npc, inline: true) %></dd>
+          <% if @npc.rules.present? %>
+            <dt>Rules</dt>
+            <dd><%= @npc.rules %></dd>
+          <% end %>
+          <% if @npc.quest.present? %>
+            <dt>Required Quest</dt>
+            <dd><%= quest(@npc) %></dd>
+          <% end %>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="card">
+      <div class="card-header">
+        <h6><%= 'Reward'.pluralize(@npc.rewards.count) %></h6>
+      </div>
+      <div class="card-body pt-0">
+        <div class="d-flex flex-wrap card-list-lg">
+          <% @npc.rewards.each do |card| %>
+            <%= large_image(card) %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row mt-4">
+  <div class="col-10 offset-1">
+    <div class="card">
+      <div class="card-header">
+        <h6>Deck
+          <span data-toggle="tooltip" data-html="true"
+            title="Opaque cards are always used.<br>Transparent cards are chosen at random.">
+            <%= fa_icon('question-circle') %>
+          </span>
+      </div>
+      <div class="card-body pt-0">
+        <div class="d-flex flex-wrap card-list-lg">
+          <% @npc.fixed_cards.each do |card| %>
+            <%= large_image(card) %>
+          <% end %>
+          <% @npc.variable_cards.each do |card| %>
+            <div class="card-faded">
+              <%= large_image(card) %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

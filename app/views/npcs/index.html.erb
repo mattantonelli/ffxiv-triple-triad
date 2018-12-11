@@ -11,12 +11,12 @@
   <tbody>
     <% @npcs.each do |npc| %>
       <tr>
-        <td><%= npc.name %></td>
+        <td><%= link_to(npc.name, npc_path(npc)) %></td>
         <td><%= location(npc) %></td>
         <td><%= npc.rules %></td>
         <td><%= quest(npc) %></td>
         <td>
-          <div class="d-flex rewards">
+          <div class="d-flex card-list">
             <% npc.rewards.each do |card| %>
               <%= small_image(card) %>
             <% end %>

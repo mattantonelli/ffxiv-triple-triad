@@ -29,6 +29,11 @@ a.sort_link i {
   padding-left: 4px;
 }
 
+.tooltip-inner {
+  white-space: nowrap;
+  max-width: none;
+}
+
 .navbar-dark {
   background-color: #222;
 }
@@ -61,14 +66,21 @@ a.sort_link i {
   background-color: #333;
 
   .card-header {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.4);
+
+    h5, h6 {
+      margin-bottom: 0;
+    }
   }
 
-  .card-body:not(.card-table) {
-    background-color: rgba(0, 0, 0, 0.1);
+  .card-body {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
   }
 
   .card-table {
+    background-color: #333;
     padding: 0;
 
     table {
