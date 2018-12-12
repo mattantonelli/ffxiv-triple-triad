@@ -4,6 +4,6 @@ module NPCsHelper
   end
 
   def quest(npc)
-    link_to(npc.quest, "http://www.garlandtools.org/db/#quest/#{npc.quest_id}", target: '_blank') if npc.quest
+    link_to(npc.quest, "https://www.garlandtools.org/db/#quest/#{npc.quest_id}", target: '_blank') if npc.quest
   end
 end

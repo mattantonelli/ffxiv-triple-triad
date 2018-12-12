@@ -2,3 +2,35 @@
   width: 60px;
   line-height: 1.1rem;
 }
+
+.card-large {
+  position: relative;
+  display: inline-flex;
+
+  .stats {
+    position: absolute;
+    bottom: 12px;
+    left: 27px;
+    font-weight: bold;
+
+    div {
+      width: 50px;
+      line-height: 0.8rem;
+    }
+
+    span {
+      text-shadow: -1px -1px 2px #000, 1px -1px 2px #000, -1px 1px 2px #000, 1px 1px 2px #000;
+    }
+  }
+}
+
+
+.card-faded {
+  img {
+    opacity: 0.7;
+  }
+
+  .stats {
+    opacity: 0.9;
+  }
+}

@@ -7,6 +7,7 @@ class NPCsController < ApplicationController
   end
 
   def show
+    @rewards = @npc.rewards
   end
 
   private

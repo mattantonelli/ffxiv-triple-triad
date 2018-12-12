@@ -23,13 +23,11 @@
   <div class="col-6">
     <div class="card">
       <div class="card-header">
-        <h6><%= 'Reward'.pluralize(@npc.rewards.count) %></h6>
+        <h6><%= 'Reward'.pluralize(@rewards.length) %></h6>
       </div>
       <div class="card-body pt-0">
         <div class="d-flex flex-wrap card-list-lg">
-          <% @npc.rewards.each do |card| %>
-            <%= large_image(card) %>
-          <% end %>
+          <%= render partial: 'cards/large', collection: @rewards, as: :card %>
         </div>
       </div>
     </div>
@@ -47,14 +45,8 @@
       </div>
       <div class="card-body pt-0">
         <div class="d-flex flex-wrap card-list-lg">
-          <% @npc.fixed_cards.each do |card| %>
-            <%= large_image(card) %>
-          <% end %>
-          <% @npc.variable_cards.each do |card| %>
-            <div class="card-faded">
-              <%= large_image(card) %>
-            </div>
-          <% end %>
+          <%= render partial: 'cards/large', collection: @npc.fixed_cards, as: :card %>
+          <%= render partial: 'cards/large', collection: @npc.variable_cards, as: :card, locals: { faded: true } %>
         </div>
       </div>
     </div>

@@ -27,4 +27,5 @@
 /config/master.key
 
 # Card images
-/app/assets/images/cards/*
+/app/assets/images/cards/large/*
+/app/assets/images/cards/small/*
