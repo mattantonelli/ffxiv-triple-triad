@@ -6,6 +6,8 @@
 .card-large {
   position: relative;
   display: inline-flex;
+  width: 104px;
+  height: 128px;
 
   .stats {
     position: absolute;
@@ -33,4 +35,8 @@
   .stats {
     opacity: 0.9;
   }
+}
+
+.card-info > div {
+  margin-right: 3rem;
 }

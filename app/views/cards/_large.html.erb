@@ -1,17 +1,16 @@
-<div data-toggle="tooltip" data-placement="bottom" title="<%= card.name %>" class="<%= 'card-faded' if local_assigns[:faded] %>">
-  <div class="card-large">
-    <%= large_image(card) %>
-      <div class="d-flex flex-column stats">
-        <div class="d-flex justify-content-center">
-          <span><%= stat(card, :top) %></span>
-        </div>
-        <div class="d-flex justify-content-around">
-          <span><%= stat(card, :left) %></span>
-          <span><%= stat(card, :right) %></span>
-        </div>
-        <div class="d-flex justify-content-center">
-          <span><%= stat(card, :bottom) %></span>
-        </div>
-      </div>
+<div data-toggle="tooltip" data-placement="bottom" title="<%= card.name %>"
+  class="card-large<%= ' card-faded' if local_assigns[:faded] %>">
+  <%= large_image(card) %>
+  <div class="d-flex flex-column stats">
+    <div class="d-flex justify-content-center">
+      <span><%= stat(card, :top) %></span>
+    </div>
+    <div class="d-flex justify-content-around">
+      <span><%= stat(card, :left) %></span>
+      <span><%= stat(card, :right) %></span>
+    </div>
+    <div class="d-flex justify-content-center">
+      <span><%= stat(card, :bottom) %></span>
+    </div>
   </div>
 </div>

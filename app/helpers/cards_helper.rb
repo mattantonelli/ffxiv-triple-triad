@@ -21,11 +21,15 @@ module CardsHelper
     value == 10 ? 'A' : value
   end
 
-  def source(card)
-    sources = card.npc_sources.pluck(:name)
-    sources << card.source.gsub(/, /, '<br>') if card.source
+  def format_price(price)
+    "#{number_with_delimiter(price)} MGP"
+  end
+
+  def sources(card)
+    sources = card.npc_sources.map { |npc| link_to(npc.name, npc_path(npc)) }
+    sources += card.source.split(', ') if card.source
     sources << link_to(card.pack.name, card_packs_path(nil, anchor: card.pack.id)) if card.pack
-    sources << "#{number_with_delimiter(card.buy_price)} MGP" if card.buy_price
-    sources.present? ? sources.join('<br>').html_safe : 'TBD'
+    sources << format_price(card.buy_price) if card.buy_price
+    sources
   end
 end

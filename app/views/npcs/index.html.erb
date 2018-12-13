@@ -11,7 +11,7 @@
   <tbody>
     <% @npcs.each do |npc| %>
       <tr>
-        <td><%= link_to(npc.name, npc_path(npc)) %></td>
+        <td><%= link_to(npc.name, npc_path(npc), class: 'name') %></td>
         <td><%= location(npc) %></td>
         <td><%= npc.rules %></td>
         <td><%= quest(npc) %></td>

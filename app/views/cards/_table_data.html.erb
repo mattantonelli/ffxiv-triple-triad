@@ -1,7 +1,7 @@
 <% cards.each do |card| %>
   <tr>
     <td><%= small_image(card) %></td>
-    <td><%= card.name %></td>
+    <td><%= link_to(card.name, card_path(card), class: 'name') %></td>
     <td><%= type_image(card) %></td>
     <td><%= stars(card) %></td>
     <td>
@@ -19,7 +19,13 @@
       </div>
     </td>
     <% unless local_assigns[:skip_source] %>
-      <td><%= source(card) %></td>
+      <td>
+        <ul class="list-unstyled mb-0">
+          <% sources(card).each do |source| %>
+            <li><%= source %></li>
+          <% end %>
+        </ul>
+      </td>
     <% end %>
   </tr>
 <% end %>

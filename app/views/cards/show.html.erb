@@ -1,0 +1,47 @@
+<div class="col-8 offset-2">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="card-title"><%= @card.name %></h5>
+    </div>
+    <div class="card-body">
+      <div class="d-flex">
+        <%= render 'large', card: @card %>
+        <div class="d-flex flex-column ml-4">
+          <div class="d-flex card-info">
+            <% if @card.card_type_id > 0 %>
+              <div class="text-center">
+                <dt>Type</dt>
+                <dd><%= type_image(@card) %></dd>
+              </div>
+            <% end %>
+            <div>
+              <dt>Rarity</dt>
+              <dd><%= stars(@card) %></dd>
+            </div>
+            <div>
+              <dt>Stats</dt>
+              <dd><%= render 'stats', card: @card %></dd>
+            </div>
+            <div>
+              <dt>Sale Price</dt>
+              <dd><%= format_price(@card.sell_price) %></dd>
+            </div>
+          </div>
+          <div>
+            <dt>Source</dt>
+            <dd>
+              <ul class="list-unstyled">
+                <% sources(@card).each do |source| %>
+                  <li><%= source %></li>
+                <% end %>
+              </ul>
+            </dd>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <dt>Description</dt>
+      <dd><%= @card.description %></dd>
+    </div>
+  </div>
+</div>

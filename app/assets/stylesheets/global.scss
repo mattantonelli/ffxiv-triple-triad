@@ -29,6 +29,14 @@ a.sort_link i {
   padding-left: 4px;
 }
 
+a.name {
+  text-decoration: none;
+}
+
+hr {
+  border-top: 1px solid rgba(233, 233, 233, 0.1)
+}
+
 .tooltip-inner {
   white-space: nowrap;
   max-width: none;
