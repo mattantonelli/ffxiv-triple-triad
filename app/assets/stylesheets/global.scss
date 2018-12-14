@@ -29,7 +29,7 @@ a.sort_link i {
   padding-left: 4px;
 }
 
-a.name {
+a.name, a.btn {
   text-decoration: none;
 }
 
@@ -44,10 +44,25 @@ hr {
 
 .navbar-dark {
   background-color: #222;
+
+  .dropdown-menu {
+    background-color: #292929;
+    min-width: 9rem;
+
+    a {
+      text-decoration: none;
+    }
+  }
 }
 
 .navbar-expand .navbar-nav .nav-link {
   padding-right: 1rem;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }
 
 .table-striped tbody tr:nth-of-type(even), thead {

@@ -1,0 +1,23 @@
+<div class="navbar navbar-expand navbar-dark mb-2">
+  <div class="navbar-nav mr-auto">
+    <%= link_to 'Home', root_path, class: 'nav-link' %>
+    <%= link_to 'My Cards', '#', class: 'nav-link' %>
+    <%= link_to 'All Cards', cards_path, class: 'nav-link' %>
+    <%= link_to 'NPCs', npcs_path, class: 'nav-link' %>
+    <%= link_to 'Packs', card_packs_path, class: 'nav-link' %>
+  </div>
+    <% if user_signed_in? %>
+      <div class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle p-0 pr-1" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <%= image_tag(current_user.avatar_url, class: 'avatar mr-2') %>
+          <%= current_user.username %>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right text-right px-4" aria-labelledby="userDropdown">
+          <%= link_to fa_icon('sign-out', text: 'Sign Out'), destroy_user_session_path %>
+        </div>
+      </div>
+    <% else %>
+      <%= link_to 'Sign in with Discord', user_discord_omniauth_authorize_path, class: 'btn btn-secondary' %>
+    <% end %>
+</div>
