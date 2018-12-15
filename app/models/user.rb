@@ -22,6 +22,18 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :trackable, :omniauthable, omniauth_providers: [:discord]
 
+  def cards
+    Redis.current.smembers(deck_key).map(&:to_i)
+  end
+
+  def add_card(card_id)
+    Redis.current.sadd(deck_key, card_id)
+  end
+
+  def remove_card(card_id)
+    Redis.current.srem(deck_key, card_id)
+  end
+
   def self.from_omniauth(auth)
     discord_user = where(provider: auth.provider, uid: auth.uid).first_or_create do |u|
       user.username = auth.info.name
@@ -35,5 +47,10 @@ class User < ApplicationRecord
     end
 
     discord_user
+  end
+
+  private
+  def deck_key
+    "deck-#{provider}-#{uid}"
   end
 end

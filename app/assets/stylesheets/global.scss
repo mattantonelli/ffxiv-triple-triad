@@ -33,6 +33,10 @@ a.name, a.btn {
   text-decoration: none;
 }
 
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
 hr {
   border-top: 1px solid rgba(233, 233, 233, 0.1)
 }

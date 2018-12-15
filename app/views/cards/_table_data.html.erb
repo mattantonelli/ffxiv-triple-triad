@@ -1,5 +1,5 @@
 <% cards.each do |card| %>
-  <tr>
+  <tr <%= 'class="has-card"'.html_safe if local_assigns[:user_cards] && user_cards.include?(card.id) %>>
     <td><%= small_image(card) %></td>
     <td><%= link_to(card.name, card_path(card), class: 'name') %></td>
     <td><%= type_image(card) %></td>
@@ -25,6 +25,15 @@
             <li><%= source %></li>
           <% end %>
         </ul>
+      </td>
+    <% end %>
+    <% if local_assigns[:user_cards] %>
+      <td class="text-center">
+        <% if user_cards.include?(card.id) %>
+          <input type="checkbox" class="card-toggle" data-path="<%= user_card_remove_path(current_user, card) %>" checked>
+        <% else %>
+          <input type="checkbox" class="card-toggle" data-path="<%= user_card_add_path(current_user, card) %>">
+        <% end %>
       </td>
     <% end %>
   </tr>

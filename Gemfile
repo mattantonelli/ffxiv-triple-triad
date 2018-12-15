@@ -20,6 +20,7 @@ gem 'jquery-rails'
 gem 'font-awesome-rails'
 gem 'ransack'
 gem 'chunky_png'
+gem 'redis-namespace'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
