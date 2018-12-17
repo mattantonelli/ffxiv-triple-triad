@@ -35,6 +35,11 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'puma', '~> 3.11'
   gem 'annotate'
+
+  gem 'capistrano', '3.10.0'
+  gem 'capistrano-bundler', '~> 1.2'
+  gem 'capistrano-rbenv', '~> 2.1'
+  gem 'capistrano-rails', '~> 1.4.0'
 end
 
 gem 'xivapi', git: 'https://github.com/xivapi/xivapi-ruby.git', tag: 'v0.1.2'

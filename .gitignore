@@ -29,3 +29,7 @@
 # Card images
 /app/assets/images/cards/large/*
 /app/assets/images/cards/small/*
+
+# Capistrano
+Capfile
+config/deploy*
