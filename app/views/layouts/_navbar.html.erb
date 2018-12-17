@@ -1,10 +1,12 @@
 <div class="navbar navbar-expand navbar-dark mb-2">
+  <%= link_to root_path, class: 'navbar-brand' do %>
+    <%= image_tag('logo.png') %>
+  <% end %>
   <div class="navbar-nav mr-auto">
-    <%= link_to 'Home', root_path, class: 'nav-link' %>
-    <%= link_to 'My Cards', my_cards_path, class: 'nav-link' %>
-    <%= link_to 'All Cards', cards_path, class: 'nav-link' %>
-    <%= link_to 'NPCs', npcs_path, class: 'nav-link' %>
-    <%= link_to 'Packs', card_packs_path, class: 'nav-link' %>
+    <%= nav_link('My Cards', my_cards_path) %>
+    <%= nav_link('All Cards', cards_path) %>
+    <%= nav_link('NPCs', npcs_path) %>
+    <%= nav_link('Packs', card_packs_path) %>
   </div>
     <% if user_signed_in? %>
       <div class="nav-item dropdown">

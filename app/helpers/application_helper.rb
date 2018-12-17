@@ -7,4 +7,9 @@ module ApplicationHelper
     when 'alert'   then 'alert-warning'
     end
   end
+
+  def nav_link(text, path)
+    classes = "nav-link#{' active' if current_page?(path)}"
+    link_to text, path, class: classes
+  end
 end

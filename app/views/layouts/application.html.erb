@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>FFXIV Triple Triad</title>
+    <title>Another Triple Triad Tracker</title>
+    <meta name="description" content="Another website for tracking your Final Fantasy XIV Triple Triad card collection." />
+
+    <meta property="og:title" content="Another Triple Triad Tracker">
+    <meta property="og:description" content="Another website for tracking your Final Fantasy XIV Triple Triad card collection." />
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -20,7 +25,8 @@
     </main>
 
     <footer class="text-center">
-      <span>Created by Raelys Skyborn of Behemoth</span>
+      <span>Created by Raelys Skyborn of Behemoth |</span>
+      <span>Powered by <%= link_to 'XIVAPI', 'https://xivapi.com/', target: '_blank' %></span>
     </footer>
   </body>
 </html>

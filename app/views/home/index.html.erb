@@ -1,3 +1,29 @@
-<div class="col-md-12">
-  <h1>Another Triple Triad Tracker</h1>
+<div class="jumbotron py-4 mb-3">
+  <h1 class="display-4">Another Triple Triad Tracker</h1>
+  <p class="lead">Another website for tracking your Final Fantasy XIV Triple Triad card collection.</p>
+  <hr class="my-4">
+  <h5>Why would you make another one of these?</h5>
+  <p>
+    I don't know, I just have a habit of
+    <%= link_to 'remaking things that already exist', 'http://na.lodestone.raelys.com/', target: '_blank' %>.
+  </p>
+  <h5>What's so special about this one?</h5>
+  <p>
+    <ul>
+      <li><b>Easy setup:</b> Create and maintain your card list by matching up the website with your in-game card list.</li>
+      <li><b>Quick updates:</b> As much info as possible is pulled from the game data thanks to
+        <%= link_to 'XIVAPI', 'https://xivapi.com/', target: '_blank' %>.
+        The rest is updated by hand on patch day (probably.)</li>
+      <li><b>Community:</b> If you have any feedback or feature requests, I want to hear them!</li>
+      <li><b>Dark theme:</b> I know the other ones are dark, but this one is, like, really dark.</li>
+    </ul>
+  </p>
+  <div class="mt-5 text-center">
+    <%= link_to 'Discuss on Discord', 'https://discord.gg/Bf62wNU', class: 'btn discord', target: '_blank' %>
+    <%= link_to 'Support on Patreon', 'https://www.patreon.com/lodestonenews', class: 'btn patreon', target: '_blank' %>
+  </div>
 </div>
+<p class="text-right">
+    FINAL FANTASY is a registered trademark of Square Enix Holdings Co., Ltd.<br>
+    FINAL FANTASY XIV © SQUARE ENIX CO., LTD.
+</p>

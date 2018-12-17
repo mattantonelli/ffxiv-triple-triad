@@ -16,9 +16,13 @@ footer {
   height: 24px;
 }
 
-a, a:hover {
+a {
   color: #eee;
   text-decoration: underline;
+
+  &:hover {
+    color: #fff;
+  }
 }
 
 a.nav-link {
