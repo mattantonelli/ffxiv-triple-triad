@@ -23,15 +23,20 @@ class User < ApplicationRecord
   devise :trackable, :omniauthable, omniauth_providers: [:discord]
 
   def cards
-    Redis.current.smembers(deck_key).map(&:to_i)
+    Redis.current.smembers(cards_key).map(&:to_i)
   end
 
   def add_card(card_id)
-    Redis.current.sadd(deck_key, card_id)
+    Redis.current.sadd(cards_key, card_id)
   end
 
   def remove_card(card_id)
-    Redis.current.srem(deck_key, card_id)
+    Redis.current.srem(cards_key, card_id)
+  end
+
+  def set_cards(card_ids)
+    Redis.current.del(cards_key)
+    Redis.current.sadd(cards_key, card_ids) unless card_ids.empty?
   end
 
   def self.from_omniauth(auth)
@@ -50,7 +55,7 @@ class User < ApplicationRecord
   end
 
   private
-  def deck_key
-    "deck-#{provider}-#{uid}"
+  def cards_key
+    "user-#{id}-cards"
   end
 end

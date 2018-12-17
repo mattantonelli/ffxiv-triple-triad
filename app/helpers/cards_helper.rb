@@ -21,6 +21,10 @@ module CardsHelper
     value == 10 ? 'A' : value
   end
 
+  def select_tooltip_delay
+    '{"show": 500, "hide": 0 }'
+  end
+
   def format_price(price)
     "#{number_with_delimiter(price)} MGP"
   end

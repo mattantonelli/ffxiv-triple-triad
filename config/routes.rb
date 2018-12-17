@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :cards, only: [:index, :show] do
     collection do
       get 'mine', as: :my
+      get 'select'
     end
   end
 
@@ -19,6 +20,9 @@ Rails.application.routes.draw do
     resources :cards, only: [] do
       post 'add'
       post 'remove'
+      collection do
+        post 'set'
+      end
     end
   end
 

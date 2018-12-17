@@ -13,12 +13,17 @@ class CardsController < ApplicationController
     end
   end
 
+  def select
+    @cards = Card.all.includes(:npc_sources, :pack).order(:sort_id)
+    @user_cards = current_user.cards
+  end
+
   def show
     @card = Card.find(params[:id])
   end
 
   def add
-    if current_user.id == params[:user_id].to_i
+    if valid_user?
       current_user.add_card(params[:card_id])
       head :no_content
     else
@@ -27,7 +32,7 @@ class CardsController < ApplicationController
   end
 
   def remove
-    if current_user.id == params[:user_id].to_i
+    if valid_user?
       current_user.remove_card(params[:card_id])
       head :no_content
     else
@@ -35,9 +40,22 @@ class CardsController < ApplicationController
     end
   end
 
+  def set
+    current_user.set_cards(set_params[:cards].split(',')) if valid_user?
+    redirect_to my_cards_path
+  end
+
   private
   def set_cards
     @q = Card.all.ransack(params[:q])
     @cards = @q.result.includes(:npc_sources, :pack).order(id: :desc)
+  end
+
+  def set_params
+    params.permit(:cards)
+  end
+
+  def valid_user?
+    current_user.id == params[:user_id].to_i
   end
 end

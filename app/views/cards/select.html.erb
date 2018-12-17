@@ -1,0 +1,52 @@
+<div class="card-buttons mx-auto mb-2 d-flex justify-content-between align-items-center">
+  <div>
+    <button type="button" class="btn btn-success btn-sm" id="add-all">All</button>
+    <button type="button" class="btn btn-danger btn-sm" id="remove-all">None</button>
+  </div>
+  <div class="hide-toggle">
+    <label for="toggle-missing" class="mb-0 mr-1">Hide Missing</label>
+    <input type="checkbox" id="toggle-missing" />
+  </div>
+</div>
+<div class="card card-page mx-auto pl-2 pt-2">
+  <div class="d-flex flex-wrap align-items-start">
+    <% @cards.each do |card| %>
+      <div class="card-select<%= ' missing' unless @user_cards.include?(card.id) %>" data-id="<%= card.id %>"
+        data-toggle="tooltip" data-placement="top" data-delay="<%= select_tooltip_delay %>" title="<%= card.name %>">
+        <%= small_image(card) %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="card-buttons mx-auto mt-2 d-flex justify-content-between align-items-center">
+  <button type="button" class="btn btn-secondary btn-sm" id="nav-prev"><%= fa_icon('arrow-left') %> Prev</button>
+  <div class="d-flex flex-column text-center">
+    <span id="page">Page 1</span>
+    <span class="font-weight-bold" id="total">Cards: <%= @user_cards.size %></span>
+  </div>
+  <button type="button" class="btn btn-secondary btn-sm float-right" id="nav-next">Next <%= fa_icon('arrow-right') %></button>
+</div>
+<div class="card mt-4 mb-2">
+  <div class="card-header">
+    <h5>Card Selection</h5>
+  </div>
+  <div class="card-body">
+    <p>
+      Welcome to the Card Selection page. From here you can set up your card list for the first time, or look for cards
+      you may have forgotten to add.
+
+      If you are just getting started, you can click the <span class="font-weight-bold">All</span> button above to add
+      all of the cards to your list, then compare this page to the in-game list and remove the cards you are missing.
+    </p>
+    <p>
+      Once you are done, remember to hit <span class="font-weight-bold">Save!</span>
+    </p>
+  </div>
+</div>
+<div class="float-right">
+  <%= form_tag(set_user_cards_path(current_user)) do %>
+    <%= hidden_field_tag('cards', @user_cards.join(','), id: 'card-ids') %>
+    <%= link_to 'Reset', select_cards_path, class: 'btn btn-danger' %>
+    <%= submit_tag('Submit', class: 'btn btn-primary') %>
+  <% end %>
+</div>
