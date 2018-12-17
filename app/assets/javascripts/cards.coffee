@@ -18,7 +18,10 @@ $(document).on 'turbolinks:load', ->
     else
       $.post(card.data('path'), { authenticity_token: window._token })
       path = card.data('path').replace('add', 'remove')
-      card.closest('tr').addClass('has-card')
+      row = card.closest('tr')
+      row.addClass('has-card')
+      if $('#toggle-owned').prop('checked')
+        row.hide()
 
     card.data('path', path)
     $('.btn-attention').removeClass('btn-attention')
