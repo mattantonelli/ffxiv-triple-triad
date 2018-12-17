@@ -78,3 +78,7 @@ $(document).on 'turbolinks:load', ->
   $('#nav-next').click ->
     page = if page == page_max then 1 else page + 1
     navigate_to(page)
+
+  $('#submit').click ->
+    dirty = false
+    $('form').submit()

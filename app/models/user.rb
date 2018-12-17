@@ -40,7 +40,7 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth)
-    discord_user = where(provider: auth.provider, uid: auth.uid).first_or_create do |u|
+    discord_user = where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.username = auth.info.name
       user.discriminator = auth.extra.raw_info.discriminator
       user.avatar_url = auth.info.image
