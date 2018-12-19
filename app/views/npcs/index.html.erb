@@ -18,7 +18,9 @@
         <td>
           <div class="d-flex card-list">
             <% npc.rewards.each do |card| %>
-              <%= small_image(card) %>
+              <div data-toggle="tooltip" data-placement="top" title="<%= card.name %>">
+                <%= small_image(card) %>
+              </div>
             <% end %>
           </div>
         </td>
