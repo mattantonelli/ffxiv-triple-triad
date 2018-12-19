@@ -20,23 +20,24 @@ bundle exec rake app:update:bin
 Create the MySQL databases `triad_development` and `triad_test` as well as a database user with access to them
 
 #### Create the necessary 3rd party applications
-  1. Create a new [Discord app](https://discordapp.com/developers/applications/) for user authentication. Take note of the **client ID** and **secret**.
-  2. Create a new [XIVAPI app](https://xivapi.com/app) for retrieving the data. Take note of the application **key**.
-  3. Configure the credentials file to match the format below using your data.
-  ```
-  rm config/credentials.yml.enc
-  rails credentials:edit
-  ```
-  ```yml
-  mysql:
-    development:
-      username: username
-      password: password
-  discord:
-    client_id: 123456789
-    client_secret: abc123
-  xivapi_key: def456
-  ```
+1. Create a new [Discord app](https://discordapp.com/developers/applications/) for user authentication. Take note of the **client ID** and **secret**.
+    1. Set the redirect URI on the OAuth2 page of your app: `http://localhost:3000/users/auth/discord/callback`
+2. Create a new [XIVAPI app](https://xivapi.com/app) for retrieving the data. Take note of the application **key**.
+3. Configure the credentials file to match the format below using your data.
+```
+rm config/credentials.yml.enc
+rails credentials:edit
+```
+```yml
+mysql:
+  development:
+    username: username
+    password: password
+discord:
+  client_id: 123456789
+  client_secret: abc123
+xivapi_key: def456
+```
 
 #### Load the database
 ```
