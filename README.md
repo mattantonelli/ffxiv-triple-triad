@@ -8,7 +8,7 @@ This is yet another application for tracking your Final Fantasy XIV Triple Triad
 * Redis
 
 ## Installation
-##### Clone and initialize the repository
+#### Clone and initialize the repository
 ```
 git clone https://github.com/mattantonelli/ffxiv-triple-triad
 cd ffxiv-triple-triad
@@ -16,10 +16,10 @@ bundle install
 bundle exec rake app:update:bin
 ```
 
-##### Set up the database
+#### Set up the database
 Create the MySQL databases `triad_development` and `triad_test` as well as a database user with access to them
 
-##### Create the necessary 3rd party applications
+#### Create the necessary 3rd party applications
   1. Create a new [Discord app](https://discordapp.com/developers/applications/) for user authentication. Take note of the **client ID** and **secret**.
   2. Create a new [XIVAPI app](https://xivapi.com/app) for retrieving the data. Take note of the application **key**.
   3. Configure the credentials file to match the format below using your data.
@@ -38,13 +38,13 @@ Create the MySQL databases `triad_development` and `triad_test` as well as a dat
   xivapi_key: def456
   ```
 
-##### Load the database
+#### Load the database
 ```
 bundle exec rake db:schema:load
 bundle exec rake all:load card_sources:set card_packs:create
 ```
 
-##### Start the server
+#### Start the server
 ```
 rails server
 ```
