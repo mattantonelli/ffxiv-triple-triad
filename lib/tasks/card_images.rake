@@ -1,11 +1,14 @@
 require 'open-uri'
 
 namespace :card_images do
-  LARGE_DIR = Rails.root.join('app/assets/images/cards/large')
-  SMALL_DIR = Rails.root.join('app/assets/images/cards/small')
-  BACKGROUND = ChunkyPNG::Image.from_file(Rails.root.join('app/assets/images/cards/background.png'))
-  STAR = ChunkyPNG::Image.from_file(Rails.root.join('app/assets/images/cards/star.png'))
-  TYPES = (1..4).map { |id| ChunkyPNG::Image.from_file(Rails.root.join("app/assets/images/cards/types/#{id}.png")) }
+  LARGE_DIR = Rails.root.join('tmp/cards/large')
+  SMALL_DIR = Rails.root.join('tmp/cards/small')
+  IMAGES_DIR = Rails.root.join('app/assets/images/cards')
+  BACKGROUND = ChunkyPNG::Image.from_file(IMAGES_DIR.join('background.png'))
+  STAR = ChunkyPNG::Image.from_file(IMAGES_DIR.join('star.png'))
+
+  type_sheet = ChunkyPNG::Image.from_file(IMAGES_DIR.join("types.png"))
+  TYPES = (1..4).map { |id| type_sheet.crop(20 * (id - 1), 0, 20, 20) }
 
   desc 'Download the images for each card'
   task download: :environment do
@@ -25,6 +28,11 @@ namespace :card_images do
 
     puts "Downloaded #{Dir.entries(LARGE_DIR).size - counts[:large]} large images"
     puts "Downloaded #{Dir.entries(SMALL_DIR).size - counts[:small]} small images"
+
+    create_sheet(SMALL_DIR, IMAGES_DIR.join('small.png'), 40, 40)
+    create_sheet(LARGE_DIR, IMAGES_DIR.join('large.png'), 104, 128)
+
+    puts 'Created spritesheets for the latest card images'
   end
 end
 
@@ -57,4 +65,16 @@ end
 
 def download_image(offset, id)
   open("https://xivapi.com/i/082000/0#{offset + id}.png")
+end
+
+def create_sheet(source, destination, width, height)
+  ids = Card.order(:id).pluck(:id)
+  sheet = ChunkyPNG::Image.new(width * ids.size, height)
+
+  ids.each do |id|
+    image = source.join("#{id}.png")
+    sheet.compose!(ChunkyPNG::Image.from_file(image), width * (id - 1), 0)
+  end
+
+  sheet.save(destination.to_s)
 end

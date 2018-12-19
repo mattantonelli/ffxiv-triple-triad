@@ -1,6 +1,10 @@
 <% cards.each do |card| %>
   <tr <%= 'class="has-card"'.html_safe if local_assigns[:user_cards] && user_cards.include?(card.id) %>>
-    <td><%= small_image(card) %></td>
+    <td>
+      <%= link_to(card_path(card)) do %>
+        <%= small_image(card) %>
+      <% end %>
+    </td>
     <td><%= link_to(card.name, card_path(card), class: 'name') %></td>
     <td><%= type_image(card) %></td>
     <td><%= stars(card) %></td>

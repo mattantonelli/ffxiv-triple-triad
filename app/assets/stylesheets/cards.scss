@@ -3,6 +3,24 @@
   line-height: 1.1rem;
 }
 
+img.small {
+  width: 40px;
+  height: 40px;
+  background: url(asset_path('cards/small.png')) no-repeat;
+}
+
+img.large {
+  width: 104px;
+  height: 128px;
+  background: url(asset_path('cards/large.png')) no-repeat;
+}
+
+img.type {
+  width: 20px;
+  height: 20px;
+  background: url(asset_path('cards/types.png')) no-repeat;
+}
+
 .card-large {
   position: relative;
   display: inline-flex;

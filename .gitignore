@@ -27,8 +27,8 @@
 /config/master.key
 
 # Card images
-/app/assets/images/cards/large/*
-/app/assets/images/cards/small/*
+/app/assets/images/cards/large.png
+/app/assets/images/cards/small.png
 
 # Capistrano
 Capfile

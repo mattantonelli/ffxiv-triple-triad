@@ -39,7 +39,7 @@
       all of the cards to your list, then compare this page to the in-game list and remove the cards you are missing.
     </p>
     <p>
-      Once you are done, remember to hit <span class="font-weight-bold">Save!</span>
+      Once you are done, remember to hit <span class="font-weight-bold">Save Cards!</span>
     </p>
   </div>
 </div>
@@ -47,6 +47,6 @@
   <%= form_tag(set_user_cards_path(current_user)) do %>
     <%= hidden_field_tag('cards', @user_cards.join(','), id: 'card-ids') %>
     <%= link_to 'Reset', select_cards_path, class: 'btn btn-danger' %>
-    <%= submit_tag('Submit', class: 'btn btn-primary', id: 'submit') %>
+    <%= submit_tag('Save Cards', class: 'btn btn-primary', id: 'submit') %>
   <% end %>
 </div>

@@ -1,15 +1,15 @@
 module CardsHelper
   def small_image(card)
-    image_tag("cards/small/#{card.id}.png")
+    image_tag('blank.png', class: 'small', style: "background-position: -#{40 * (card.id - 1)}px 0")
   end
 
   def large_image(card)
-    image_tag("cards/large/#{card.id}.png")
+    image_tag('blank.png', class: 'large', style: "background-position: -#{104 * (card.id - 1)}px 0")
   end
 
   def type_image(card)
-    id = card.card_type_id
-    image_tag("cards/types/#{id}.png") if id > 0
+    id = card.card_type_id - 1
+    image_tag('blank.png', class: 'type', style: "background-position: -#{20 * id}px 0") if id > -1
   end
 
   def stars(card)
