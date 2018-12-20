@@ -14,8 +14,13 @@ class CardsController < ApplicationController
   end
 
   def select
-    @cards = Card.all.includes(:npc_sources, :pack).order(:sort_id)
-    @user_cards = current_user.cards
+    if user_signed_in?
+      @cards = Card.all.includes(:npc_sources, :pack).order(:sort_id)
+      @user_cards = current_user.cards
+    else
+      flash[:alert] = 'You must sign in to manage your cards.'
+      redirect_to cards_path
+    end
   end
 
   def show
