@@ -1,4 +1,6 @@
 $(document).on 'turbolinks:load', ->
+  return unless $('#my-cards').length > 0
+
   restripe = ->
     $('tbody tr:visible').each (index) ->
       $(this).css('background-color', if index % 2 == 0 then 'rgba(0, 0, 0, 0.1)' else 'rgba(0, 0, 0, 0.2)')

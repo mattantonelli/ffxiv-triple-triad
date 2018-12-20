@@ -1,4 +1,6 @@
 $(document).on 'turbolinks:load', ->
+  return unless $('.card-select').length > 0
+
   all_cards = ->
     $('.card-select')
 
