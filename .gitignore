@@ -29,6 +29,8 @@
 # Card images
 /app/assets/images/cards/large.png
 /app/assets/images/cards/small.png
+/public/images/cards/large/*
+/public/images/cards/small/*
 
 # Capistrano
 Capfile

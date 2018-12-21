@@ -1,8 +1,8 @@
 require 'open-uri'
 
 namespace :card_images do
-  LARGE_DIR = Rails.root.join('tmp/cards/large')
-  SMALL_DIR = Rails.root.join('tmp/cards/small')
+  LARGE_DIR = Rails.root.join('public/images/cards/large')
+  SMALL_DIR = Rails.root.join('public/images/cards/small')
   IMAGES_DIR = Rails.root.join('app/assets/images/cards')
   BACKGROUND = ChunkyPNG::Image.from_file(IMAGES_DIR.join('background.png'))
   STAR = ChunkyPNG::Image.from_file(IMAGES_DIR.join('star.png'))
