@@ -6,6 +6,7 @@
       <th scope="col">Rules</th>
       <th scope="col">Quest</th>
       <th scope="col">Rewards</th>
+      <th scope="col"><%= sort_link(@q, :patch, [:patch, :id]) %></th>
     </tr>
   </thead>
   <tbody>
@@ -24,6 +25,7 @@
             <% end %>
           </div>
         </td>
+        <td><%= npc.patch %></td>
       </tr>
     <% end %>
   </tbody>

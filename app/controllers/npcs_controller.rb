@@ -3,7 +3,7 @@ class NPCsController < ApplicationController
 
   def index
     @q = NPC.all.ransack(params[:q])
-    @npcs = @q.result.includes(:rewards).order(id: :desc)
+    @npcs = @q.result.includes(:rewards).order(patch: :desc, id: :desc)
   end
 
   def show

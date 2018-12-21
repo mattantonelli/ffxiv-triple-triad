@@ -13,6 +13,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  quest_id    :integer
+#  patch       :string(255)
 #
 
 class NPC < ApplicationRecord

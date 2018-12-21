@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_14_200118) do
+ActiveRecord::Schema.define(version: 2018_12_20_235806) do
 
   create_table "card_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -36,8 +36,10 @@ ActiveRecord::Schema.define(version: 2018_12_14_200118) do
     t.datetime "updated_at", null: false
     t.integer "sort_id"
     t.index ["card_type_id"], name: "index_cards_on_card_type_id"
+    t.index ["id", "patch"], name: "index_cards_on_id_and_patch"
     t.index ["name"], name: "index_cards_on_name", unique: true
     t.index ["sort_id"], name: "index_cards_on_sort_id"
+    t.index ["stars"], name: "index_cards_on_stars"
   end
 
   create_table "npc_cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -70,6 +72,8 @@ ActiveRecord::Schema.define(version: 2018_12_14_200118) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "quest_id"
+    t.string "patch"
+    t.index ["patch"], name: "index_npcs_on_patch"
   end
 
   create_table "pack_cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

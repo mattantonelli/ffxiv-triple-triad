@@ -66,6 +66,8 @@ namespace :npcs do
       data.to_h.select { |k, v| k =~ /item_possible_reward\d\Z/ && v != nil }.values.each do |reward|
         NPCReward.find_or_create_by!(npc_id: data.id, card_id: reward.additional_data)
       end
+
+      npc.update!(patch: npc.rewards.pluck(:patch).min)
     end
 
     counts.each do |klass, count|

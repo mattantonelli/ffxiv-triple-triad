@@ -53,7 +53,7 @@ class CardsController < ApplicationController
   private
   def set_cards
     @q = Card.all.ransack(params[:q])
-    @cards = @q.result.includes(:npc_sources, :pack).order(id: :desc)
+    @cards = @q.result.includes(:npc_sources, :pack).order(patch: :desc, id: :desc)
   end
 
   def set_params

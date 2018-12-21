@@ -9,7 +9,7 @@
     <td><%= type_image(card) %></td>
     <td><%= stars(card) %></td>
     <td>
-      <div class="d-flex flex-column stats">
+      <div class="d-flex flex-column align-items-center stats">
         <div class="d-flex justify-content-center">
           <span><%= stat(card, :top) %></span>
         </div>
@@ -30,9 +30,10 @@
           <% end %>
         </ul>
       </td>
+      <td class="text-right"><%= card.patch %></td>
     <% end %>
     <% if local_assigns[:user_cards] %>
-      <td class="text-center">
+      <td class="text-center pr-0">
         <% if user_cards.include?(card.id) %>
           <input type="checkbox" class="card-toggle" data-path="<%= user_card_remove_path(current_user, card) %>" checked>
         <% else %>

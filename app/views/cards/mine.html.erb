@@ -12,13 +12,14 @@
 <table class="table table-striped table-sm shadow p-3 mt-2 mb-5" id="my-cards">
   <thead>
     <tr>
-      <th scope="col"><%= sort_link(@q, :id, 'ID') %></th> <!-- Image -->
+      <th scope="col"></th> <!-- Image -->
       <th scope="col"><%= sort_link(@q, :name) %></th>
       <th scope="col"><%= sort_link(@q, :type_id, 'Type') %></th>
       <th scope="col"><%= sort_link(@q, :stars, 'Rarity') %></th>
-      <th scope="col">Stats</th>
+      <th scope="col" class="text-center">Stats</th>
       <th scope="col">Source</th>
-      <th scope="col">Own</th>
+      <th scope="col" class="text-right"><%= sort_link(@q, :patch, [:patch, :id]) %></th>
+      <th scope="col" class="text-center pr-0">Own</th>
     </tr>
   </thead>
   <tbody>

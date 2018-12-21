@@ -91,6 +91,14 @@ hr {
   thead th {
     border-bottom: 2px solid #888;
   }
+
+  td:first-child, th:first-child {
+    padding-left: 0.5rem;
+  }
+
+  td:last-child, th:last-child {
+    padding-right: 1rem;
+  }
 }
 
 .card {
