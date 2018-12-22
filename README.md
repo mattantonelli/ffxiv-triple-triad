@@ -1,6 +1,10 @@
 # Another Triple Triad Tracker
 This is yet another application for tracking your Final Fantasy XIV Triple Triad card collection written in [Ruby on Rails](https://rubyonrails.org/) and powered by [XIVAPI](https://xivapi.com/). This application strives to be as autonomous as possible by pulling its card and NPC data from the game files via [XIVAPI](https://xivapi.com/). This ensures that manual data entry is only required for data not available on the client side, such as instance drop locations. Even if the card source is unknown, the cards themselves will still be created and the source can easily be updated later when it becomes known.
 
+## API
+
+All of this application's data is made available through a RESTful JSON API. See the [wiki](https://github.com/mattantonelli/ffxiv-triple-triad/wiki/API) for details.
+
 ## Dependencies
 * Ruby (2.4.1)
 * Rails (5.2.1)
