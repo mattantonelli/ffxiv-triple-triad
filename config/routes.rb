@@ -30,5 +30,10 @@ Rails.application.routes.draw do
     end
   end
 
+  get '404', to: 'home#not_found'
+  match "api/*path", via: :all, to: -> (_) { [404, { 'Content-Type' => 'application/json' },
+                                              ['{"status": 404, "error": "Not found"}'] ] }
+  match "*path", via: :all, to: redirect('404')
+
   root 'home#index'
 end
