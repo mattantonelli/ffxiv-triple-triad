@@ -8,6 +8,8 @@
         <dl>
           <dt>Location</dt>
           <dd><%= location(@npc, inline: true) %></dd>
+          <dt>Patch</dt>
+          <dd><%= @npc.patch %></dd>
           <% if @npc.rules.present? %>
             <dt>Rules</dt>
             <dd><%= @npc.rules %></dd>
