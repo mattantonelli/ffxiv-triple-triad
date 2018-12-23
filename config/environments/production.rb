@@ -54,7 +54,7 @@ Rails.application.configure do
   config.log_level = :info
 
   # Prepend all log lines with the following tags.
-  # config.log_tags = [ :request_id ]
+  config.log_tags = [ :remote_ip ]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -87,4 +87,9 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.lograge.enabled = true
+
+  config.lograge.custom_options = lambda do |event|
+    params = event.payload[:params].except(*%w(controller action format id))
+    { params: params } if params.present?
+  end
 end
