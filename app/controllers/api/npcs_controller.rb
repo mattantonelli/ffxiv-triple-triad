@@ -8,7 +8,8 @@ class Api::NPCsController < ApiController
   end
 
   def show
-    @npc = add_includes(NPC.all).find(params[:id])
+    @npc = add_includes(NPC.all).find_by(id: params[:id])
+    render_not_found unless @npc.present?
   end
 
   private

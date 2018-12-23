@@ -6,6 +6,7 @@ class Api::PacksController < ApiController
   end
 
   def show
-    @pack = Pack.includes(cards: :type).find(params[:id])
+    @pack = Pack.includes(cards: :type).find_by(id: params[:id])
+    render_not_found unless @pack.present?
   end
 end
