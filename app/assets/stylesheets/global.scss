@@ -56,10 +56,15 @@ hr {
 
   .dropdown-menu {
     background-color: #292929;
-    min-width: 9rem;
+    max-width: 130px;
 
     a {
+      color: rgba(255, 255, 255, 0.5);
       text-decoration: none;
+      &:hover, &:focus {
+        color: #fff;
+        background-color: inherit;
+      }
     }
   }
 }

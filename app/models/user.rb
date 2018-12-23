@@ -15,11 +15,10 @@
 #  last_sign_in_ip    :string(255)
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  public_cards       :boolean          default(TRUE)
 #
 
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :trackable, :omniauthable, omniauth_providers: [:discord]
 
   def cards
@@ -46,9 +45,10 @@ class User < ApplicationRecord
       user.avatar_url = auth.info.image
     end
 
-    # Keep existing Discord users' avatars up to date
-    unless discord_user.avatar_url == auth.info.image
-      discord_user.update(avatar_url: auth.info.image)
+    # Keep existing Discord users' data up to date
+    if discord_user.persisted?
+      discord_user.update(discriminator: auth.extra.raw_info.discriminator,
+                          avatar_url: auth.info.image)
     end
 
     discord_user
