@@ -6,7 +6,8 @@ class Api::UsersController < ApplicationController
       @total = Card.count
       @user_cards = @user.cards
 
-      random_ids = ((1..@total).to_a - @user_cards).sample(params[:limit].to_i || 5)
+      limit = params[:limit_missing].present? ? params[:limit_missing].to_i : 5
+      random_ids = ((1..@total).to_a - @user_cards).sample(limit)
       @random_cards = Card.includes(:type, :npc_sources, :pack).where(id: random_ids).order(:patch, :id)
     else
       render json: { status: 403, error: "User's card collection is set to private" }, status: :forbidden
