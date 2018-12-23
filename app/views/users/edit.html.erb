@@ -4,7 +4,7 @@
       <h5 class="card-title">Privacy</h5>
     </div>
     <div class="card-body pt-4 pb-3">
-      <%= form_for(@user) do |f| %>
+      <%= form_for(@user, url: user_settings_path, method: :post) do |f| %>
         <div class="form-group form-check">
           <%= f.check_box :public_cards %>
           <%= f.label :public_cards, 'Make my card collection publicly available' %>

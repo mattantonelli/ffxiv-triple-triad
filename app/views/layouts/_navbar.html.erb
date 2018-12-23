@@ -16,7 +16,7 @@
           <%= current_user.username %>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-          <%= link_to fa_icon('wrench', text: 'Settings'), edit_user_path(current_user), class: 'dropdown-item' %>
+          <%= link_to fa_icon('wrench', text: 'Settings'), user_settings_path, class: 'dropdown-item' %>
           <%= link_to fa_icon('sign-out', text: 'Sign Out'), destroy_user_session_path, class: 'dropdown-item' %>
         </div>
       </div>

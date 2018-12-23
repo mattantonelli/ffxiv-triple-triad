@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update]
-  before_action :validate_user!
+  before_action :set_user!, only: [:edit, :update]
 
   def edit
   end
@@ -8,7 +7,7 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       flash[:success] = 'Your settings have been updated.'
-      redirect_to edit_user_path(@user)
+      redirect_to user_settings_path
     else
       flash[:error] = 'There was a problem updating your settings.'
       render :edit
@@ -16,20 +15,16 @@ class UsersController < ApplicationController
   end
 
   private
-  def set_user
-    @user = User.find(params[:id])
-  end
-
-  def user_params
-    params.require(:user).permit(:public_cards)
-  end
-
-  def validate_user!
+  def set_user!
     if user_signed_in?
-      redirect_to edit_user_path(current_user) unless @user == current_user
+      @user = current_user
     else
       flash[:alert] = 'You must sign in to manage your settings.'
       redirect_to root_path
     end
+  end
+
+  def user_params
+    params.require(:user).permit(:public_cards)
   end
 end

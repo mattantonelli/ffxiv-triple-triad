@@ -16,13 +16,16 @@ Rails.application.routes.draw do
   resources :card_packs, only: :index
   resources :npcs, only: [:index, :show]
 
-  resources :users, only: [:edit, :update] do
+  resources :users, only: [] do
     resources :cards, only: [] do
       post 'add'
       post 'remove'
       post 'set', on: :collection
     end
   end
+
+  get 'user/settings', to: 'users#edit'
+  post 'user/settings', to: 'users#update'
 
   namespace :api do
     %w(npcs cards packs).each do |model|
