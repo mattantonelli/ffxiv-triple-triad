@@ -4,7 +4,7 @@ class Api::NPCsController < ApiController
   def index
     @query_params = sanitize_query_params.except(:deck)
     query = NPC.all.ransack(@query_params)
-    @npcs = add_includes(query.result).order(:patch, :id)
+    @npcs = add_includes(query.result).order(:patch, :id).limit(params[:limit])
   end
 
   def show

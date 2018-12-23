@@ -1,6 +1,6 @@
 class ApiController < ApplicationController
   def sanitize_query_params
-    query = params.except(:format, :controller, :action)
+    query = params.except(:format, :controller, :action, :limit)
     query.each do |k, v|
       if k =~ /_in\Z/
         case v
