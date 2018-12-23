@@ -1,4 +1,6 @@
 class ApiController < ApplicationController
+  before_action :set_default_format
+
   def render_not_found
     render json: { status: 404, error: 'Not found' }, status: :not_found
   end
@@ -17,5 +19,10 @@ class ApiController < ApplicationController
         end
       end
     end
+  end
+
+  private
+  def set_default_format
+    request.format = :json unless params[:format]
   end
 end
