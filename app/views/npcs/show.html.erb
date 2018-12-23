@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-4 offset-1">
+  <div class="col-5 col-lg-4 offset-0 offset-lg-1">
     <div class="card">
       <div class="card-header">
         <h5 class="card-title"><%= @npc.name %></h5>
@@ -20,7 +20,7 @@
       </div>
     </div>
   </div>
-  <div class="col-6">
+  <div class="col-7 col-lg-6">
     <div class="card">
       <div class="card-header">
         <h6><%= 'Reward'.pluralize(@rewards.length) %></h6>
@@ -34,19 +34,26 @@
   </div>
 </div>
 <div class="row mt-4">
-  <div class="col-10 offset-1">
+  <div class="col-12 col-lg-10 offset-lg-1">
     <div class="card">
       <div class="card-header">
         <h6>Deck
           <span data-toggle="tooltip" data-html="true"
-            title="Opaque cards are always used.<br>Transparent cards are chosen at random.">
-            <%= fa_icon('question-circle') %>
+                                      title="Cards on the left are always used.<br>Cards on the right are chosen at random.">
+            <%= fa_icon('question-circle') if @npc.variable_cards.present? %>
           </span>
       </div>
-      <div class="card-body pt-0">
-        <div class="d-flex flex-wrap card-list-lg">
-          <%= render partial: 'cards/large', collection: @npc.fixed_cards, as: :card %>
-          <%= render partial: 'cards/large', collection: @npc.variable_cards, as: :card, locals: { faded: true } %>
+      <div class="card-body pl-0">
+        <div class="d-flex">
+          <div class="d-flex <%= @npc.variable_cards.present? ? 'w-50' : 'w-100' %> flex-wrap
+            align-self-start card-list-lg pl-3">
+            <%= render partial: 'cards/large', collection: @npc.fixed_cards, as: :card, deck: true %>
+          </div>
+          <% if @npc.variable_cards.present? %>
+            <div class="d-flex w-50 flex-wrap align-self-start card-list-lg variable-cards pl-3">
+              <%= render partial: 'cards/large', collection: @npc.variable_cards, as: :card, deck: true %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
