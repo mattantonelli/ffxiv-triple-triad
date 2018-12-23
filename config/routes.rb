@@ -28,6 +28,8 @@ Rails.application.routes.draw do
     %w(npcs cards packs).each do |model|
       resources model, only: [:index, :show], defaults: { format: :json }
     end
+
+    resources :users, only: :show
   end
 
   get '404', to: 'home#not_found'

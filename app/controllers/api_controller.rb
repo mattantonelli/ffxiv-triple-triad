@@ -1,4 +1,8 @@
 class ApiController < ApplicationController
+  def render_not_found
+    render json: { status: 404, error: 'Not found' }, status: :not_found
+  end
+
   def sanitize_query_params
     query = params.except(:format, :controller, :action, :limit)
     query.each do |k, v|
