@@ -28,8 +28,8 @@ class CardsController < ApplicationController
   end
 
   def add
-    if valid_user?
-      current_user.add_card(params[:card_id])
+    if user = current_user
+      user.add_card(params[:card_id])
       head :no_content
     else
       head :not_found
@@ -37,8 +37,8 @@ class CardsController < ApplicationController
   end
 
   def remove
-    if valid_user?
-      current_user.remove_card(params[:card_id])
+    if user = current_user
+      user.remove_card(params[:card_id])
       head :no_content
     else
       head :not_found
@@ -46,7 +46,7 @@ class CardsController < ApplicationController
   end
 
   def set
-    current_user.set_cards(set_params[:cards].split(',')) if valid_user?
+    current_user.set_cards(set_params[:cards].split(','))
     redirect_to my_cards_path
   end
 
@@ -58,9 +58,5 @@ class CardsController < ApplicationController
 
   def set_params
     params.permit(:cards)
-  end
-
-  def valid_user?
-    current_user.id == params[:user_id].to_i
   end
 end

@@ -44,7 +44,7 @@
   </div>
 </div>
 <div class="float-right">
-  <%= form_tag(set_user_cards_path(current_user)) do %>
+  <%= form_tag(set_cards_path) do %>
     <%= hidden_field_tag('cards', @user_cards.join(','), id: 'card-ids') %>
     <%= link_to 'Reset', select_cards_path, class: 'btn btn-danger' %>
     <%= submit_tag('Save Cards', class: 'btn btn-primary', id: 'submit') %>

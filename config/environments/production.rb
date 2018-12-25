@@ -89,7 +89,7 @@ Rails.application.configure do
   config.lograge.enabled = true
 
   config.lograge.custom_options = lambda do |event|
-    params = event.payload[:params].except(*%w(controller action format id authenticity_token))
+    params = event.payload[:params].except(*%w(controller action format id authenticity_token state code))
     { params: params } if params.present?
   end
 end

@@ -35,9 +35,9 @@
     <% if local_assigns[:user_cards] %>
       <td class="text-center pr-0">
         <% if user_cards.include?(card.id) %>
-          <input type="checkbox" class="card-toggle" data-path="<%= user_card_remove_path(current_user, card) %>" checked>
+          <input type="checkbox" class="card-toggle" data-path="<%= card_remove_path(card) %>" checked>
         <% else %>
-          <input type="checkbox" class="card-toggle" data-path="<%= user_card_add_path(current_user, card) %>">
+          <input type="checkbox" class="card-toggle" data-path="<%= card_add_path(card) %>">
         <% end %>
       </td>
     <% end %>
