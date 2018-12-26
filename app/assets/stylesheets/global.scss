@@ -141,3 +141,36 @@ hr {
     }
   }
 }
+
+form.form-inline {
+  label {
+    margin-right: 0.5rem;
+  }
+
+  input.form-control, select.form-control {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-color: #555;
+    color: #eee;
+
+    &::placeholder {
+      color: #ccc;
+    }
+
+    &:active, &:focus {
+      box-shadow: none;
+      background-color: rgba(0, 0, 0, 0.01);
+      border-color: #777;
+    }
+
+    option {
+      background-color: #292929;
+      color: #eee;
+    }
+  }
+
+  .input-group-text {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #eee;
+    border-color: #555;
+  }
+}

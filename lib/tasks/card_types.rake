@@ -8,7 +8,7 @@ namespace :card_types do
     CardType.find_or_create_by!(id: 0, name: 'Normal')
 
     XIVAPI_CLIENT.content(name: 'TripleTriadCardType', columns: %w(ID Name)).each do |type|
-      CardType.find_or_create_by!(id: type.id, name: type.name)
+      CardType.find_or_create_by!(id: type.id, name: type.name) unless type.name.blank?
     end
 
     puts "Created #{CardType.count - count} new card types"
