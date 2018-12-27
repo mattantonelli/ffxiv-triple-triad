@@ -36,7 +36,7 @@ module CardsHelper
   def sources(card)
     sources = card.npc_sources.map { |npc| link_to(npc.name, npc_path(npc)) }
     sources += card.sources.pluck(:name)
-    sources << link_to(card.pack.name, card_packs_path(nil, anchor: card.pack.id)) if card.pack
+    sources << link_to(card.pack.name, packs_path(nil, anchor: card.pack.id)) if card.pack
     sources << format_price(card.buy_price) if card.buy_price
     sources
   end

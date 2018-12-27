@@ -13,7 +13,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :card_packs, only: :index
+  get 'packs', to: 'card_packs#index'
+
   resources :npcs, only: [:index, :show]
 
   resources :cards, only: [] do
