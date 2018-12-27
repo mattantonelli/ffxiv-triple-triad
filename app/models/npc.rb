@@ -23,4 +23,19 @@ class NPC < ApplicationRecord
   has_many :fixed_cards, -> { where('npc_cards.fixed = true') }, through: :npc_cards, source: :card
   has_many :variable_cards, -> { where('npc_cards.fixed = false') }, through: :npc_cards, source: :card
   has_many :rewards, through: :npc_rewards, source: :card
+
+  def self.locations
+    {
+      'La Noscea'         => ['Limsa', 'Noscea'],
+      'The Black Shroud'  => ['Gridania', 'Shroud'],
+      'Thanalan'          => ["Ul'dah", 'Thanalan', 'Gold Saucer', 'Battlehall'],
+      'Mor Dhona'         => ['Mor Dhona'],
+      'Coerthas'          => ['Foundation', 'Coerthas', 'Pillars', 'Fortemps'],
+      "Abalathia's Spire" => ['Clouds', 'Azys'],
+      'Dravania'          => ['Idyllshire', 'Forelands', 'Hinterlands', 'Churning'],
+      'Gyr Abania'        => ["Rhalgr's", 'Fringes', 'Peaks', 'Lochs'],
+      'Hingashi'          => ['Kugane'],
+      'Othard'            => ['Ruby Sea', 'Yanxia', 'Azim', 'Doman']
+    }.freeze
+  end
 end

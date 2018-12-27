@@ -1,14 +1,20 @@
 <div class="row">
+  <div class="col-6">
+    <%= form_tag(npcs_path, method: :get, enforce_utf8: false, class: 'form-inline search-form', id: 'npc-search') do %>
+      <%= select_tag :location, options_for_select(NPC.locations.keys, @location),
+        include_blank: 'All Locations', class: 'form-control form-control-sm mr-3' %>
+    <% end %>
+  </div>
   <% if user_signed_in? %>
-    <div class="col-12">
+    <div class="col-6 d-flex align-items-end justify-content-end">
       <div class="text-right">
-        <label for="toggle-completed" class="mb-1 mr-1">Hide Completed</label>
+        <label for="toggle-completed" class="mb-0 mr-1">Hide Completed</label>
         <input type="checkbox" id="toggle-completed" />
       </div>
     </div>
   <% end %>
 </div>
-<table class="table table-striped table-sm shadow p-3 mb-5" id="npcs">
+<table class="table table-striped table-sm shadow p-3 mt-2 mb-5" id="npcs">
   <thead>
     <tr>
       <th scope="col"><%= sort_link(@q, :name) %></th>

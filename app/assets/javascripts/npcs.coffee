@@ -19,3 +19,6 @@ $(document).on 'turbolinks:load', ->
       localStorage.setItem('display-completed', 'false')
 
     restripe()
+
+  $('#npc-search select').change ->
+    $('form').submit()
