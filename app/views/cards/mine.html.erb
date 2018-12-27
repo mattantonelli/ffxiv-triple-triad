@@ -1,13 +1,13 @@
 <%= javascript_tag "window._token = '#{form_authenticity_token}'" %>
 <div class="row mb-1">
-  <div class="col-6 col-lg-2 order-2 order-lg-1">
+  <div class="col-6 col-xl-2 order-2 order-xl-1">
     <%= link_to 'Select Your Cards', select_cards_path,
       class: "btn btn-secondary btn-sm#{' btn-attention' if @user_cards.empty?}" %>
   </div>
-  <div class="col-12 col-lg-8 order-1 order-lg-2 mb-2 mb-lg-0 text-center">
+  <div class="col-12 col-xl-8 order-1 order-xl-2 mb-2 mb-xl-0 text-center">
     <%= render 'form', url: my_cards_path %>
   </div>
-  <div class="col-6 col-lg-2 order-3 d-flex align-items-end justify-content-end">
+  <div class="col-6 col-xl-2 order-3 d-flex align-items-end justify-content-end">
     <div class="hide-toggle text-right">
       <label for="toggle-owned" class="mb-0 mr-1">Hide Owned</label>
       <input type="checkbox" id="toggle-owned" />

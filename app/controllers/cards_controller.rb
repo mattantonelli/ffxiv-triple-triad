@@ -52,8 +52,20 @@ class CardsController < ApplicationController
 
   private
   def set_cards
-    @q = Card.all.ransack(params[:q])
-    @cards = @q.result.includes(:npc_sources, :pack).order(patch: :desc, id: :desc)
+    @type = params.dig(:q, :sources_origin_eq)
+
+    case @type
+    when 'NPC'
+      params[:q].delete(:sources_origin_eq)
+      @q = Card.joins(:npc_sources).ransack(params[:q])
+    when 'Pack'
+      params[:q].delete(:sources_origin_eq)
+      @q = Card.joins(:pack).ransack(params[:q])
+    else
+      @q = Card.all.ransack(params[:q])
+    end
+
+    @cards = @q.result.includes(:npc_sources, :sources, :pack).order(patch: :desc, id: :desc).uniq
   end
 
   def set_params

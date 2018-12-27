@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_23_181952) do
+ActiveRecord::Schema.define(version: 2018_12_27_005522) do
 
   create_table "card_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(version: 2018_12_23_181952) do
     t.integer "left", null: false
     t.integer "buy_price"
     t.integer "sell_price", null: false
-    t.string "source"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "sort_id"
@@ -91,6 +90,16 @@ ActiveRecord::Schema.define(version: 2018_12_23_181952) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_packs_on_name", unique: true
+  end
+
+  create_table "sources", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "card_id"
+    t.string "origin"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_sources_on_card_id"
+    t.index ["origin"], name: "index_sources_on_origin"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
