@@ -16,7 +16,7 @@ unless local_assigns[:skip_sources]
       end
     end
 
-    json.drops card.source&.split(', ') || []
+    json.drops card.sources.pluck(:name)
     json.purchase card.buy_price || 0
   end
 end
