@@ -16,18 +16,18 @@
         <th></th> <!-- Avatar -->
         <th>Username</th>
         <th>Discord ID</th>
+        <th>Created</th>
         <th>Last Signed In</th>
-        <th>IP Address</th>
         <th>Cards</th>
         <th>Public</th>
       </tr>
       <% @users.each do |user| %>
         <tr>
           <td><%= image_tag(user.avatar_url, class: 'avatar') if user.avatar_url.present? %></td>
-          <td><%= user.username %>#<%= user.discriminator %></td>
+          <td><%= username(user) %></td>
           <td><%= user.uid %></td>
-          <td><%= user.current_sign_in_at %></td>
-          <td><%= user.current_sign_in_ip %></td>
+          <td><%= format_date(user.created_at) %></td>
+          <td><%= format_date(user.current_sign_in_at) %></td>
           <td><%= user.cards.count %></td>
           <td><%= fa_icon(user.public_cards ? 'check-square' : 'square') %></td>
         </tr>

@@ -12,4 +12,8 @@ module ApplicationHelper
     classes = "nav-link#{' active' if current_page?(path)}"
     link_to text, path, class: classes
   end
+
+  def format_date(date)
+    date.in_time_zone('America/New_York').strftime('%e %b %Y %H:%I')
+  end
 end
