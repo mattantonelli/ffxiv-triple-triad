@@ -1,0 +1,57 @@
+<div class="col-6 offset-3">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="card-title">Edit Card</h5>
+    </div>
+    <div class="card-body py-3">
+      <%= form_for(@card, url: admin_card_path, html: { class: 'form' }) do |f| %>
+        <div class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <%= f.label :buy_price, 'Buy Price' %>
+              <div class="input-group">
+                <%= f.text_field :buy_price, class: 'form-control' %>
+                <div class="input-group-append">
+                  <span class="input-group-text">MGP</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <%= f.label :patch %>
+              <%= f.text_field :patch, class: 'form-control' %>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :sources %>
+          <%= f.fields_for :sources do |sf| %>
+            <%= sf.hidden_field :id %>
+            <%= sf.hidden_field :card_id, value: @card.id %>
+
+            <div class="row mb-2">
+              <div class="col-4 pr-0">
+                <%= sf.select :origin, origin_options, { prompt: 'Select type' }, class: 'form-control' %>
+              </div>
+              <div class="col-8">
+                <%= sf.text_field :name, class: 'form-control' %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="text-right mt-4">
+          <% if @card.sources.length > 0 %>
+            <%= link_to 'Delete Sources', admin_card_delete_sources_path(@card), method: :delete,
+              data: { confirm: 'All of the custom sources will be deleted. Are you sure?' }, class: 'btn btn-danger' %>
+          <% end %>
+          <%= f.submit 'Submit', class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

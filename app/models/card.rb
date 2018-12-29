@@ -27,6 +27,8 @@ class Card < ApplicationRecord
   has_one :pack_card
   has_one :pack, through: :pack_card
 
+  accepts_nested_attributes_for :sources
+
   def stats
     "#{top} #{right} #{bottom} #{left}".gsub(/10/, 'A')
   end

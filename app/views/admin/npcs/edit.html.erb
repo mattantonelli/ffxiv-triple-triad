@@ -1,0 +1,68 @@
+<div class="col-6 offset-3">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="card-title">Edit NPC</h5>
+    </div>
+    <div class="card-body py-3">
+      <%= form_for(@npc, url: admin_npc_path, html: { class: 'form' }) do |f| %>
+        <div class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
+        <%= f.label :location %>
+        <div class="row mb-3">
+          <div class="col-6 pr-0">
+            <%= f.text_field :location, class: 'form-control' %>
+          </div>
+          <div class="col-3 pr-0">
+            <div class="input-group">
+              <%= f.number_field :x, class: 'form-control' %>
+              <div class="input-group-append">
+                <span class="input-group-text">X</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="input-group">
+              <%= f.number_field :y, class: 'form-control' %>
+              <div class="input-group-append">
+                <span class="input-group-text">Y</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-9">
+            <div class="form-group">
+              <%= f.label :rules %>
+              <%= f.text_field :rules, class: 'form-control' %>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <%= f.label :patch %>
+              <%= f.text_field :patch, class: 'form-control' %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-9">
+            <div class="form-group">
+              <%= f.label :quest %>
+              <%= f.text_field :quest, class: 'form-control' %>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <%= f.label :quest_id, 'ID' %>
+              <%= f.text_field :quest_id, class: 'form-control' %>
+            </div>
+          </div>
+        </div>
+        <div class="text-right mt-4">
+          <%= f.submit 'Submit', class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -16,6 +16,7 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  public_cards       :boolean          default(TRUE)
+#  admin              :boolean          default(FALSE)
 #
 
 class User < ApplicationRecord

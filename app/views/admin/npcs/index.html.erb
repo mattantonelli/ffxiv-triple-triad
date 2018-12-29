@@ -1,0 +1,40 @@
+<div class="card">
+  <div class="card-header">
+    <div class="d-flex">
+      <%= link_to :admin_npcs, class: 'unstyled mr-auto pt-1' do %>
+        <h5>Manage NPCs</h5>
+      <% end %>
+      <%= search_form_for(@q, url: admin_npcs_path, class: 'form form-inline') do |f| %>
+        <%= f.search_field :name_cont, placeholder: 'Name', size: 30, class: 'form-control form-control-sm mr-2' %>
+        <%= f.submit 'Search', class: 'btn btn-secondary btn-sm' %>
+      <% end %>
+    </div>
+  </div>
+  <div class="card-body card-table">
+    <table class="table table-striped table-sm">
+      <tr>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Rules</th>
+        <th>Quest</th>
+        <th>Patch</th>
+        <th></th> <!-- Actions -->
+      </tr>
+      <% @npcs.each do |npc| %>
+        <tr>
+          <td><%= npc.name %></td>
+          <td><%= location(npc) %></td>
+          <td><%= npc.rules %></td>
+          <td><%= quest(npc) %></td>
+          <td><%= npc.patch %></td>
+          <td class="text-center">
+            <%= link_to fa_icon('pencil', class: 'btn btn-dark btn-sm'), edit_admin_npc_path(npc) %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <div class="card-footer d-flex justify-content-center mb-0">
+      <%= will_paginate(@npcs, renderer: WillPaginate::ActionView::BootstrapLinkRenderer) %>
+  </div>
+</div>

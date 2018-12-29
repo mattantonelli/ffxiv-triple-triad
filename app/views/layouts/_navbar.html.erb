@@ -16,6 +16,12 @@
           <%= current_user.username %>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+          <% if current_user.admin? %>
+            <%= link_to fa_icon('user', text: 'Manage Users'), admin_users_path, class: 'dropdown-item' %>
+            <%= link_to fa_icon('file', text: 'Manage Cards'), admin_cards_path, class: 'dropdown-item' %>
+            <%= link_to fa_icon('address-book', text: 'Manage NPCs'), admin_npcs_path, class: 'dropdown-item' %>
+            <div class="dropdown-divider"></div>
+          <% end %>
           <%= link_to fa_icon('wrench', text: 'Settings'), user_settings_path, class: 'dropdown-item' %>
           <%= link_to fa_icon('sign-out', text: 'Sign Out'), destroy_user_session_path, class: 'dropdown-item' %>
         </div>

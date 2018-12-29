@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-6">
-    <%= form_tag(npcs_path, method: :get, enforce_utf8: false, class: 'form-inline search-form', id: 'npc-search') do %>
+    <%= form_tag(npcs_path, method: :get, enforce_utf8: false, class: 'form form-inline search-form', id: 'npc-search') do %>
       <%= select_tag :location, options_for_select(NPC.locations.keys, @location),
         include_blank: 'All Locations', class: 'form-control form-control-sm mr-3' %>
     <% end %>

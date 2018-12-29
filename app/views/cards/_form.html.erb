@@ -1,9 +1,9 @@
-<%= search_form_for(@q, url: url, enforce_utf8: false, class: 'form-inline card-search search-form') do |f| %>
+<%= search_form_for(@q, url: url, enforce_utf8: false, class: 'form form-inline card-search search-form') do |f| %>
   <%= f.search_field :name_cont, placeholder: 'Name', size: 30, class: 'form-control form-control-sm' %>
   <%= f.collection_select :card_type_id_eq, CardType.all, :id, :name,
     { include_blank: 'All Types' }, class: 'form-control form-control-sm' %>
   <%= f.select :stars_eq, rarity_options, { include_blank: 'All Rarities' }, class: 'form-control form-control-sm' %>
-  <%= select_tag :source_type, options_for_select(Source.names, @type),
+  <%= select_tag :source_type, options_for_select(Source.origins, @type),
     include_blank: 'All Sources', class: 'form-control form-control-sm' %>
   <%= f.submit name: nil, class: 'btn btn-secondary btn-sm' %>
 <% end %>

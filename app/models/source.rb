@@ -13,7 +13,7 @@
 class Source < ApplicationRecord
   belongs_to :card
 
-  def self.names
+  def self.origins
     %w(NPC Dungeon Trial Raid FATE Pack Achievement Tournament Other)
   end
 end

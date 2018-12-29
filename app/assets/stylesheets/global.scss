@@ -37,6 +37,14 @@ a.name, a.btn {
   text-decoration: none;
 }
 
+a.unstyled {
+  text-decoration: none;
+}
+
+.btn-dark:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
 label, input[type="checkbox"] {
   cursor: pointer;
 }
@@ -65,6 +73,11 @@ hr {
         color: #fff;
         background-color: inherit;
       }
+    }
+
+    .dropdown-divider {
+      border-top: 1px solid #bbb;
+      margin: 0.3rem 0;
     }
   }
 }
@@ -142,7 +155,7 @@ hr {
   }
 }
 
-form.form-inline {
+.form {
   label {
     margin-right: 0.5rem;
   }
@@ -172,5 +185,33 @@ form.form-inline {
     background-color: rgba(0, 0, 0, 0.1);
     color: #eee;
     border-color: #555;
+  }
+}
+
+.pagination {
+  margin-bottom: 0;
+
+  .page-link, .page-item.disabled .page-link, .page-item.active .page-link {
+    background: rgba(0, 0, 0, 0.1);
+    color: #eee;
+    text-decoration: none;
+    border: 1px solid #bbb;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:active, &:focus {
+      box-shadow: none;
+    }
+  }
+
+  .page-item.active {
+    background: rgba(0, 0, 0, 0.15);
+    font-weight: bold;
+  }
+
+  .page-item.disabled {
+    opacity: 0.6;
   }
 }

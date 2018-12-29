@@ -34,7 +34,15 @@ Rails.application.routes.draw do
     resources :users, only: :show
   end
 
-  get '404', to: 'home#not_found'
+  namespace :admin do
+    resources :users, only: :index
+    resources :npcs, only: [:index, :edit, :update]
+    resources :cards, only: [:index, :edit, :update] do
+      delete 'delete_sources'
+    end
+  end
+
+  get '404', to: 'home#not_found', as: :not_found
   match "api/*path", via: :all, to: -> (_) { [404, { 'Content-Type' => 'application/json' },
                                               ['{"status": 404, "error": "Not found"}'] ] }
   match "*path", via: :all, to: redirect('404')
