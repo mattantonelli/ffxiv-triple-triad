@@ -60,6 +60,8 @@ class CardsController < ApplicationController
       cards = Card.joins(:npc_sources)
     when 'Pack'
       cards = Card.joins(:pack)
+    when 'MGP'
+      cards = Card.where.not(buy_price: nil)
     else
       query[:sources_origin_eq] = @type
       cards = Card.all
