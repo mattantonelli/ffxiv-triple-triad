@@ -1,5 +1,5 @@
 <% cards.each do |card| %>
-  <tr <%= 'class="has-card"'.html_safe if local_assigns[:user_cards]&.include?(card.id) %>>
+  <tr class="card-row<%= ' has-card' if local_assigns[:user_cards]&.include?(card.id) %>">
     <td <%= 'class="owned"'.html_safe if local_assigns[:owned_cards]&.include?(card.id) %>>
       <%= link_to(card_path(card)) do %>
         <%= small_image(card) %>

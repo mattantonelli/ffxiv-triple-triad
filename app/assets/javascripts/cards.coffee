@@ -7,7 +7,7 @@ $(document).on 'turbolinks:load', ->
 
     progress = $('.progress-bar')
     current = $('.has-card').length
-    max = progress.attr('aria-valuemax')
+    max = $('.card-row').length
     completion = (current / max) * 100
 
     progress.attr('aria-valuenow', current)

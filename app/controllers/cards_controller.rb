@@ -7,8 +7,8 @@ class CardsController < ApplicationController
   def mine
     if user_signed_in?
       @user_cards = current_user.cards
-      @count = @user_cards.count
-      @total = Card.count
+      @count = (@user_cards & @cards.pluck(:id)).count
+      @total = @cards.count
       @completion = (@count / @total.to_f) * 100
     else
       flash[:alert] = 'You must sign in to manage your cards.'
