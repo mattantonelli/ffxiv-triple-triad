@@ -7,6 +7,9 @@ class CardsController < ApplicationController
   def mine
     if user_signed_in?
       @user_cards = current_user.cards
+      @count = @user_cards.count
+      @total = Card.count
+      @completion = (@count / @total.to_f) * 100
     else
       flash[:alert] = 'You must sign in to manage your cards.'
       redirect_to cards_path

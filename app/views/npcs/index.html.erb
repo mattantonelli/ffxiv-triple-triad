@@ -10,6 +10,14 @@
     </div>
   <% end %>
 </div>
+<% if user_signed_in? %>
+  <div class="progress mt-2">
+    <div class="progress-bar" role="progressbar" style="width: <%= @completion %>%;"
+      aria-valuenow="<%= @count %>" aria-valuemin="0" aria-valuemax="<%= @total %>">
+        <b class="px-2"><%= @count %>/<%= @total %> (<%= @completion.to_i %>%)</b>
+    </div>
+  </div>
+<% end %>
 <table class="table table-striped table-sm shadow p-3 mt-2 mb-5" id="npcs">
   <thead>
     <tr>

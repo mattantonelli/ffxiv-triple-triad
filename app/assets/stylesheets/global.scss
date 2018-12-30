@@ -219,3 +219,13 @@ hr {
     opacity: 0.6;
   }
 }
+
+.progress {
+  background-color: rgba(255, 255, 255, 0.2);
+  height: 1.25rem;
+
+  .progress-bar {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #eee;
+  }
+}
