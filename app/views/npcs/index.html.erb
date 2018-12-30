@@ -39,10 +39,12 @@
         <td>
           <div class="d-flex card-list">
             <% npc.rewards.each do |card| %>
-              <div data-toggle="tooltip" data-placement="top" title="<%= card.name %>"
-                <%= 'class="owned"'.html_safe if @user_cards.include?(card.id) %>>
-                <%= small_image(card) %>
-              </div>
+              <%= link_to card_path(card) do %>
+                <div data-toggle="tooltip" data-placement="top" title="<%= card.name %>"
+                  <%= 'class="owned"'.html_safe if @user_cards.include?(card.id) %>>
+                  <%= small_image(card) %>
+                </div>
+              <% end %>
             <% end %>
           </div>
         </td>
