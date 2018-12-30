@@ -7,6 +7,9 @@
     <%= nav_link('All Cards', cards_path) %>
     <%= nav_link('NPCs', npcs_path) %>
     <%= nav_link('Packs', packs_path) %>
+    <%= link_to("Play Guide #{fa_icon('external-link')}".html_safe,
+                'https://na.finalfantasyxiv.com/lodestone/playguide/contentsguide/goldsaucer/tripletriad',
+                target: '_blank', class: 'nav-link') %>
   </div>
     <% if user_signed_in? %>
       <div class="nav-item dropdown">
