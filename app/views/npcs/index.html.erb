@@ -1,16 +1,12 @@
-<div class="row">
-  <div class="col-6">
-    <%= form_tag(npcs_path, method: :get, enforce_utf8: false, class: 'form form-inline search-form', id: 'npc-search') do %>
-      <%= select_tag :location, options_for_select(NPC.locations.keys, @location),
-        include_blank: 'All Locations', class: 'form-control form-control-sm mr-3' %>
-    <% end %>
-  </div>
+<div class="d-flex align-items-end">
+  <%= form_tag(npcs_path, method: :get, enforce_utf8: false, class: 'form form-inline search-form', id: 'npc-search') do %>
+    <%= select_tag :location, options_for_select(NPC.locations.keys, @location),
+      include_blank: 'All Locations', class: 'form-control form-control-sm mr-3' %>
+  <% end %>
   <% if user_signed_in? %>
-    <div class="col-6 d-flex align-items-end justify-content-end">
-      <div class="text-right">
-        <label for="toggle-completed" class="mb-0 mr-1">Hide Completed</label>
-        <input type="checkbox" id="toggle-completed" />
-      </div>
+    <div class="d-flex align-items-center ml-auto">
+      <label for="toggle-completed" class="mb-0 mr-1">Hide Completed</label>
+      <input type="checkbox" id="toggle-completed" />
     </div>
   <% end %>
 </div>
