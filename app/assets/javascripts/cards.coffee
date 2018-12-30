@@ -9,6 +9,8 @@ $(document).on 'turbolinks:load', ->
     $('.has-card').hide()
     $('#toggle-owned').prop('checked', true)
     restripe()
+  else
+    $('.has-card').show()
 
   $('.card-toggle').change ->
     card = $(this)
