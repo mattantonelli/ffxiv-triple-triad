@@ -1,12 +1,7 @@
-<div class="card-buttons mx-auto mb-2 d-flex justify-content-between align-items-center">
-  <div>
-    <button type="button" class="btn btn-success btn-sm" id="add-all">All</button>
-    <button type="button" class="btn btn-danger btn-sm" id="remove-all">None</button>
-  </div>
-  <div class="hide-toggle">
-    <label for="toggle-missing" class="mb-0 mr-1">Hide Missing</label>
-    <input type="checkbox" id="toggle-missing" />
-  </div>
+<div class="card-buttons d-flex justify-content-between align-items-center mx-auto mb-1">
+  <button type="button" class="btn btn-secondary btn-sm" id="nav-prev"><%= fa_icon('arrow-left') %> Prev</button>
+  <span id="page">Page 1</span>
+  <button type="button" class="btn btn-secondary btn-sm float-right" id="nav-next">Next <%= fa_icon('arrow-right') %></button>
 </div>
 <div class="card card-page mx-auto pl-2 pt-2">
   <div class="d-flex flex-wrap align-items-start">
@@ -18,29 +13,41 @@
     <% end %>
   </div>
 </div>
-<div class="card-buttons mx-auto mt-2 d-flex justify-content-between align-items-center">
-  <button type="button" class="btn btn-secondary btn-sm" id="nav-prev"><%= fa_icon('arrow-left') %> Prev</button>
-  <div class="d-flex flex-column text-center">
-    <span id="page">Page 1</span>
-    <span class="font-weight-bold" id="total">Cards: <%= @user_cards.size %></span>
+<div class="card-buttons d-flex flex-column mx-auto mt-1 px-1">
+  <div class="d-flex mb-1">
+    <div class="d-flex align-items-center mr-auto">
+      <input type="checkbox" id="toggle-missing" />
+      <label for="toggle-missing" class="mb-0 ml-1">Hide Missing</label>
+    </div>
+    <span class="font-weight-bold" id="total">Total: <%= @user_cards.size %></span>
   </div>
-  <button type="button" class="btn btn-secondary btn-sm float-right" id="nav-next">Next <%= fa_icon('arrow-right') %></button>
+  <div class="d-flex">
+    <button type="button" class="btn btn-success btn-sm w-50 mr-1" id="add-all">Add All</button>
+    <button type="button" class="btn btn-danger btn-sm w-50 ml-1" id="remove-all">Remove All</button>
+  </div>
 </div>
 <div class="card mt-4 mb-2">
   <div class="card-header">
-    <h5>Card Selection</h5>
+    <h5>How To Use</h5>
   </div>
   <div class="card-body">
-    <p>
-      Welcome to the Card Selection page. From here you can set up your card list for the first time, or look for cards
-      you may have forgotten to add.
-
-      If you are just getting started, you can click the <span class="font-weight-bold">All</span> button above to add
-      all of the cards to your list, then compare this page to the in-game list and remove the cards you are missing.
-    </p>
-    <p>
-      Once you are done, remember to hit <span class="font-weight-bold">Save Cards!</span>
-    </p>
+    <h5>I have more than half the cards</h5>
+    <ol>
+      <li>Click the <b>Add All</b> button.</li>
+      <li>Click cards to remove them until the page matches the one in-game.</li>
+      <li>Continue until each page and the <b>Total</b> match your in-game list.</li>
+      <ul>
+        <li>If you made a mistake, you can uncheck the <b>Hide Missing</b> box and click the card to re-add it.</li>
+      </ul>
+      <li>Click <b>Save Cards</b>.</li>
+    </ol>
+    <h5>I have less than half the cards</h5>
+    <ol>
+      <li>Click the cards you see on your in-game list to add them.</li>
+      <li>Once your <b>Total</b> matches your total in-game, check the <b>Hide Missing</b> box.</li>
+      <li>Double check that each page looks like the ones in-game.</li>
+      <li>Click <b>Save Cards</b>.</li>
+    </ol>
   </div>
 </div>
 <div class="float-right">
