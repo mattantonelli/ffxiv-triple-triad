@@ -14,6 +14,6 @@ module ApplicationHelper
   end
 
   def format_date(date)
-    date.in_time_zone('America/New_York').strftime('%e %b %Y %H:%I')
+    date.in_time_zone('America/New_York').strftime('%e %b %Y %H:%M')
   end
 end
