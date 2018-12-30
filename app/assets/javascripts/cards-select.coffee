@@ -39,6 +39,13 @@ $(document).on 'turbolinks:load', ->
 
   navigate_to(page)
 
+  $(document).off 'turbolinks:before-visit'
+  $(document).on 'turbolinks:before-visit', ->
+    if $('.card-select').length > 0 && dirty then return confirm('Your selection has not been saved! Are you sure you want to leave?')
+
+  window.onbeforeunload = ->
+    if $('.card-select').length > 0 && dirty then return true
+
   $('#add-all').click ->
     all_cards().removeClass('missing')
     $('#toggle-missing').prop('checked', true)
