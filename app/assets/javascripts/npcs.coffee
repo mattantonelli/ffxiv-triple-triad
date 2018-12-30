@@ -9,8 +9,6 @@ $(document).on 'turbolinks:load', ->
     $('.completed').hide()
     $('#toggle-completed').prop('checked', true)
     restripe()
-  else
-    $('.completed').show()
 
   $('#toggle-completed').change ->
     $('.completed').toggle()
