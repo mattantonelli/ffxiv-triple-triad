@@ -15,7 +15,6 @@
         <%= link_to 'XIVAPI', 'https://xivapi.com/', target: '_blank' %>.
         The rest is updated by hand on patch day (probably.)</li>
       <li><b>Community:</b> If you have any feedback or feature requests, I want to hear them!</li>
-      <li><b>Dark theme:</b> I know the other ones are dark, but this one is, like, really dark.</li>
     </ul>
   </p>
   <div class="mt-5 text-center">
@@ -23,7 +22,47 @@
     <%= link_to 'Support on Patreon', 'https://www.patreon.com/raelys', class: 'btn patreon', target: '_blank' %>
   </div>
 </div>
-<p class="text-right">
-    FINAL FANTASY is a registered trademark of Square Enix Holdings Co., Ltd.<br>
-    FINAL FANTASY XIV © SQUARE ENIX CO., LTD.
-</p>
+<div class="row">
+  <div class="col-12 col-xl-6 mb-3 mb-xl-0">
+    <div class="card">
+      <div class="card-header">
+        <h5>API</h5>
+      </div>
+      <div class="card-body">
+        <p>
+          All of the data used on this site is available for any savvy developers through a public RESTful JSON API.
+          You can check out the full documentation
+          <%= link_to 'here', 'https://github.com/mattantonelli/ffxiv-triple-triad/wiki', target: '_blank' %>.
+        </p>
+        <b>GET <%= link_to nil, api_card_url(240), class: 'unstyled' %></b>
+        <%= render 'api_sample' %>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-xl-6">
+    <div class="card">
+      <div class="card-header">
+        <h5>Ser Aymeric Bot Integration</h5>
+      </div>
+      <div class="card-body">
+        <p class="mb-0">
+          <%= link_to 'Ser Aymeric', 'http://www.seraymeric.com/', target: '_blank' %> now provides Triple Triad
+          commands using our <%= link_to 'API', 'https://github.com/mattantonelli/ffxiv-triple-triad/wiki', target: '_blank' %>.
+          You can use the <code>ttcollection</code> command to show off your card collection or check out your
+          friends' collections.
+        </p>
+        <div class="text-center my-2">
+          <%= image_tag 'aymeric.png', class: 'mx-auto' %>
+        </div>
+        <p class="mb-0">
+          Look up full card information  by name with the <code>ttcard</code> command,
+          or use <code>ttnpcs</code> to find NPCs by location.
+        </p>
+      </div>
+    </div>
+    <p class="text-right mt-2">
+      FINAL FANTASY is a registered trademark of Square Enix Holdings Co., Ltd.<br>
+      FINAL FANTASY XIV © SQUARE ENIX CO., LTD.
+    </p>
+  </div>
+</div>
