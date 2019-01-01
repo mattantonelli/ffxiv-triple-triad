@@ -23,7 +23,7 @@
       </tr>
       <% @users.each do |user| %>
         <tr>
-          <td><%= image_tag(user.avatar_url, class: 'avatar') if user.avatar_url.present? %></td>
+          <td><%= avatar(user) %></td>
           <td><%= username(user) %></td>
           <td><%= user.uid %></td>
           <td><%= format_date(user.created_at) %></td>

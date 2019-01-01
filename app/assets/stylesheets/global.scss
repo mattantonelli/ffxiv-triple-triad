@@ -62,6 +62,10 @@ hr {
 .navbar-dark {
   background-color: #222;
 
+  .dropdown-toggle img {
+    margin-right: 0.5rem;
+  }
+
   .dropdown-menu {
     background-color: #292929;
     max-width: 130px;
