@@ -54,8 +54,15 @@ namespace :npcs do
       quest_name = data.previous_quest0&.name&.sub(/\A[^a-z0-9]/i, '')&.strip
 
       npcs[data.id].merge!(rules: rules, quest_id: quest_id, quest: quest_name)
+      npc_data = npcs[data.id]
 
-      npc = NPC.find_or_create_by!(npcs[data.id])
+      # Create or update the NPC
+      if npc = NPC.find(data.id)
+        npc_data.except!(:name)
+        npc.update!(npc_data) if updated?(npc, npc_data)
+      else
+        npc = NPC.create!(npc_data)
+      end
 
       # Create the NPC deck
       data.to_h.select { |k, v| k =~ /triple_triad_card_(fixed|variable)?\d_target_id/ && v != 0 }.each do |key, id|

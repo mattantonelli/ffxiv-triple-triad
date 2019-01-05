@@ -46,7 +46,7 @@ xivapi_key: def456
 #### Load the database
 ```
 bundle exec rake db:schema:load
-bundle exec rake all:load card_sources:set card_packs:create
+bundle exec rake data:initialize
 ```
 
 #### Start the server

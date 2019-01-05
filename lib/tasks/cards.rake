@@ -38,11 +38,12 @@ namespace :cards do
                           when 5 then 1500
                           end
 
-      # Find or create the card
-      card = Card.find_or_create_by!(data.except(:sort_id))
-
-      # Then set the sort ID (which has probably changed between patches)
-      card.update!(sort_id: data[:sort_id])
+      # Create or update the card
+      if card = Card.find(data[:id])
+        card.update!(data) if updated?(card, data)
+      else
+        card = Card.create!(data)
+      end
     end
 
     puts "Created #{Card.count - count} new cards"
