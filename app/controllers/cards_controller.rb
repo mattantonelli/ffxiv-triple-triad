@@ -66,7 +66,7 @@ class CardsController < ApplicationController
     when 'MGP'
       cards = Card.where.not(buy_price: nil)
     else
-      query[:sources_origin_eq] = @type
+      query[:sources_origin_eq] = @type if @type.present?
       cards = Card.all
     end
 
