@@ -2,7 +2,6 @@ require 'csv'
 require 'open-uri'
 
 namespace :npcs do
-  LEVEL_DATA_URL = 'https://raw.githubusercontent.com/viion/ffxiv-datamining/master/csv/Level.csv'.freeze
   MAP_COLUMNS = %w(ID PlaceName.Name OffsetX OffsetY SizeFactor).freeze
 
   desc 'Create the NPCs'
@@ -23,10 +22,10 @@ namespace :npcs do
 
     # Find the associated Level data for each NPC Resident and add the location data
     puts '  Fetching location data'
-    CSV.read(open(LEVEL_DATA_URL)).drop(3).each do |level|
-      resident_id = level[-4].to_i
+    XIVAPI_CLIENT.content(name: 'Level', columns: %w(X Z Object Map.ID), limit: 1_000_000).each do |level|
+      resident_id = level.object
       next unless resident_ids.include?(resident_id)
-      data = { x: level[1].to_f, y: level[3].to_f, map_id: level[-3].to_i }
+      data = { x: level.x.to_f, y: level.z.to_f, map_id: level.map.id }
       id, _ = npcs.find { |id, npc| npc[:resident_id] == resident_id }
       npcs[id].merge!(data)
     end
@@ -57,7 +56,7 @@ namespace :npcs do
       npc_data = npcs[data.id]
 
       # Create or update the NPC
-      if npc = NPC.find(data.id)
+      if npc = NPC.find_by(id: data.id)
         npc_data.except!(:name)
         npc.update!(npc_data) if updated?(npc, npc_data)
       else

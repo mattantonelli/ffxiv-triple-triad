@@ -39,7 +39,7 @@ namespace :cards do
                           end
 
       # Create or update the card
-      if card = Card.find(data[:id])
+      if card = Card.find_by(id: data[:id])
         card.update!(data) if updated?(card, data)
       else
         card = Card.create!(data)
