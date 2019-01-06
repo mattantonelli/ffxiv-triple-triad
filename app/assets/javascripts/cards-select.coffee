@@ -47,16 +47,18 @@ $(document).on 'turbolinks:load', ->
     if $('.card-select').length > 0 && dirty then return true
 
   $('#add-all').click ->
-    all_cards().removeClass('missing')
-    $('#toggle-missing').prop('checked', true)
-    update_cards()
-    reset_page()
+    if !dirty || confirm('Are you sure you want to add all cards to your collection?')
+      all_cards().removeClass('missing')
+      $('#toggle-missing').prop('checked', true)
+      update_cards()
+      reset_page()
 
   $('#remove-all').click ->
-    owned_cards().addClass('missing')
-    $('#toggle-missing').prop('checked', false)
-    update_cards()
-    reset_page()
+    if !dirty || confirm('Are you sure you want to remove all cards from your collection?')
+      owned_cards().addClass('missing')
+      $('#toggle-missing').prop('checked', false)
+      update_cards()
+      reset_page()
 
   $('#toggle-missing').change ->
     missing_cards().toggle()
