@@ -5,7 +5,9 @@
         <%= small_image(card) %>
       <% end %>
     </td>
-    <td><%= link_to(card.name, card_path(card), class: 'name') %></td>
+    <td <%= 'class="hide-xs"'.html_safe unless local_assigns[:skip_source] %>>
+      <%= link_to(card.name, card_path(card), class: 'name') %>
+    </td>
     <td><%= type_image(card) %></td>
     <td><%= stars(card) %></td>
     <td>
@@ -23,7 +25,7 @@
       </div>
     </td>
     <% unless local_assigns[:skip_source] %>
-      <td>
+      <td class="hide-xs">
         <ul class="list-unstyled mb-0">
           <% sources(card).each do |source| %>
             <li><%= source %></li>

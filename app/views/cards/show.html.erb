@@ -1,4 +1,4 @@
-<div class="col-8 offset-2">
+<div class="col-12 col-lg-8 offset-0 offset-lg-2">
   <div class="card">
     <div class="card-header">
       <h5 class="card-title"><%= @card.name %></h5>
@@ -7,7 +7,7 @@
       <div class="d-flex">
         <%= render 'large', card: @card %>
         <div class="d-flex flex-column ml-4">
-          <div class="d-flex card-info">
+          <div class="d-flex flex-wrap card-info">
             <% if @card.card_type_id > 0 %>
               <div class="text-center">
                 <dt>Type</dt>

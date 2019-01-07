@@ -9,6 +9,21 @@ body {
   margin-bottom: 40px;
 }
 
+// Below sm
+@media (max-width: 575px) {
+  .hide-xs {
+    display: none;
+  }
+}
+
+// Below md
+@media (max-width: 991px) {
+  .container {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
 footer {
   position: absolute;
   bottom: 8px;
@@ -68,7 +83,6 @@ hr {
 
   .dropdown-menu {
     background-color: #292929;
-    max-width: 130px;
 
     a {
       color: rgba(255, 255, 255, 0.5);
