@@ -5,7 +5,7 @@
 #  id           :bigint(8)        not null, primary key
 #  name         :string(255)      not null
 #  description  :text(65535)      not null
-#  patch        :string(255)      not null
+#  patch        :string(255)
 #  card_type_id :integer          not null
 #  stars        :integer          not null
 #  top          :integer          not null
