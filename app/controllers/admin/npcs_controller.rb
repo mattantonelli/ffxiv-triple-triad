@@ -12,7 +12,7 @@ class Admin::NPCsController < AdminController
   def update
     if @npc.update(npc_params)
       flash[:success] = 'NPC has been updated.'
-      redirect_to edit_admin_npcs_path(@npc)
+      redirect_to edit_admin_npcs_path(npc)
     else
       flash[:error] = 'There was a problem updating the NPC.'
       render :edit
