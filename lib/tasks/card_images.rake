@@ -69,7 +69,7 @@ end
 
 def create_sheet(source, destination, width, height)
   ids = Card.order(:id).pluck(:id)
-  sheet = ChunkyPNG::Image.new(width * ids.size, height)
+  sheet = ChunkyPNG::Image.new(width * Card.pluck(:id).max, height)
 
   ids.each do |id|
     image = source.join("#{id}.png")

@@ -42,7 +42,7 @@ namespace :cards do
       if card = Card.find_by(id: data[:id])
         card.update!(data) if updated?(card, data)
       else
-        card = Card.create!(data)
+        card = Card.create!(data) if data[:name].present?
       end
     end
 
