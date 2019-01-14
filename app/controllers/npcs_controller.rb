@@ -14,9 +14,10 @@ class NPCsController < ApplicationController
 
     if user_signed_in?
       @user_cards = current_user.cards
-      @incomplete = @npcs.joins(:rewards).where('cards.id not in (?)', @user_cards).distinct.pluck(:id)
+      @completed = @npcs.joins(:rewards).where('cards.id in (?)', @user_cards).distinct.pluck(:id)
+      @defeated = @npcs.where(id: current_user.npcs).distinct.pluck(:id)
       @total = @npcs.count
-      @count = @total - @incomplete.count
+      @count = @defeated.count
       @completion = (@count / @total.to_f) * 100
     else
       @user_cards = []
@@ -28,8 +29,35 @@ class NPCsController < ApplicationController
     @rewards = @npc.rewards
   end
 
+  def add
+    if user = current_user
+      user.add_npc(params[:npc_id])
+      head :no_content
+    else
+      head :not_found
+    end
+  end
+
+  def remove
+    if user = current_user
+      user.remove_npc(params[:npc_id])
+      head :no_content
+    else
+      head :not_found
+    end
+  end
+
+  def update_defeated
+    current_user.add_defeated_npcs
+    redirect_to npcs_path
+  end
+
   private
   def set_npc
     @npc = NPC.find(params[:id])
+  end
+
+  def set_params
+    params.permit(:npcs)
   end
 end

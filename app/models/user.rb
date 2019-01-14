@@ -39,6 +39,36 @@ class User < ApplicationRecord
     Redis.current.sadd(cards_key, card_ids) unless card_ids.empty?
   end
 
+  def npcs
+    Redis.current.smembers(npcs_key).map(&:to_i)
+  end
+
+  def add_npc(npc_id)
+    Redis.current.sadd(npcs_key, npc_id)
+  end
+
+  def remove_npc(npc_id)
+    Redis.current.srem(npcs_key, npc_id)
+  end
+
+  def add_defeated_npcs
+    # Find the IDs for all NPCs from whom the user has obtained exclusive cards,
+    # those that are available from that NPC and nowhere else
+    ids = Card.joins(npc_rewards: :npc)
+      .left_joins(:sources).where('sources.id is null')
+      .left_joins(:pack_card).where('pack_cards.id is null')
+      .where(buy_price: nil)
+      .group('npc_rewards.card_id').having('count(npc_rewards.npc_id) = 1')
+      .where(id: cards).distinct
+      .select('npcs.id as id').map { |card| card.id }
+
+    # Add the existing defeated NPC IDs
+    ids += npcs
+
+    Redis.current.del(npcs_key)
+    Redis.current.sadd(npcs_key, ids.uniq) unless ids.empty?
+  end
+
   def self.from_omniauth(auth)
     # Clean up any special characters in the username
     username = auth.info.name.encode(Encoding.find('ASCII'), { invalid: :replace, undef: :replace, replace: '' })
@@ -62,5 +92,9 @@ class User < ApplicationRecord
   private
   def cards_key
     "user-#{id}-cards"
+  end
+
+  def npcs_key
+    "user-#{id}-npcs"
   end
 end

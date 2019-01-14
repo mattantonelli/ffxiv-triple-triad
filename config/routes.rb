@@ -15,7 +15,11 @@ Rails.application.routes.draw do
 
   get 'packs', to: 'card_packs#index'
 
-  resources :npcs, only: [:index, :show]
+  resources :npcs, only: [:index, :show] do
+    post 'add'
+    post 'remove'
+    post 'defeated/update', on: :collection, to: 'npcs#update_defeated', as: :update_defeated
+  end
 
   resources :cards, only: [] do
     post 'add'
