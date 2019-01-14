@@ -5,8 +5,10 @@
       <%= select_tag :location, options_for_select(NPC.locations.keys, @location),
         include_blank: 'All Locations', class: 'form-control form-control-sm mr-3' %>
     <% end %>
-    <%= link_to 'Update Defeated', update_defeated_npcs_path, method: :post, class: 'btn btn-sm btn-secondary',
-      data: { confirm: 'All NPCs with exclusive cards you have obtained will be marked as defeated.' } %>
+    <% if user_signed_in? %>
+      <%= link_to 'Update Defeated', update_defeated_npcs_path, method: :post, class: 'btn btn-sm btn-secondary',
+        data: { confirm: 'All NPCs with exclusive cards you have obtained will be marked as defeated.' } %>
+    <% end %>
   </div>
   <div class="col-12 col-md-6 d-flex justify-content-center justify-content-md-end align-items-center">
     <% if user_signed_in? %>

@@ -21,7 +21,8 @@ class NPCsController < ApplicationController
       @completion = (@count / @total.to_f) * 100
     else
       @user_cards = []
-      @incomplete = []
+      @completed = []
+      @defeated = []
     end
   end
 
