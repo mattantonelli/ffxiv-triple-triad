@@ -1,7 +1,7 @@
 <div class="card-buttons d-flex justify-content-between align-items-center mx-auto mb-1">
   <button type="button" class="btn btn-secondary btn-sm" id="nav-prev"><%= fa_icon('arrow-left') %> Prev</button>
   <span id="page">Page 1</span>
-  <button type="button" class="btn btn-secondary btn-sm float-right" id="nav-next">Next <%= fa_icon('arrow-right') %></button>
+  <button type="button" class="btn btn-secondary btn-sm" id="nav-next">Next <%= fa_icon('arrow-right') %></button>
 </div>
 <div class="card card-page mx-auto pl-2 pt-2">
   <div class="d-flex flex-wrap align-items-start">
@@ -50,10 +50,8 @@
     </ol>
   </div>
 </div>
-<div class="float-right">
-  <%= form_tag(set_cards_path) do %>
-    <%= hidden_field_tag('cards', @user_cards.join(','), id: 'card-ids') %>
-    <%= link_to 'Reset', select_cards_path, class: 'btn btn-danger' %>
-    <%= submit_tag('Save Cards', class: 'btn btn-primary', id: 'submit') %>
-  <% end %>
-</div>
+<%= form_tag(set_cards_path, class: 'text-right') do %>
+  <%= hidden_field_tag('cards', @user_cards.join(','), id: 'card-ids') %>
+  <%= link_to 'Reset', select_cards_path, class: 'btn btn-danger' %>
+  <%= submit_tag('Save Cards', class: 'btn btn-primary', id: 'submit') %>
+<% end %>
