@@ -13,9 +13,9 @@ class NPCsController < ApplicationController
     @npcs = @q.result.includes(:rewards).order(patch: :desc, id: :desc)
 
     if user_signed_in?
-      @user_cards = current_user.cards
+      @user_cards = current_user.cards.pluck(:id)
       @completed = @npcs.joins(:rewards).where('cards.id in (?)', @user_cards).distinct.pluck(:id)
-      @defeated = @npcs.where(id: current_user.npcs).distinct.pluck(:id)
+      @defeated = current_user.npcs.pluck(:id)
       @total = @npcs.count
       @count = @defeated.count
       @completion = (@count / @total.to_f) * 100

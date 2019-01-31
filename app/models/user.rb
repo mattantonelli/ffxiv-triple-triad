@@ -20,35 +20,29 @@
 #
 
 class User < ApplicationRecord
+  has_and_belongs_to_many :cards
+  has_and_belongs_to_many :npcs
+
   devise :trackable, :omniauthable, omniauth_providers: [:discord]
 
-  def cards
-    Redis.current.smembers(cards_key).map(&:to_i)
-  end
-
   def add_card(card_id)
-    Redis.current.sadd(cards_key, card_id)
+    cards << Card.find(card_id)
   end
 
   def remove_card(card_id)
-    Redis.current.srem(cards_key, card_id)
+    cards.delete(card_id)
   end
 
   def set_cards(card_ids)
-    Redis.current.del(cards_key)
-    Redis.current.sadd(cards_key, card_ids) unless card_ids.empty?
-  end
-
-  def npcs
-    Redis.current.smembers(npcs_key).map(&:to_i)
+    self.cards = Card.where(id: card_ids)
   end
 
   def add_npc(npc_id)
-    Redis.current.sadd(npcs_key, npc_id)
+    npcs << NPC.find(npc_id)
   end
 
   def remove_npc(npc_id)
-    Redis.current.srem(npcs_key, npc_id)
+    npcs.delete(npc_id)
   end
 
   def add_defeated_npcs
@@ -63,10 +57,9 @@ class User < ApplicationRecord
       .select('npcs.id as id').map { |card| card.id }
 
     # Add the existing defeated NPC IDs
-    ids += npcs
+    ids += npcs.pluck(:id)
 
-    Redis.current.del(npcs_key)
-    Redis.current.sadd(npcs_key, ids.uniq) unless ids.empty?
+    self.npcs = NPC.where(id: ids.uniq) unless ids.empty?
   end
 
   def self.from_omniauth(auth)

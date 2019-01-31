@@ -6,7 +6,7 @@ class CardsController < ApplicationController
 
   def mine
     if user_signed_in?
-      @user_cards = current_user.cards
+      @user_cards = current_user.cards.pluck(:id)
       @count = (@user_cards & @cards.pluck(:id)).count
       @total = @cards.present? ? @cards.count : Card.count
       @completion = (@count / @total.to_f) * 100
@@ -18,8 +18,8 @@ class CardsController < ApplicationController
 
   def select
     if user_signed_in?
-      @cards = Card.all.includes(:npc_sources, :pack).order(:sort_id)
-      @user_cards = current_user.cards
+      @cards = Card.all.order(:sort_id)
+      @user_cards = current_user.cards.pluck(:id)
     else
       flash[:alert] = 'You must sign in to manage your cards.'
       redirect_to cards_path
