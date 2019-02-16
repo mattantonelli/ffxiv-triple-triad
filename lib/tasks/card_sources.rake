@@ -149,11 +149,11 @@ namespace :card_sources do
     Card.find_by(name: 'Vaan').sources.find_or_create_by(origin: 'Achievement', name: 'Achievement: Wheel of Fortune V')
 
     # Eureka
-    Card.find_by(name: 'Happy Bunny').sources.find_or_create_by(origin: 'Other', name: 'Eureka Pagos: Silver Coffer')
-    Card.find_by(name: 'Yukinko').sources.find_or_create_by(origin: 'Other', name: 'Eureka Pagos: Eternity FATE')
-    Card.find_by(name: 'Pazuzu').sources.find_or_create_by(origin: 'Other', name: 'Eureka Anemos: Wail in the Willows FATE')
-    Card.find_by(name: 'Louhi').sources.find_or_create_by(origin: 'Other', name: 'Eureka Pagos: Louhi on Ice FATE')
-    Card.find_by(name: 'Penthesilea').sources.find_or_create_by(origin: 'Other', name: 'Eureka Pyros: Lost Epic FATE')
+    Card.find_by(name: 'Happy Bunny').sources.find_or_create_by(origin: 'Eureka', name: 'Eureka Pagos: Silver Coffer')
+    Card.find_by(name: 'Yukinko').sources.find_or_create_by(origin: 'Eureka', name: 'Eureka Pagos: Eternity FATE')
+    Card.find_by(name: 'Pazuzu').sources.find_or_create_by(origin: 'Eureka', name: 'Eureka Anemos: Wail in the Willows FATE')
+    Card.find_by(name: 'Louhi').sources.find_or_create_by(origin: 'Eureka', name: 'Eureka Pagos: Louhi on Ice FATE')
+    Card.find_by(name: 'Penthesilea').sources.find_or_create_by(origin: 'Eureka', name: 'Eureka Pyros: Lost Epic FATE')
 
     # Heaven on High
     Card.find_by(name: 'Wanyudo & Katasharin').sources.find_or_create_by(origin: 'Other', name: 'Heaven on High: Silver/Gold Sack')

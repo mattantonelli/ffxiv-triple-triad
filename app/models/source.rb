@@ -14,6 +14,6 @@ class Source < ApplicationRecord
   belongs_to :card
 
   def self.origins
-    %w(NPC Dungeon Trial Raid FATE Pack Achievement Tournament MGP Other)
+    %w(NPC Dungeon Trial Raid Pack Eureka FATE Achievement Tournament MGP Other)
   end
 end
