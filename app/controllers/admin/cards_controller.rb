@@ -16,7 +16,7 @@ class Admin::CardsController < AdminController
 
     if @card.update(update_params)
       flash[:success] = 'Card has been updated.'
-      redirect_to edit_admin_card_path(@card)
+      redirect_to admin_cards_path
     else
       flash[:error] = 'There was a problem updating the card.'
       build_sources
