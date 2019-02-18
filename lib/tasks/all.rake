@@ -1,3 +1,5 @@
+BASE_URL = 'https://raw.githubusercontent.com/mattantonelli/ffxiv-triple-triad-data/master'.freeze
+
 namespace :data do
   desc 'Initialize all Triple Triad data'
   task initialize: :environment do

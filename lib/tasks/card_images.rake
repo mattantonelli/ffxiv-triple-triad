@@ -64,7 +64,7 @@ def download_small(card)
 end
 
 def download_image(offset, id)
-  open("https://xivapi.com/i/082000/0#{offset + id}.png")
+  open("https://github.com/mattantonelli/ffxiv-triple-triad-data/raw/master/images/0#{offset + id}.png")
 end
 
 def create_sheet(source, destination, width, height)
