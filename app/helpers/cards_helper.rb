@@ -30,7 +30,11 @@ module CardsHelper
   end
 
   def format_price(price)
-    "#{number_with_delimiter(price)} MGP"
+    if price > 0
+      "#{number_with_delimiter(price)} MGP"
+    else
+      'N/A'
+    end
   end
 
   def sources(card)
