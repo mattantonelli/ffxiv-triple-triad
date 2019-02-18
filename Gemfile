@@ -44,5 +44,3 @@ group :development do
   gem 'capistrano-rbenv', '~> 2.1'
   gem 'capistrano-rails', '~> 1.4.0'
 end
-
-gem 'xivapi', git: 'https://github.com/xivapi/xivapi-ruby.git', tag: 'v0.1.2'
