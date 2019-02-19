@@ -53,7 +53,7 @@
   </thead>
   <tbody>
     <% @npcs.each do |npc| %>
-      <tr class="npc-row<%= ' completed' if @completed.include?(npc.id) %><%= ' defeated' if @defeated.include?(npc.id) %>">
+      <tr class="npc-row<%= ' completed' if !@incomplete.include?(npc.id) %><%= ' defeated' if @defeated.include?(npc.id) %>">
         <td class="npc-name"><%= link_to(npc.name, npc_path(npc), class: 'name') %></td>
         <td><%= location(npc) %></td>
         <td class="hide-xs"><%= npc.rules %></td>
