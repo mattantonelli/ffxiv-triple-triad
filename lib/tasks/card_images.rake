@@ -10,6 +10,9 @@ namespace :card_images do
   type_sheet = ChunkyPNG::Image.from_file(IMAGES_DIR.join("types.png"))
   TYPES = (1..4).map { |id| type_sheet.crop(20 * (id - 1), 0, 20, 20) }
 
+  number_sheet = ChunkyPNG::Image.from_file(IMAGES_DIR.join("numbers.png"))
+  NUMBERS = (1..10).map { |num| number_sheet.crop(15 * (num - 1), 0, 15, 15) }
+
   desc 'Download the images for each card'
   task download: :environment do
     puts 'Downloading card images'
@@ -53,6 +56,11 @@ def download_large(card)
     when 5 then image.compose!(STAR, 23, 21)
     end
   end
+
+  image.compose!(NUMBERS[card.top - 1], 45, 89)
+  image.compose!(NUMBERS[card.right - 1], 59, 96)
+  image.compose!(NUMBERS[card.bottom - 1], 45, 103)
+  image.compose!(NUMBERS[card.left - 1], 31, 96)
 
   image.save(LARGE_DIR.join("#{card.id}.png").to_s)
 end
