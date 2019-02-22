@@ -11,7 +11,6 @@ namespace :card_types do
     CardType.find_or_create_by!(id: 0, name: 'Normal')
 
     CSV.new(open("#{BASE_URL}/csv/TripleTriadCardType.en.csv")).drop(4).each do |type|
-      puts type
       CardType.find_or_create_by!(id: type[0], name: type[1]) unless type[1].blank?
     end
 
