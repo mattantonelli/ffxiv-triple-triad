@@ -7,12 +7,17 @@ class Api::UsersController < ApiController
     elsif !@user.public_cards
       render json: { status: 403, error: "User's card collection is set to private" }, status: :forbidden
     else
-      @total = Card.count
+      @total_cards = Card.count
       @user_cards = @user.cards.pluck(:id)
+      @card_completion = (@user_cards.size / @total_cards.to_f) * 100
 
       limit = params[:limit_missing].present? ? params[:limit_missing].to_i : 5
       random_ids = (Card.pluck(:id) - @user_cards).sample(limit)
       @random_cards = Card.includes(:type, :npc_sources, :sources, :pack).where(id: random_ids).order(:patch, :id)
+
+      @total_npcs = NPC.count
+      @defeated_npcs = @user.npcs.size
+      @npc_completion = (@defeated_npcs / @total_npcs.to_f) * 100
     end
   end
 end
