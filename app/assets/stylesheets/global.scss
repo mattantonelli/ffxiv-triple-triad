@@ -52,6 +52,10 @@ a.name, a.btn {
   text-decoration: none;
 }
 
+.btn, .btn:hover {
+  color: #eee;
+}
+
 a.unstyled {
   text-decoration: none;
 }
@@ -123,6 +127,8 @@ hr {
 }
 
 .table {
+  color: #eee;
+
   th, td {
     vertical-align: middle;
     border-top: 1px solid #888;
