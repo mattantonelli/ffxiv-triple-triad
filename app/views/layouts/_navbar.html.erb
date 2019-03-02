@@ -16,13 +16,22 @@
                   'https://na.finalfantasyxiv.com/lodestone/playguide/contentsguide/goldsaucer/tripletriad',
                   target: '_blank', class: 'nav-link') %>
     </div>
+    <div class="navbar-nav nav-item dropdown">
+      <a class="nav-link dropdown-toggle p-0 pr-3" href="#" id="localeDropdown" role="button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false"><%= cookies[:locale].upcase %></a>
+      <div class="dropdown-menu" aria-labelledBy="localeDropdown">
+        <% %w(EN DE FR JA).each do |locale| %>
+          <%= link_to locale, locale_set_path(locale: locale), class: 'dropdown-item', method: :post %>
+        <% end %>
+      </div>
+    </div>
     <% if user_signed_in? %>
+      <div class="navbar-nav nav-item pr-2">
+        <%= avatar(current_user) %>
+      </div>
       <div class="navbar-nav nav-item dropdown">
-        <a class="nav-link dropdown-toggle p-0 pr-1" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
-          <%= avatar(current_user) %>
-          <%= current_user.username %>
-        </a>
+        <a class="nav-link dropdown-toggle p-0" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false"><%= current_user.username %></a>
         <div class="dropdown-menu" aria-labelledby="userDropdown">
           <% if current_user.admin? %>
             <%= link_to fa_icon('user', text: 'Manage Users'), admin_users_path, class: 'dropdown-item' %>

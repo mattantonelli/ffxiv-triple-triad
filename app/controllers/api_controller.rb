@@ -1,4 +1,5 @@
 class ApiController < ApplicationController
+  skip_before_action :set_locale
   before_action :set_default_format
   before_action :set_language
 

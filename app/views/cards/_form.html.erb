@@ -5,5 +5,5 @@
   <%= f.select :stars_eq, rarity_options, { include_blank: 'All Rarities' }, class: 'form-control form-control-sm' %>
   <%= select_tag :source_type, options_for_select(Source.origins, @type),
     include_blank: 'All Sources', class: 'form-control form-control-sm' %>
-  <%= f.submit name: nil, class: 'btn btn-secondary btn-sm mt-2 mt-md-0' %>
+  <%= f.submit 'Search', name: nil, class: 'btn btn-secondary btn-sm mt-2 mt-md-0' %>
 <% end %>
