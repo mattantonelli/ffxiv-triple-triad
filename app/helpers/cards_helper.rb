@@ -29,6 +29,12 @@ module CardsHelper
     '{"show": 500, "hide": 0 }'
   end
 
+  def format_description(card)
+    card.description.gsub("\n", '<br>')
+      .gsub(/\*(.*?)\*/, '<i>\1</i>')
+      .html_safe
+  end
+
   def format_price(price)
     if price > 0
       "#{number_with_delimiter(price)} MGP"

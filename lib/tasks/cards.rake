@@ -9,22 +9,13 @@ namespace :cards do
 
     # Load the base cards
     cards = CSV.new(open("#{BASE_URL}/csv/TripleTriadCard.en.csv")).drop(4).each_with_object({}) do |card, h|
-      name = card[1]
-      name = name.titleize if name =~ /^[a-z]/ # Fix lowercase names
-      description = card[9].gsub(/\<.*?\>/, '').gsub("\r", "\n")
-      h[card[0]] = { id: card[0].to_i, name_en: name, description_en: description }
+      h[card[0]] = { id: card[0].to_i, name_en: sanitize_name(card[1]), description_en: sanitize_description(card[9]) }
     end
 
     %w(fr de ja).each do |locale|
       CSV.new(open("#{BASE_URL}/csv/TripleTriadCard.#{locale}.csv")).drop(4).each do |card|
-        name = card[1]
-        name = name.titleize if name =~ /^[a-z]/ # Fix lowercase names
-        description = card[9].gsub('<SoftHyphen/>', "\u00AD")
-          .gsub(/<Switch.*?><Case\(1\)>(.*?)<\/Case>.*?<\/Switch>/, '\1')
-          .gsub(/<If.*?>(.*?)<Else\/>.*?<\/If>/, '\1')
-          .gsub(/\<.*?\>/, '')
-          .gsub("\r", "\n")
-        cards[card[0]].merge!("name_#{locale}" => name, "description_#{locale}" => description)
+        cards[card[0]].merge!("name_#{locale}" => sanitize_name(card[1]),
+                              "description_#{locale}" => sanitize_description(card[9]))
       end
     end
 
@@ -47,4 +38,5 @@ namespace :cards do
 
     puts "Created #{Card.count - count} new cards"
   end
+
 end

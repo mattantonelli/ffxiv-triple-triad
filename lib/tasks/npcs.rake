@@ -21,9 +21,7 @@ namespace :npcs do
     %w(en fr de ja).each do |locale|
       CSV.new(open("#{BASE_URL}/csv/ENpcResident.#{locale}.csv")).drop(4).each do |npc|
         if npcs.has_key?(npc[0])
-          name = npc[1]
-          name = name.titleize if name =~ /^[a-z]/ # Fix lowercase names
-          npcs[npc[0]]["name_#{locale}"] = name
+          npcs[npc[0]]["name_#{locale}"] = sanitize_name(npc[1])
         end
       end
     end

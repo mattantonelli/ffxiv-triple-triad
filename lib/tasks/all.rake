@@ -22,6 +22,26 @@ namespace :data do
   end
 end
 
+# Replace various tags with the appropriate text
+def sanitize_description(description)
+  description.gsub('<SoftHyphen/>', "\u00AD")
+    .gsub(/<Switch.*?><Case\(1\)>(.*?)<\/Case>.*?<\/Switch>/, '\1')
+    .gsub(/<If.*?>(.*?)<Else\/>.*?<\/If>/, '\1')
+    .gsub(/<\/?Emphasis>/, '*')
+    .gsub('<Indent/>', ' ')
+    .gsub(/\<.*?\>/, '')
+    .gsub("\r", "\n")
+end
+
+# Fix lowercase names and German gender tags
+def sanitize_name(name)
+  name = name.titleize if name =~ /^[a-z]/
+  name.gsub('[t]', 'der')
+    .gsub('[a]', 'e')
+    .gsub('[A]', 'er')
+    .gsub('[p]', '')
+end
+
 def updated?(model, data)
   current = model.attributes.symbolize_keys.select { |k, _| data.keys.include?(k) }
 

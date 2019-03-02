@@ -45,7 +45,7 @@
       </div>
       <hr />
       <dt>Description</dt>
-      <dd><%= @card.description.gsub("\n", '<br>').html_safe %></dd>
+      <dd><%= format_description(@card) %></dd>
     </div>
   </div>
 </div>
