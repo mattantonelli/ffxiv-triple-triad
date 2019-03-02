@@ -11,18 +11,20 @@ namespace :npcs do
     puts '  Fetching resident data'
     npcs = CSV.new(open("#{BASE_URL}/csv/ENpcBase.csv")).drop(4).each_with_object({}) do |npc, h|
       npc[3..34].each do |data|
-        if data&.match(/TripleTriad#(\d+)/) && h.values.find { |npc| npc[:id] == $1.to_i }.nil?
+        if data&.match(/TripleTriad#(\d+)/) && h.values.find { |val| val[:id] == $1.to_i }.nil?
           h[npc[0]] = { id: $1.to_i, resident_id: npc[0].to_i }
           break
         end
       end
     end
 
-    CSV.new(open("#{BASE_URL}/csv/ENpcResident.en.csv")).drop(4).each do |npc|
-      if npcs.has_key?(npc[0])
-        name = npc[1]
-        name = name.titleize if name =~ /^[a-z]/ # Fix lowercase names
-        npcs[npc[0]][:name] = name
+    %w(en fr de ja).each do |locale|
+      CSV.new(open("#{BASE_URL}/csv/ENpcResident.#{locale}.csv")).drop(4).each do |npc|
+        if npcs.has_key?(npc[0])
+          name = npc[1]
+          name = name.titleize if name =~ /^[a-z]/ # Fix lowercase names
+          npcs[npc[0]]["name_#{locale}"] = name
+        end
       end
     end
 
@@ -57,7 +59,7 @@ namespace :npcs do
       next unless npc.present?
       npc[:rules] = opponent[11..12].reject(&:empty?).join(', ')
       npc[:quest] = opponent[16].sub(/\A[^a-z0-9]/i, '')&.strip if opponent[16].present?
-      npc[:rewards] = Card.where(name: opponent[27..30].compact.map { |card| card.sub(/ Card$/, '') }).pluck(:id)
+      npc[:rewards] = Card.where(name_en: opponent[27..30].compact.map { |card| card.sub(/ Card$/, '') }).pluck(:id)
     end
 
     CSV.new(open("#{BASE_URL}/csv/TripleTriad.raw.csv")).drop(5).each do |opponent|
@@ -76,7 +78,7 @@ namespace :npcs do
 
       # Create or update the NPC
       if npc = NPC.find_by(id: data[:id])
-        data.except!(:name)
+        data.except!('name_en', 'name_de', 'name_fr', 'name_ja')
         npc.update!(data) if updated?(npc, data)
       else
         npc = NPC.create!(data)

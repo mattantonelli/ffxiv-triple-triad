@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_02_003420) do
+ActiveRecord::Schema.define(version: 2019_03_02_015010) do
 
   create_table "card_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -78,7 +78,6 @@ ActiveRecord::Schema.define(version: 2019_03_02_003420) do
   end
 
   create_table "npcs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name", null: false
     t.string "location"
     t.integer "x"
     t.integer "y"
@@ -89,6 +88,10 @@ ActiveRecord::Schema.define(version: 2019_03_02_003420) do
     t.datetime "updated_at", null: false
     t.integer "quest_id"
     t.string "patch"
+    t.string "name_en", null: false
+    t.string "name_de", null: false
+    t.string "name_fr", null: false
+    t.string "name_ja", null: false
     t.index ["patch"], name: "index_npcs_on_patch"
   end
 

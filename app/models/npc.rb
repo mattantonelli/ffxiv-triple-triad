@@ -3,7 +3,6 @@
 # Table name: npcs
 #
 #  id          :bigint(8)        not null, primary key
-#  name        :string(255)      not null
 #  location    :string(255)
 #  x           :integer
 #  y           :integer
@@ -14,6 +13,10 @@
 #  updated_at  :datetime         not null
 #  quest_id    :integer
 #  patch       :string(255)
+#  name_en     :string(255)      not null
+#  name_de     :string(255)      not null
+#  name_fr     :string(255)      not null
+#  name_ja     :string(255)      not null
 #
 
 class NPC < ApplicationRecord
@@ -24,6 +27,8 @@ class NPC < ApplicationRecord
   has_many :variable_cards, -> { where('npc_cards.fixed = false') }, through: :npc_cards, source: :card
   has_many :rewards, through: :npc_rewards, source: :card
   has_and_belongs_to_many :users
+
+  translates :name
 
   def self.locations
     {
