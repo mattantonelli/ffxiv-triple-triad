@@ -30,6 +30,8 @@ class Card < ApplicationRecord
 
   accepts_nested_attributes_for :sources
 
+  translates :name, :description
+
   def stats
     "#{top} #{right} #{bottom} #{left}".gsub(/10/, 'A')
   end
