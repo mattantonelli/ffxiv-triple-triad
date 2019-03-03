@@ -4,7 +4,7 @@ namespace :card_sources do
     puts 'Setting various card sources'
 
     # Initial
-    Card.where(name: %w(Dodo Sabotender Bomb Mandragora Coeurl)).each do |card|
+    Card.where(name_en: %w(Dodo Sabotender Bomb Mandragora Coeurl)).each do |card|
       card.sources.find_or_create_by!(origin: 'Other', name: 'Quest: Triple Triad Trial')
     end
 

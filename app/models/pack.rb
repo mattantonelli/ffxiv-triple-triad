@@ -3,13 +3,18 @@
 # Table name: packs
 #
 #  id         :bigint(8)        not null, primary key
-#  name       :string(255)      not null
 #  cost       :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  name_en    :string(255)      not null
+#  name_de    :string(255)      not null
+#  name_fr    :string(255)      not null
+#  name_ja    :string(255)      not null
 #
 
 class Pack < ApplicationRecord
   has_many :pack_cards
   has_many :cards, through: :pack_cards
+
+  translates :name
 end
