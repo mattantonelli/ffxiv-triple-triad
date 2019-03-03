@@ -10,7 +10,7 @@ class NPCsController < ApplicationController
     end
 
     @q = NPC.all.ransack(query)
-    @npcs = @q.result.includes(:rewards, :rules, :location).order(patch: :desc, id: :desc)
+    @npcs = @q.result.includes(:rewards, :rules, :location, :quest).order(patch: :desc, id: :desc)
 
     if user_signed_in?
       @user_cards = current_user.cards.pluck(:id)

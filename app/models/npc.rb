@@ -27,7 +27,7 @@ class NPC < ApplicationRecord
   has_and_belongs_to_many :users
   has_and_belongs_to_many :rules
   belongs_to :location
-  belongs_to :quest
+  belongs_to :quest, optional: true
 
   translates :name
 end
