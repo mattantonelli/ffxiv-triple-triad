@@ -55,7 +55,6 @@ namespace :npcs do
     CSV.new(open("#{BASE_URL}/csv/TripleTriad.csv")).drop(5).each do |opponent|
       npc = npcs.values.find { |val| val[:id] == opponent[0].to_i }
       next unless npc.present?
-      npc[:rules] = opponent[11..12].reject(&:empty?).join(', ')
       npc[:quest] = opponent[16].sub(/\A[^a-z0-9]/i, '')&.strip if opponent[16].present?
       npc[:rewards] = Card.where(name_en: opponent[27..30].compact.map { |card| card.sub(/ Card$/, '') }).pluck(:id)
     end
@@ -66,6 +65,7 @@ namespace :npcs do
       npc[:quest_id] = opponent[16].to_i if opponent[16] != '0'
       npc[:fixed_cards] = opponent[1..5].reject { |card| card == '0' }
       npc[:variable_cards] = opponent[6..10].reject { |card| card == '0' }
+      npc[:rules] = Rule.where(id: opponent[11..12].reject { |rule| rule == '0' })
     end
 
     # Create the NPCs and their cards

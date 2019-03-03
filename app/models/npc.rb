@@ -6,7 +6,6 @@
 #  location    :string(255)
 #  x           :integer
 #  y           :integer
-#  rules       :string(255)
 #  quest       :string(255)
 #  resident_id :integer          not null
 #  created_at  :datetime         not null
@@ -27,6 +26,7 @@ class NPC < ApplicationRecord
   has_many :variable_cards, -> { where('npc_cards.fixed = false') }, through: :npc_cards, source: :card
   has_many :rewards, through: :npc_rewards, source: :card
   has_and_belongs_to_many :users
+  has_and_belongs_to_many :rules
 
   translates :name
 

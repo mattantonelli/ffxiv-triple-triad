@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_03_025702) do
+ActiveRecord::Schema.define(version: 2019_03_03_150559) do
 
   create_table "card_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -87,7 +87,6 @@ ActiveRecord::Schema.define(version: 2019_03_03_025702) do
     t.string "location"
     t.integer "x"
     t.integer "y"
-    t.string "rules"
     t.string "quest"
     t.integer "resident_id", null: false
     t.datetime "created_at", null: false
@@ -99,6 +98,14 @@ ActiveRecord::Schema.define(version: 2019_03_03_025702) do
     t.string "name_fr", null: false
     t.string "name_ja", null: false
     t.index ["patch"], name: "index_npcs_on_patch"
+  end
+
+  create_table "npcs_rules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "npc_id"
+    t.integer "rule_id"
+    t.index ["npc_id", "rule_id"], name: "index_npcs_rules_on_npc_id_and_rule_id", unique: true
+    t.index ["npc_id"], name: "index_npcs_rules_on_npc_id"
+    t.index ["rule_id"], name: "index_npcs_rules_on_rule_id"
   end
 
   create_table "npcs_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -130,6 +137,23 @@ ActiveRecord::Schema.define(version: 2019_03_03_025702) do
     t.index ["name_en"], name: "index_packs_on_name_en", unique: true
     t.index ["name_fr"], name: "index_packs_on_name_fr", unique: true
     t.index ["name_ja"], name: "index_packs_on_name_ja", unique: true
+  end
+
+  create_table "rules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name_en", null: false
+    t.string "name_de", null: false
+    t.string "name_fr", null: false
+    t.string "name_ja", null: false
+    t.string "description_en", null: false
+    t.string "description_de", null: false
+    t.string "description_fr", null: false
+    t.string "description_ja", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name_de"], name: "index_rules_on_name_de", unique: true
+    t.index ["name_en"], name: "index_rules_on_name_en", unique: true
+    t.index ["name_fr"], name: "index_rules_on_name_fr", unique: true
+    t.index ["name_ja"], name: "index_rules_on_name_ja", unique: true
   end
 
   create_table "sources", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
