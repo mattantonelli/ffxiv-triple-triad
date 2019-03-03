@@ -5,7 +5,6 @@
 #  id          :bigint(8)        not null, primary key
 #  x           :integer
 #  y           :integer
-#  quest       :string(255)
 #  resident_id :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -28,6 +27,7 @@ class NPC < ApplicationRecord
   has_and_belongs_to_many :users
   has_and_belongs_to_many :rules
   belongs_to :location
+  belongs_to :quest
 
   translates :name
 end

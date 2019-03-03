@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_03_183219) do
+ActiveRecord::Schema.define(version: 2019_03_03_205841) do
 
   create_table "card_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -107,7 +107,6 @@ ActiveRecord::Schema.define(version: 2019_03_03_183219) do
   create_table "npcs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "x"
     t.integer "y"
-    t.string "quest"
     t.integer "resident_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -163,6 +162,15 @@ ActiveRecord::Schema.define(version: 2019_03_03_183219) do
     t.index ["name_en"], name: "index_packs_on_name_en", unique: true
     t.index ["name_fr"], name: "index_packs_on_name_fr", unique: true
     t.index ["name_ja"], name: "index_packs_on_name_ja", unique: true
+  end
+
+  create_table "quests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name_en"
+    t.string "name_de"
+    t.string "name_fr"
+    t.string "name_ja"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "rules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
