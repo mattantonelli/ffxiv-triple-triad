@@ -8,8 +8,10 @@ module CardsHelper
   end
 
   def type_image(card)
-    id = card.card_type_id - 1
-    image_tag('blank.png', class: 'type', style: "background-position: -#{20 * id}px 0") if id > -1
+    if card.card_type_id > 0
+      image_tag('blank.png', class: 'type', style: "background-position: -#{20 * (card.card_type_id - 1)}px 0",
+                data: { toggle: 'tooltip', placement: 'top', title: card.type.name })
+    end
   end
 
   def stars(card)
