@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_03_150559) do
+ActiveRecord::Schema.define(version: 2019_03_03_173906) do
 
   create_table "card_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -64,6 +64,27 @@ ActiveRecord::Schema.define(version: 2019_03_03_150559) do
     t.index ["user_id"], name: "index_cards_users_on_user_id"
   end
 
+  create_table "locations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name_en", null: false
+    t.string "name_de", null: false
+    t.string "name_fr", null: false
+    t.string "name_ja", null: false
+    t.string "region_en", null: false
+    t.string "region_de", null: false
+    t.string "region_fr", null: false
+    t.string "region_ja", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name_de"], name: "index_locations_on_name_de", unique: true
+    t.index ["name_en"], name: "index_locations_on_name_en", unique: true
+    t.index ["name_fr"], name: "index_locations_on_name_fr", unique: true
+    t.index ["name_ja"], name: "index_locations_on_name_ja", unique: true
+    t.index ["region_de"], name: "index_locations_on_region_de"
+    t.index ["region_en"], name: "index_locations_on_region_en"
+    t.index ["region_fr"], name: "index_locations_on_region_fr"
+    t.index ["region_ja"], name: "index_locations_on_region_ja"
+  end
+
   create_table "npc_cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "npc_id", null: false
     t.integer "card_id", null: false
@@ -84,7 +105,6 @@ ActiveRecord::Schema.define(version: 2019_03_03_150559) do
   end
 
   create_table "npcs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "location"
     t.integer "x"
     t.integer "y"
     t.string "quest"
@@ -97,6 +117,8 @@ ActiveRecord::Schema.define(version: 2019_03_03_150559) do
     t.string "name_de", null: false
     t.string "name_fr", null: false
     t.string "name_ja", null: false
+    t.integer "location_id", null: false
+    t.index ["location_id"], name: "index_npcs_on_location_id"
     t.index ["patch"], name: "index_npcs_on_patch"
   end
 

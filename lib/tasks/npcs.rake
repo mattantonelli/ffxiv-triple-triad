@@ -5,7 +5,7 @@ namespace :npcs do
   desc 'Create the NPCs'
   task create: :environment do
     puts 'Creating NPCs'
-    counts = { npc: NPC.count, npc_card: NPCCard.count, npc_reward: NPCReward.count }
+    counts = { npc: NPC.count, npc_card: NPCCard.count, npc_reward: NPCReward.count, locations: Location.count }
 
     # Find all of the Triple Triad NPC Residents and create the base NPC object
     puts '  Fetching resident data'
@@ -36,18 +36,32 @@ namespace :npcs do
 
     map_ids = npcs.values.pluck(:map_id)
 
-    # Look up the relevant maps and set the NPC locations
-    maps = CSV.new(open("#{BASE_URL}/csv/Map.csv")).drop(4).each_with_object({}) do |map, h|
+    # Look up the relevant maps and set the coordinate data
+    maps = CSV.new(open("#{BASE_URL}/csv/Map.raw.csv")).drop(4).each_with_object({}) do |map, h|
       if map_ids.include?(map[0])
-        h[map[0]] = { name: map[11], x_offset: map[8].to_f, y_offset: map[9].to_f, size_factor: map[7].to_f }
+        h[map[0]] = { region_id: map[10], location_id: map[11],
+                      x_offset: map[8].to_f, y_offset: map[9].to_f, size_factor: map[7].to_f }
       end
     end
 
     npcs.values.each do |npc|
       map = maps[npc.delete(:map_id)]
-      npc[:location] = map[:name]
+      npc[:location_id] = map[:location_id]
       npc[:x] = get_coordinate(npc[:x], map[:x_offset], map[:size_factor])
       npc[:y] = get_coordinate(npc[:y], map[:y_offset], map[:size_factor])
+    end
+
+    # Create the NPC locations
+    locations = %w(en fr de ja).each_with_object(Hash.new({})) do |locale, h|
+      places = CSV.new(open("#{BASE_URL}/csv/PlaceName.#{locale}.csv")).drop(3).map { |place| place[1] }
+      maps.values.each do |map|
+        h[map[:location_id]] = h[map[:location_id]].merge("name_#{locale}" => places[map[:location_id].to_i],
+                                                          "region_#{locale}" => places[map[:region_id].to_i])
+      end
+    end
+
+    locations.each do |id, data|
+      Location.find_or_create_by!(data.merge(id: id))
     end
 
     # Add their opponent data
@@ -76,7 +90,7 @@ namespace :npcs do
 
       # Create or update the NPC
       if npc = NPC.find_by(id: data[:id])
-        data.except!('name_en', 'name_de', 'name_fr', 'name_ja')
+        data.except!('name_en', 'name_de', 'name_fr', 'name_ja', :rules)
         npc.update!(data) if updated?(npc, data)
       else
         npc = NPC.create!(data)

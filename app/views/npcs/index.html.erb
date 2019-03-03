@@ -2,7 +2,7 @@
 <div class="row">
   <div class="col-12 col-md-6 mb-2 mb-md-0 d-flex justify-content-center justify-content-md-start">
     <%= form_tag(npcs_path, method: :get, enforce_utf8: false, class: 'form form-inline search-form', id: 'npc-search') do %>
-      <%= select_tag :location, options_for_select(NPC.locations.keys, @location),
+      <%= select_tag :location, options_for_select(Location.order(:id).map(&:region).uniq, @location),
         include_blank: 'All Locations', class: 'form-control form-control-sm mr-3' %>
     <% end %>
     <% if user_signed_in? %>

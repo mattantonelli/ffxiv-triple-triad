@@ -3,7 +3,6 @@
 # Table name: npcs
 #
 #  id          :bigint(8)        not null, primary key
-#  location    :string(255)
 #  x           :integer
 #  y           :integer
 #  quest       :string(255)
@@ -16,6 +15,7 @@
 #  name_de     :string(255)      not null
 #  name_fr     :string(255)      not null
 #  name_ja     :string(255)      not null
+#  location_id :integer          not null
 #
 
 class NPC < ApplicationRecord
@@ -27,21 +27,7 @@ class NPC < ApplicationRecord
   has_many :rewards, through: :npc_rewards, source: :card
   has_and_belongs_to_many :users
   has_and_belongs_to_many :rules
+  belongs_to :location
 
   translates :name
-
-  def self.locations
-    {
-      'La Noscea'         => ['Limsa', 'Noscea'],
-      'The Black Shroud'  => ['Gridania', 'Shroud'],
-      'Thanalan'          => ["Ul'dah", 'Thanalan', 'Gold Saucer', 'Battlehall'],
-      'Mor Dhona'         => ['Mor Dhona'],
-      'Coerthas'          => ['Foundation', 'Coerthas', 'Pillars', 'Fortemps'],
-      "Abalathia's Spire" => ['Clouds', 'Azys'],
-      'Dravania'          => ['Idyllshire', 'Forelands', 'Hinterlands', 'Churning'],
-      'Gyr Abania'        => ["Rhalgr's", 'Fringes', 'Peaks', 'Lochs'],
-      'Hingashi'          => ['Kugane'],
-      'Othard'            => ['Ruby Sea', 'Yanxia', 'Azim', 'Doman']
-    }.freeze
-  end
 end

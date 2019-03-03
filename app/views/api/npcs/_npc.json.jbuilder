@@ -1,7 +1,8 @@
 json.(npc, :id, :resident_id, :name, :patch)
 
 json.location do
-  json.name npc.location
+  json.name npc.location.name
+  json.region npc.location.region
   json.x npc.x
   json.y npc.y
 end
