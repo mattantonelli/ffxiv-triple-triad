@@ -8,8 +8,10 @@ module CardsHelper
   end
 
   def type_image(card)
-    id = card.card_type_id - 1
-    image_tag('blank.png', class: 'type', style: "background-position: -#{20 * id}px 0") if id > -1
+    if card.card_type_id > 0
+      image_tag('blank.png', class: 'type', style: "background-position: -#{20 * (card.card_type_id - 1)}px 0",
+                data: { toggle: 'tooltip', placement: 'top', title: card.type.name })
+    end
   end
 
   def stars(card)
@@ -29,6 +31,12 @@ module CardsHelper
     '{"show": 500, "hide": 0 }'
   end
 
+  def format_description(card)
+    card.description.gsub("\n", '<br>')
+      .gsub(/\*(.*?)\*/, '<i>\1</i>')
+      .html_safe
+  end
+
   def format_price(price)
     if price > 0
       "#{number_with_delimiter(price)} MGP"
@@ -39,7 +47,11 @@ module CardsHelper
 
   def sources(card)
     sources = card.npc_sources.map { |npc| link_to(npc.name, npc_path(npc)) }
-    sources += card.sources.pluck(:name)
+
+    sources += card.sources.pluck(:name).map do |name|
+      I18n.t(name.delete('.*'), default: name)
+    end
+
     sources << link_to(card.pack.name, packs_path(nil, anchor: card.pack.id)) if card.pack
     sources << format_price(card.buy_price) if card.buy_price
     sources

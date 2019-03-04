@@ -9,12 +9,9 @@
           <%= f.label :name %>
           <%= f.text_field :name, class: 'form-control' %>
         </div>
-        <%= f.label :location %>
-        <div class="row mb-3">
-          <div class="col-6 pr-0">
-            <%= f.text_field :location, class: 'form-control' %>
-          </div>
-          <div class="col-3 pr-0">
+        <div class="form-row mb-3 align-items-end">
+          <div class="col-3">
+            <%= f.label :location %>
             <div class="input-group">
               <%= f.number_field :x, class: 'form-control' %>
               <div class="input-group-append">
@@ -30,32 +27,10 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-9">
-            <div class="form-group">
-              <%= f.label :rules %>
-              <%= f.text_field :rules, class: 'form-control' %>
-            </div>
-          </div>
-          <div class="col-3">
-            <div class="form-group">
+          <div class="col-3 offset-1">
+            <div class="form-group mb-0">
               <%= f.label :patch %>
               <%= f.text_field :patch, class: 'form-control' %>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-9">
-            <div class="form-group">
-              <%= f.label :quest %>
-              <%= f.text_field :quest, class: 'form-control' %>
-            </div>
-          </div>
-          <div class="col-3">
-            <div class="form-group">
-              <%= f.label :quest_id, 'ID' %>
-              <%= f.text_field :quest_id, class: 'form-control' %>
             </div>
           </div>
         </div>

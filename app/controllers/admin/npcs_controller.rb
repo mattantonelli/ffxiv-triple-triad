@@ -3,7 +3,7 @@ class Admin::NPCsController < AdminController
 
   def index
     @q = NPC.all.ransack(params[:q])
-    @npcs = @q.result.order(patch: :desc, id: :desc).paginate(page: params[:page])
+    @npcs = @q.result.includes(:rules, :location, :quest).order(patch: :desc, id: :desc).paginate(page: params[:page])
   end
 
   def edit
@@ -25,6 +25,6 @@ class Admin::NPCsController < AdminController
   end
 
   def npc_params
-    params.require(:npc).permit(:name, :location, :x, :y, :rules, :patch, :quest, :quest_id)
+    params.require(:npc).permit(:name, :x, :y, :patch)
   end
 end

@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     get 'sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
   end
 
+  post 'locale/set', to: 'locale#update'
+
   resources :cards, only: [:index, :show] do
     collection do
       get 'mine', as: :my

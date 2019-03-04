@@ -15,28 +15,34 @@ desc 'Create the card packs'
     puts 'Creating card packs'
     count = Pack.count
 
-    bronze = Pack.find_or_create_by!(name: 'Bronze Triad Card', cost: 520)
-    bronze.cards = Card.where(name: BRONZE_CARDS)
+    bronze = Pack.find_or_create_by!(name_en: 'Bronze Triad Card', name_de: 'Boosterkarte (Bronze)',
+                                     name_fr: 'Pochette Triple Triade Bronze', name_ja: 'トライアドパック・ブロンズ', cost: 520)
+    bronze.cards = Card.where(name_en: BRONZE_CARDS)
     bronze.save
 
-    silver = Pack.find_or_create_by!(name: 'Silver Triad Card', cost: 1150)
-    silver.cards = Card.where(name: SILVER_CARDS)
+    silver = Pack.find_or_create_by!(name_en: 'Silver Triad Card', name_de: 'Boosterkarte (Silber)',
+                                     name_fr: 'Pochette Triple Triade Argent', name_ja: 'トライアドパック・シルバー', cost: 1150)
+    silver.cards = Card.where(name_en: SILVER_CARDS)
     silver.save
 
-    gold = Pack.find_or_create_by!(name: 'Gold Triad Card', cost: 2160)
-    gold.cards = Card.where(name: GOLD_CARDS)
+    gold = Pack.find_or_create_by!(name_en: 'Gold Triad Card', name_de: 'Boosterkarte (Gold)',
+                                   name_fr: 'Pochette Triple Triade Or', name_ja: 'トライアドパック・ゴールド', cost: 2160)
+    gold.cards = Card.where(name_en: GOLD_CARDS)
     gold.save
 
-    mythril = Pack.find_or_create_by!(name: 'Mythril Triad Card', cost: 8000)
-    mythril.cards = Card.where(name: MYTHRIL_CARDS)
+    mythril = Pack.find_or_create_by!(name_en: 'Mythril Triad Card', name_de: 'Boosterkarte (Mithril)',
+                                      name_fr: 'Pochette Triple Triade Mithrite', name_ja: 'トライアドパック・ミスライト', cost: 8000)
+    mythril.cards = Card.where(name_en: MYTHRIL_CARDS)
     mythril.save
 
-    platinum = Pack.find_or_create_by!(name: 'Platinum Triad Card', cost: 0)
-    platinum.cards = Card.where(name: PLATINUM_CARDS)
+    platinum = Pack.find_or_create_by!(name_en: 'Platinum Triad Card', name_de: 'Boosterkarte (Platin)',
+                                       name_fr: 'Pochette Triple Triade Platine', name_ja: 'トライアドパック・プラチナ', cost: 0)
+    platinum.cards = Card.where(name_en: PLATINUM_CARDS)
     platinum.save
 
-    imperial = Pack.find_or_create_by!(name: 'Imperial Triad Card', cost: 2160)
-    imperial.cards = Card.where(name: IMPERIAL_CARDS)
+    imperial = Pack.find_or_create_by!(name_en: 'Imperial Triad Card', name_de: 'Garleische Triple Triad-Karte',
+                                       name_fr: 'Pochette Triple Triade Impériale', name_ja: 'インペリアルトライアドパック', cost: 2160)
+    imperial.cards = Card.where(name_en: IMPERIAL_CARDS)
     imperial.save
 
     puts "Created #{Pack.count - count} new card packs"

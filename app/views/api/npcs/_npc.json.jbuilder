@@ -1,7 +1,8 @@
 json.(npc, :id, :resident_id, :name, :patch)
 
 json.location do
-  json.name npc.location
+  json.name npc.location.name
+  json.region npc.location.region
   json.x npc.x
   json.y npc.y
 end
@@ -9,14 +10,14 @@ end
 json.quest do
   if npc.quest
     json.id npc.quest_id
-    json.name npc.quest
+    json.name npc.quest.name
     json.link "https://www.garlandtools.org/db/#quest/#{npc.quest_id}"
   else
     json.merge! nil
   end
 end
 
-json.rules npc.rules.split(', ')
+json.rules format_rules(npc)
 
 sets = []
 sets += %i(fixed_cards variable_cards) if local_assigns[:include_deck]

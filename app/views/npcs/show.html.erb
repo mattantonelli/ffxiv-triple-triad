@@ -12,7 +12,7 @@
           <dd><%= @npc.patch %></dd>
           <% if @npc.rules.present? %>
             <dt>Rules</dt>
-            <dd><%= @npc.rules %></dd>
+            <dd><%= format_rules(@npc) %></dd>
           <% end %>
           <% if @npc.quest.present? %>
             <dt>Required Quest</dt>

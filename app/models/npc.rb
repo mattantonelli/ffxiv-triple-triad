@@ -3,17 +3,18 @@
 # Table name: npcs
 #
 #  id          :bigint(8)        not null, primary key
-#  name        :string(255)      not null
-#  location    :string(255)
 #  x           :integer
 #  y           :integer
-#  rules       :string(255)
-#  quest       :string(255)
 #  resident_id :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  quest_id    :integer
 #  patch       :string(255)
+#  name_en     :string(255)      not null
+#  name_de     :string(255)      not null
+#  name_fr     :string(255)      not null
+#  name_ja     :string(255)      not null
+#  location_id :integer          not null
 #
 
 class NPC < ApplicationRecord
@@ -24,19 +25,9 @@ class NPC < ApplicationRecord
   has_many :variable_cards, -> { where('npc_cards.fixed = false') }, through: :npc_cards, source: :card
   has_many :rewards, through: :npc_rewards, source: :card
   has_and_belongs_to_many :users
+  has_and_belongs_to_many :rules
+  belongs_to :location
+  belongs_to :quest, optional: true
 
-  def self.locations
-    {
-      'La Noscea'         => ['Limsa', 'Noscea'],
-      'The Black Shroud'  => ['Gridania', 'Shroud'],
-      'Thanalan'          => ["Ul'dah", 'Thanalan', 'Gold Saucer', 'Battlehall'],
-      'Mor Dhona'         => ['Mor Dhona'],
-      'Coerthas'          => ['Foundation', 'Coerthas', 'Pillars', 'Fortemps'],
-      "Abalathia's Spire" => ['Clouds', 'Azys'],
-      'Dravania'          => ['Idyllshire', 'Forelands', 'Hinterlands', 'Churning'],
-      'Gyr Abania'        => ["Rhalgr's", 'Fringes', 'Peaks', 'Lochs'],
-      'Hingashi'          => ['Kugane'],
-      'Othard'            => ['Ruby Sea', 'Yanxia', 'Azim', 'Doman']
-    }.freeze
-  end
+  translates :name
 end

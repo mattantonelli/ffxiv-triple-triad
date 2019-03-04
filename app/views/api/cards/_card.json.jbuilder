@@ -16,7 +16,7 @@ unless local_assigns[:skip_sources]
       end
     end
 
-    json.drops card.sources.pluck(:name)
+    json.drops card.sources.pluck(:name).map { |name| I18n.t(name.delete('.*'), default: name) }
     json.purchase card.buy_price || 0
   end
 end

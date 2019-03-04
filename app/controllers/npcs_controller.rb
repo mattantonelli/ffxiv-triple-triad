@@ -6,11 +6,11 @@ class NPCsController < ApplicationController
     query = params[:q]&.reject { |k, _| k != 's' } || {}
 
     if @location.present?
-      query[:location_matches_any] = NPC.locations[@location].map { |name| "%#{name}%" }
+      query["location_region_#{I18n.locale}_eq"] = @location
     end
 
     @q = NPC.all.ransack(query)
-    @npcs = @q.result.includes(:rewards).order(patch: :desc, id: :desc)
+    @npcs = @q.result.includes(:rewards, :rules, :location, :quest).order(patch: :desc, id: :desc)
 
     if user_signed_in?
       @user_cards = current_user.cards.pluck(:id)
