@@ -22,7 +22,7 @@ namespace :cards do
     # Add their various stats
     CSV.new(open("#{BASE_URL}/csv/TripleTriadCardResident.csv")).drop(4).each do |card|
       stars = card[6].scan(/\d$/).first
-      type_id = CardType.find_by(name: card[7])&.id || 0
+      type_id = CardType.find_by(name_en: card[7])&.id || 0
       cards[card[0]].merge!(top: card[2].to_i, bottom: card[3].to_i, left: card[4].to_i, right: card[5].to_i,
                             stars: stars.to_i, card_type_id: type_id.to_i, sell_price: card[8].to_i, sort_id: card[9].to_i)
     end

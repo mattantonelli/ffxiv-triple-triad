@@ -17,7 +17,7 @@ namespace :card_types do
     end
 
     types.map(&:compact!).transpose.each_with_index do |type, i|
-      CardType.create!(id: i + 1, name_en: type[0], name_de: type[1], name_fr: type[2], name_ja: type[3])
+      CardType.find_or_create_by!(id: i + 1, name_en: type[0], name_de: type[1], name_fr: type[2], name_ja: type[3])
     end
 
     puts "Created #{CardType.count - count} new card types"
