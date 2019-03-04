@@ -10,7 +10,7 @@ end
 json.quest do
   if npc.quest
     json.id npc.quest_id
-    json.name npc.quest
+    json.name npc.quest.name
     json.link "https://www.garlandtools.org/db/#quest/#{npc.quest_id}"
   else
     json.merge! nil
