@@ -71,7 +71,7 @@ class CardsController < ApplicationController
     end
 
     @q = cards.ransack(query)
-    @cards = @q.result.includes(:npc_sources, :sources, :pack).order(patch: :desc, id: :desc).uniq
+    @cards = @q.result.includes(:npc_sources, :sources, :pack, :type).order(patch: :desc, id: :desc).uniq
   end
 
   def set_params

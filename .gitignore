@@ -35,3 +35,6 @@
 # Capistrano
 Capfile
 config/deploy*
+
+# Automatically generated translations
+config/locales/instances/*
