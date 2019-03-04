@@ -17,7 +17,7 @@ namespace :patch do
     Card.where(id: 224..230).update(patch: '4.3')
     Card.where(id: 221..225).update(patch: '4.35')
     Card.where(id: 223..227).update(patch: '4.36')
-    Card.where(id: 236..239).update(patch: '4.45')
+    Card.where(id: [231, 236, 237, 238, 239]).update(patch: '4.45')
     Card.where(id: 241..251).update(patch: '4.5')
     Card.where(id: [232, 233, 234, 235, 238, 240]).update(patch: '4.4')
     Card.where(id: [242, 243, 245]).update(patch: '4.55')
