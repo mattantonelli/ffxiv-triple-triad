@@ -25,6 +25,7 @@ module FfxivTripleTriad
     config.generators.system_tests = nil
 
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*{.yml}')]
+    config.i18n.enforce_available_locales = false
 
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
   end
