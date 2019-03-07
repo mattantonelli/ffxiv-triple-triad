@@ -25,6 +25,9 @@ class User < ApplicationRecord
 
   devise :trackable, :omniauthable, omniauth_providers: [:discord]
 
+  scope :visible, -> { where(public_cards: true) }
+  scope :active,  -> { joins(:cards).group(:id).having('count(cards.id) > 5').visible }
+
   def add_card(card_id)
     cards << Card.find(card_id)
   end

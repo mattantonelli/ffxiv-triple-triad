@@ -23,6 +23,15 @@
               <dd><%= render 'stats', card: @card %></dd>
             </div>
             <div>
+              <dt>
+                Owned
+                <span data-toggle="tooltip" title="Percentage of active, public users who own this card.">
+                  <%= fa_icon('question-circle') %>
+                </span>
+              </dt>
+              <dd><%= @card.ownership %></dd>
+            </div>
+            <div>
               <dt>Sale Price</dt>
               <dd><%= format_price(@card.sell_price) %></dd>
             </div>

@@ -41,4 +41,9 @@ class Card < ApplicationRecord
   def stats
     "#{top} #{right} #{bottom} #{left}".gsub(/10/, 'A')
   end
+
+  def ownership
+    active_user_ids = User.active.pluck(:id)
+    '%2.2f%' % ((users.where(id: active_user_ids).count / active_user_ids.size.to_f) * 100)
+  end
 end

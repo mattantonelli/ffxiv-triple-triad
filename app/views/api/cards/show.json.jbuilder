@@ -1,1 +1,1 @@
-json.partial! 'card', card: @card
+json.partial! 'card', card: @card, show_owned: true
