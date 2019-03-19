@@ -29,11 +29,12 @@
       <th scope="col"><%= sort_link(@q, :stars, 'Rarity') %></th>
       <th scope="col" class="text-center">Stats</th>
       <th scope="col" class="hide-xs">Source</th>
+      <th scope="col" class="text-right hide-xs"><%= render 'owned' %></th>
       <th scope="col" class="text-right"><%= sort_link(@q, :patch, [:patch, :id]) %></th>
-      <th scope="col" class="text-center pr-0">Own</th>
+      <th scope="col" class="text-center px-3"></th> <!-- Checkbox -->
     </tr>
   </thead>
   <tbody>
-    <%= render 'table_data', cards: @cards, user_cards: @user_cards %>
+    <%= render 'table_data', cards: @cards, user_cards: @user_cards, ownership: @ownership %>
   </tbody>
 </table>

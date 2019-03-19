@@ -32,6 +32,11 @@
           <% end %>
         </ul>
       </td>
+    <% end %>
+    <% if local_assigns[:ownership] %>
+      <td class="hide-xs text-right"><%= ownership.fetch(card.id, '0%') %></td>
+    <% end %>
+    <% unless local_assigns[:skip_source] %>
       <td class="text-right"><%= card.patch %></td>
     <% end %>
     <% if local_assigns[:user_cards] %>
