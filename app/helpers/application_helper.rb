@@ -18,7 +18,6 @@ module ApplicationHelper
   end
 
   def avatar(user)
-    # Discord users without avatars will end in a /
-    image_tag(user.avatar_url, class: 'avatar') unless user.avatar_url&.match?(/\/\Z/)
+    image_tag(user.avatar_url, class: 'avatar')
   end
 end
