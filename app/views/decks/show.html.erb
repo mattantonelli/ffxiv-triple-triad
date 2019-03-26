@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-12 col-sm-4">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Details</h5>
+      </div>
+      <div class="card-body">
+        <dl>
+          <dt>Purpose</dt>
+          <dd><%= purpose(@deck) %></dd>
+          <dt>Rating</dt>
+          <dd><%#= @deck.rating %>4</dd>
+          <% if user_signed_in? %>
+            <dt>Usable</dt>
+            <dd><%= usable?(@deck, @user_cards) %></dd>
+          <% end %>
+          <dt>Created by</dt>
+          <dd><%= @deck.user.username %></dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-sm-8">
+    <div class="card">
+      <div class="card-header">
+        <h5>Cards</h5>
+      </div>
+      <div class="card-body pt-0">
+        <div class="d-flex flex-wrap card-list-lg">
+          <%= render partial: 'cards/large', layout: 'card', collection: @deck.cards, as: :card %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

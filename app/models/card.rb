@@ -33,6 +33,7 @@ class Card < ApplicationRecord
   has_one :pack_card
   has_one :pack, through: :pack_card
   has_and_belongs_to_many :users
+  has_and_belongs_to_many :decks
 
   accepts_nested_attributes_for :sources
 

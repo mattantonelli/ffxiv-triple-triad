@@ -1,0 +1,46 @@
+<div class="row">
+  <%# Search form goes here %>
+</div>
+<div class="row">
+  <div class="col-12 col-xl-10 offset-xl-1">
+    <table class="table table-striped table-sm shadow p-3 mb-5">
+      <thead>
+        <tr>
+          <th scope="col">Purpose</th>
+          <th scope="col">Rating</th>
+          <th scope="col">Created by</th>
+          <th scope="col" class="hide-xs">Cards</th>
+          <% if user_signed_in? %>
+            <th scope="col" class="text-center">Usable</th>
+          <% end %>
+          <th></th> <!-- Button -->
+        </tr>
+      </thead>
+      <tbody>
+        <% @decks.each do |deck| %>
+          <tr>
+            <td><%= purpose(deck) %></td>
+            <td><%#= deck.rating %>4</td>
+            <td><%= deck.user.username.truncate(20) %></td>
+            <td class="hide-xs">
+              <div class="d-flex card-list">
+                <% deck.cards.each do |card| %>
+                  <%= link_to(card_path(card), data: { toggle: 'tooltip', title: "#{card.name}" },
+                              class: ('card-missing' if @user_cards.present? && !@user_cards.include?(card.id))) do %>
+                              <%= small_image(card) %>
+                            <% end %>
+                          <% end %>
+              </div>
+            </td>
+            <% if user_signed_in? %>
+              <td class="text-center"><%= usable?(deck, @user_cards) %></td>
+            <% end %>
+            <td class="text-center">
+              <%= link_to fa_icon('list', class: 'btn btn-secondary btn-sm'), deck_path(deck) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

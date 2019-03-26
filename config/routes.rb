@@ -29,6 +29,8 @@ Rails.application.routes.draw do
     post 'set', on: :collection
   end
 
+  resources :decks
+
   get 'user/settings', to: 'users#edit'
   post 'user/settings', to: 'users#update'
 
