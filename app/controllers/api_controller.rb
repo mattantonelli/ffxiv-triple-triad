@@ -2,8 +2,11 @@ class ApiController < ApplicationController
   skip_before_action :set_locale
   before_action :set_default_format
   before_action :set_language
+  before_action :track_request
 
   SUPPORTED_LOCALES = %w(en de fr ja).freeze
+  GA_URL = 'www.google-analytics.com/collect'.freeze
+  GA_TID = Rails.application.credentials.dig(:google_analytics, :tracking_id).freeze
 
   def render_not_found
     render json: { status: 404, error: 'Not found' }, status: :not_found
@@ -35,6 +38,12 @@ class ApiController < ApplicationController
 
     if language.present? && SUPPORTED_LOCALES.include?(language)
       I18n.locale = language
+    end
+  end
+
+  def track_request
+    if GA_TID.present?
+      RestClient.post(GA_URL, { v: 1, tid: GA_TID, cid: SecureRandom.uuid, t: 'pageview', dp: request.fullpath })
     end
   end
 end

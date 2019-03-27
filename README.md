@@ -9,7 +9,6 @@ All of this application's data is made available through a RESTful JSON API. See
 * Ruby (2.4.1)
 * Rails (5.2.1)
 * MySQL
-* Redis
 
 ## Installation
 #### Clone and initialize the repository
@@ -39,6 +38,8 @@ mysql:
 discord:
   client_id: 123456789
   client_secret: abc123
+google_analytics:
+  tracking_id: GA-1234567-8
 ```
 
 #### Load the database
@@ -53,7 +54,7 @@ rails server
 ```
 
 ## Updating
-When new cards & NPCs become available on patch day, they can be loaded into the database by rerunning the `all:load` rake task.
+When new cards & NPCs become available on patch day, they can be loaded into the database by rerunning the `data:update` rake task.
 
 ```
 bundle exec rake db:schema:load

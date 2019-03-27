@@ -26,6 +26,7 @@ gem 'redis-namespace'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap4'
 gem 'traco'
+gem 'rest-client'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
