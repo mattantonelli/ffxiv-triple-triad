@@ -43,7 +43,6 @@ class Card < ApplicationRecord
   end
 
   def ownership
-    active_user_ids = User.active.pluck(:id)
-    '%2.2f%' % ((users.where(id: active_user_ids).count / active_user_ids.size.to_f) * 100)
+    Redis.current.hget(:ownership, id.to_s)
   end
 end

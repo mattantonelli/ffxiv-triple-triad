@@ -9,6 +9,7 @@ All of this application's data is made available through a RESTful JSON API. See
 * Ruby (2.4.1)
 * Rails (5.2.1)
 * MySQL
+* Redis
 
 ## Installation
 #### Clone and initialize the repository

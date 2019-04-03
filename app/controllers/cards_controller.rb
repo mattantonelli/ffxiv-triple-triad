@@ -72,13 +72,7 @@ class CardsController < ApplicationController
 
     @q = cards.ransack(query)
     @cards = @q.result.includes(:npc_sources, :sources, :pack, :type).order(patch: :desc, id: :desc).uniq
-
-    active_user_ids = User.active.pluck(:id)
-    active_user_count = active_user_ids.size.to_f
-    @ownership = Card.joins(:users).where('users.id in (?)', active_user_ids).group(:card_id).size
-    @ownership.each do |card_id, owners|
-      @ownership[card_id] = "#{((owners / active_user_count) * 100).floor}%"
-    end
+    @ownership = Redis.current.hgetall(:ownership)
   end
 
   def set_params
