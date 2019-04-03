@@ -49,6 +49,15 @@ bundle exec rake db:schema:load
 bundle exec rake data:initialize
 ```
 
+#### Schedule jobs
+Run `whenever` to schedule the application's cronjobs.
+
+```
+bundle exec whenever -s 'environment=INSERT_ENV_HERE' --update-crontab
+```
+
+Please note that if you did not install your Ruby using rbenv, you will need to change the bundle command located in `config/schedule.rb`
+
 #### Start the server
 ```
 rails server
