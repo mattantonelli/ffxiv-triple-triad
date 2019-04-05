@@ -3,8 +3,9 @@ class Api::NPCsController < ApiController
 
   def index
     @query_params = sanitize_query_params.except(:deck)
-    query = NPC.all.ransack(@query_params)
-    @npcs = add_includes(query.result).order(:patch, :id).limit(params[:limit])
+    result = NPC.all.ransack(@query_params).result
+    result = result.includes(fixed_cards: :type, variable_cards: :type) if @include_deck
+    @npcs = result.includes(:location, :quest, :rules, rewards: :type).order(:patch, :id).limit(params[:limit])
   end
 
   def show
@@ -13,14 +14,6 @@ class Api::NPCsController < ApiController
   end
 
   private
-  def add_includes(collection)
-    if params[:deck]
-      collection.includes(fixed_cards: :type, variable_cards: :type, rewards: :type)
-    else
-      collection.includes(rewards: :type)
-    end
-  end
-
   def set_options
     @include_deck = params[:deck].present?
   end

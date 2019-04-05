@@ -13,7 +13,8 @@ class Api::UsersController < ApiController
 
       limit = params[:limit_missing].present? ? params[:limit_missing].to_i : 5
       random_ids = (Card.pluck(:id) - @user_cards).sample(limit)
-      @random_cards = Card.includes(:type, :npc_sources, :sources, :pack).where(id: random_ids).order(:patch, :id)
+      @random_cards = Card.includes(:type, :sources, :pack, npc_sources: [:location, :quest, :rules])
+        .where(id: random_ids).order(:patch, :id)
 
       @total_npcs = NPC.count
       @defeated_npcs = @user.npcs.size
