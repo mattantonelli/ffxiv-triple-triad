@@ -11,8 +11,18 @@
 #
 
 class Deck < ApplicationRecord
+  before_create :set_order
+
   belongs_to :user
   belongs_to :rule, required: false
   belongs_to :npc, required: false
-  has_and_belongs_to_many :cards
+  has_many :deck_cards, dependent: :delete_all
+  has_many :cards, through: :deck_cards
+
+  private
+  def set_order
+    deck_cards.each_with_index do |card, i|
+      card.position = i + 1
+    end
+  end
 end

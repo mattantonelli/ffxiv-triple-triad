@@ -30,6 +30,8 @@ class Card < ApplicationRecord
   has_many :npc_rewards
   has_many :npc_sources, through: :npc_rewards, source: :npc
   has_many :sources
+  has_many :deck_cards
+  has_many :decks, through: :deck_cards
   has_one :pack_card
   has_one :pack, through: :pack_card
   has_and_belongs_to_many :users
