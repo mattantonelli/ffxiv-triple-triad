@@ -14,5 +14,5 @@ class DeckCard < ApplicationRecord
   belongs_to :deck
   belongs_to :card
 
-  default_scope { order(:position) }
+  # default_scope { order(:position) }
 end

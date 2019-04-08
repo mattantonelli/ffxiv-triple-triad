@@ -212,6 +212,11 @@ hr {
       border-color: #777;
     }
 
+    optgroup {
+      background-color: #1F1F1F;
+      color: #eee;
+    }
+
     option {
       background-color: #292929;
       color: #eee;
@@ -267,4 +272,12 @@ pre {
   color: #e83e8c;
   background-color: rgba(0, 0, 0, 0.2);
   padding: 0.5rem;
+}
+
+.tooltip-inner {
+  text-align: center;
+}
+
+.form-check-input.checkbox {
+  margin-top: 1px;
 }

@@ -1,2 +1,15 @@
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      models:
+        deck:
+          attributes:
+            base:
+              multiple_purposes: 'You cannot select both a rule and an NPC.'
+            cards:
+              invalid_size: 'Your deck must contain exactly 5 cards.'
+              too_many_rares: "Your deck can only contain one card that is \u2605\u2605\u2605\u2605 or higher."
+            npc:
+              blank: 'Your deck has specified an invalid NPC.'
+            rule:
+              blank: 'Your deck has specified an invalid rule.'

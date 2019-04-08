@@ -229,6 +229,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    sortable-rails (1.7.0)
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -299,6 +300,7 @@ DEPENDENCIES
   ransack
   redis-namespace
   sass-rails (~> 5.0)
+  sortable-rails
   spring
   spring-watcher-listen (~> 2.0.0)
   traco

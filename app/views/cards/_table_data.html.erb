@@ -48,5 +48,18 @@
         <% end %>
       </td>
     <% end %>
+    <% if local_assigns[:deck] %>
+      <td class="text-center">
+        <%= button_tag(class: 'btn btn-secondary btn-sm deck-toggle',
+                       disabled: deck.size >= 5 && !deck.include?(card.id),
+                       data: { card_id: card.id, action: deck.include?(card.id) ? 'remove' : 'add' }) do %>
+          <% if deck.include?(card.id) %>
+            <%= fa_icon('minus', text: 'Remove') %>
+          <% else %>
+            <%= fa_icon('plus', text: 'Add') %>
+          <% end %>
+        <% end %>
+      </td>
+    <% end %>
   </tr>
 <% end %>
