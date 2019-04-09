@@ -20,5 +20,10 @@ npcs = NPC.pluck(:id)
     params[:npc_id] = npcs.sample
   end
 
-  users.sample.decks.create!(params)
+  deck_user = users.sample
+  deck = deck_user.decks.create!(params)
+
+  users.reject { |user| user.id == deck_user.id }.sample(rand(5)).each do |user|
+    deck.votes.create!(user: user)
+  end
 end

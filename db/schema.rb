@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_05_190306) do
+ActiveRecord::Schema.define(version: 2019_04_09_151711) do
 
   create_table "card_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -56,13 +56,6 @@ ActiveRecord::Schema.define(version: 2019_04_05_190306) do
     t.index ["stars"], name: "index_cards_on_stars"
   end
 
-  create_table "cards_decks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "card_id"
-    t.integer "deck_id"
-    t.index ["card_id"], name: "index_cards_decks_on_card_id"
-    t.index ["deck_id"], name: "index_cards_decks_on_deck_id"
-  end
-
   create_table "cards_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
     t.integer "card_id"
@@ -87,6 +80,7 @@ ActiveRecord::Schema.define(version: 2019_04_05_190306) do
     t.integer "npc_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "rating"
     t.index ["npc_id"], name: "index_decks_on_npc_id"
     t.index ["rule_id"], name: "index_decks_on_rule_id"
     t.index ["user_id"], name: "index_decks_on_user_id"
@@ -243,6 +237,16 @@ ActiveRecord::Schema.define(version: 2019_04_05_190306) do
     t.datetime "updated_at", null: false
     t.boolean "public_cards", default: true
     t.boolean "admin", default: false
+  end
+
+  create_table "votes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "deck_id"
+    t.integer "user_id"
+    t.integer "score", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deck_id", "user_id"], name: "index_votes_on_deck_id_and_user_id", unique: true
+    t.index ["deck_id"], name: "index_votes_on_deck_id"
   end
 
 end

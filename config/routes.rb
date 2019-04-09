@@ -31,6 +31,8 @@ Rails.application.routes.draw do
 
   resources :decks do
     get 'mine', as: :my, on: :collection
+    post 'upvote'
+    post 'downvote'
   end
 
   get 'user/settings', to: 'users#edit'

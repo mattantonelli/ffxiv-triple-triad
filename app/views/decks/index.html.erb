@@ -30,7 +30,7 @@
           <tr>
             <th scope="col"><%= sort_link(@q, "rule_name_#{I18n.locale}",
                                           ["rule_name_#{I18n.locale}", "npc_name_#{I18n.locale}"], 'Purpose') %></th>
-            <th scope="col">Rating</th>
+            <th scope="col"><%= sort_link(@q, :rating) %></th>
             <th scope="col"><%= sort_link(@q, :user_username, 'Created by') %></th>
             <th scope="col" class="hide-xs">Cards</th>
             <% if user_signed_in? %>
@@ -43,7 +43,7 @@
           <% @decks.each do |deck| %>
             <tr>
               <td><%= purpose(deck) %></td>
-              <td><%#= deck.rating %>4</td>
+              <td><%= deck.rating %></td>
               <td><%= deck.user.username.truncate(20) %></td>
               <td class="hide-xs">
                 <div class="d-flex card-list">

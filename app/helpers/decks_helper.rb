@@ -19,4 +19,8 @@ module DecksHelper
                                title: "You are missing #{missing} #{'card'.pluralize(missing)} from this deck." })
     end
   end
+
+  def voted?(deck)
+    Vote.exists?(deck: deck, user: current_user)
+  end
 end

@@ -1,5 +1,5 @@
 class DecksController < ApplicationController
-  before_action :set_deck, only: [:show, :edit, :update, :destroy]
+  before_action :set_deck, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   before_action :set_user_cards, only: [:index, :mine, :show]
   before_action :signed_in?, except: [:index, :show]
   before_action :authenticated?, only: [:edit, :update, :destroy], unless: :admin?
@@ -75,9 +75,29 @@ class DecksController < ApplicationController
     redirect_to decks_path
   end
 
+  def upvote
+    if @deck.upvote(current_user)
+      flash[:success] = 'Your vote has been added.'
+    else
+      flash[:error] = 'There was a problem casting your vote.'
+    end
+
+    redirect_to deck_path(@deck)
+  end
+
+  def downvote
+    if @deck.downvote(current_user)
+      flash[:success] = 'Your vote has been removed.'
+    else
+      flash[:error] = 'There was a problem removing your vote.'
+    end
+
+    redirect_to deck_path(@deck)
+  end
+
   private
   def set_deck
-    @deck = Deck.find(params[:id])
+    @deck = Deck.find(params[:id] || params[:deck_id])
   end
 
   def set_user_cards

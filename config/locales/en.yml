@@ -13,3 +13,7 @@ en:
               blank: 'Your deck has specified an invalid NPC.'
             rule:
               blank: 'Your deck has specified an invalid rule.'
+        vote:
+          attributes:
+            user_id:
+              taken: 'You have already voted for this deck.'
