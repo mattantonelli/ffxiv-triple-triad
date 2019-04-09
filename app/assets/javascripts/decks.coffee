@@ -6,17 +6,18 @@ $(document).on 'turbolinks:load', ->
 
     $.ajax({
       type: 'GET',
-      url: $('.card-search').attr('action'),
-      data: $('.card-search').serialize() + "&card_ids=#{card_ids}&source=#{source}",
+      url: $('.search-form').attr('action'),
+      data: $('.search-form').serialize() + "&card_ids=#{card_ids}&source=#{source}",
       dataType: 'script',
       success: ->
         switch(source)
           when 'deck' then $('.card-large').tooltip() && addDeckListeners()
           when 'search' then addSearchListeners() && $('table').fadeIn(300)
+        $('.search-form').find(':input').prop('disabled', false)
     })
 
   addCard = (id) ->
-    ids = $('#deck_card_ids').val().split(',')
+    ids = $('#deck_card_ids').val().split(',').filter(Boolean)
     ids.push(id)
     $('#deck_card_ids').val(ids.join(','))
 
@@ -76,7 +77,7 @@ $(document).on 'turbolinks:load', ->
   addSearchListeners()
   addDeckListeners()
 
-  $('.card-search').submit ->
+  $('.search-form').submit ->
     $(this).find('input[type=submit]').blur()
     $('.search-results').fadeOut(300, ->
       updateView('search')

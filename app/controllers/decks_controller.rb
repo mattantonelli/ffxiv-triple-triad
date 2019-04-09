@@ -104,7 +104,7 @@ class DecksController < ApplicationController
     unless params[:source] == 'deck'
       @q = Card.ransack(params[:q])
 
-      if params[:q].present?
+      if params[:source] == 'search'
         @cards = @q.result.includes(:type).order(patch: :desc, id: :desc)
       else
         @cards = Card.includes(:type).order(patch: :desc, id: :desc).first(5)
@@ -113,8 +113,6 @@ class DecksController < ApplicationController
 
     if ids = params[:card_ids]
       @deck.card_ids = ids.split(',')
-    elsif @deck.cards.empty?
-      @deck.cards = Card.all.sample(5)
     end
   end
 
