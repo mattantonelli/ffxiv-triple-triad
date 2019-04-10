@@ -8,9 +8,14 @@ module ApplicationHelper
     end
   end
 
-  def nav_link(text, path)
-    classes = "nav-link#{' active' if current_page?(path)}"
-    link_to text, path, class: classes
+  def nav_link(text, path, path_controller = nil)
+    if path_controller.present?
+      active = path_controller == controller_name
+    else
+      active = current_page?(path)
+    end
+
+    link_to text, path, class: "nav-link#{' active' if active}"
   end
 
   def format_date(date)
