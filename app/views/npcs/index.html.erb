@@ -3,10 +3,10 @@
   <div class="col-12 col-md-6 mb-2 mb-md-0 d-flex justify-content-center justify-content-md-start">
     <%= form_tag(npcs_path, method: :get, enforce_utf8: false, class: 'form form-inline search-form', id: 'npc-search') do %>
       <%= select_tag :location, options_for_select(Location.order(:id).map(&:region).uniq, @location),
-        include_blank: 'All Locations', class: 'form-control form-control-sm mr-3' %>
+        include_blank: 'All Locations', class: 'form-control form-control-sm mt-0' %>
     <% end %>
     <% if user_signed_in? %>
-      <%= link_to 'Update Defeated', update_defeated_npcs_path, method: :post, class: 'btn btn-sm btn-secondary',
+      <%= link_to 'Update Defeated', update_defeated_npcs_path, method: :post, class: 'btn btn-sm btn-secondary ml-3 ml-sm-0',
         data: { confirm: 'All NPCs with exclusive cards you have obtained will be marked as defeated.' } %>
     <% end %>
   </div>

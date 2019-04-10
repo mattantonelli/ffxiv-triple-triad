@@ -5,7 +5,7 @@
         <%= small_image(card) %>
       <% end %>
     </td>
-    <td <%= 'class="hide-xs"'.html_safe unless local_assigns[:skip_source] %>>
+    <td class="hide-xs">
       <%= link_to(card.name, card_path(card), class: 'name') %>
     </td>
     <td><%= type_image(card) %></td>

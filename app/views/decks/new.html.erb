@@ -1,9 +1,9 @@
 <div class="row pb-3 d-flex align-items-stretch">
-  <div class="col-8">
+  <div class="col-12 col-sm-8 mb-3 mb-sm-0">
     <div class="card shadow h-100">
       <h5 class="card-header">Organize Deck</h5>
       <div class="card-body d-flex flex-column">
-        <div class="d-flex card-list-lg flex-grow-1" id="deck">
+        <div class="d-flex card-list-lg flex-grow-1 flex-wrap" id="deck">
           <%= render partial: 'builder_card', collection: @deck.cards, as: :card %>
         </div>
         <div class="help<%= ' d-none' if @deck.cards.empty? %>">
@@ -15,7 +15,7 @@
       </div>
     </div>
   </div>
-  <div class="col-4">
+  <div class="col-12 col-sm-4">
     <div class="card shadow">
       <h5 class="card-header">Finalize Deck</h5>
       <div class="card-body">
@@ -46,7 +46,7 @@
     <div class="card shadow">
       <h5 class="card-header">Find Cards</h5>
       <div class="card-body card-table">
-        <%= search_form_for(@q, class: 'form form-inline search-form d-flex justify-content-center my-3', url: new_deck_path, enforce_utf8: false) do |f| %>
+        <%= search_form_for(@q, class: 'form form-inline search-form d-flex justify-content-center mx-2 my-3', url: new_deck_path, enforce_utf8: false) do |f| %>
           <%= f.search_field "name_#{I18n.locale}_cont", placeholder: 'Name', size: 30, class: 'form-control form-control-sm' %>
           <%= f.collection_select :card_type_id_eq, CardType.all, :id, :name,
             { include_blank: 'All Types' }, class: 'form-control form-control-sm' %>

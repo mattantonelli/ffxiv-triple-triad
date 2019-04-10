@@ -44,23 +44,6 @@ img.type {
   }
 }
 
-.card-search {
-  display: inline-block;
-
-  @media (max-width: 575px) {
-    select {
-      margin-top: 0.5rem;
-    }
-  }
-}
-
-.search-form {
-  input, select {
-    margin-right: 1rem;
-  }
-}
-
-
 .card-info > div {
   margin-right: 2rem;
 }
