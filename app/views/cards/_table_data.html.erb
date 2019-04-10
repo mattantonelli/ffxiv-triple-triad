@@ -5,7 +5,7 @@
         <%= small_image(card) %>
       <% end %>
     </td>
-    <td <%= 'class="hide-xs"'.html_safe unless local_assigns[:skip_source] %>>
+    <td class="hide-xs">
       <%= link_to(card.name, card_path(card), class: 'name') %>
     </td>
     <td><%= type_image(card) %></td>
@@ -45,6 +45,19 @@
           <input type="checkbox" class="card-toggle" data-path="<%= card_remove_path(card) %>" checked>
         <% else %>
           <input type="checkbox" class="card-toggle" data-path="<%= card_add_path(card) %>">
+        <% end %>
+      </td>
+    <% end %>
+    <% if local_assigns[:deck] %>
+      <td class="text-center">
+        <%= button_tag(class: 'btn btn-secondary btn-sm deck-toggle',
+                       disabled: deck.size >= 5 && !deck.include?(card.id),
+                       data: { card_id: card.id, action: deck.include?(card.id) ? 'remove' : 'add' }) do %>
+          <% if deck.include?(card.id) %>
+            <%= fa_icon('minus', text: 'Remove') %>
+          <% else %>
+            <%= fa_icon('plus', text: 'Add') %>
+          <% end %>
         <% end %>
       </td>
     <% end %>

@@ -7,6 +7,14 @@ class ApplicationController < ActionController::Base
     new_user_session_path
   end
 
+  def flash_errors(record)
+    if record.errors.any?
+      flash.now[:error] = record.errors.messages.values.flatten.join('<br>').html_safe
+    else
+      flash.now[:error] = 'Sorry, something went wrong.'
+    end
+  end
+
   private
   def set_locale
     locale = cookies['locale']

@@ -16,6 +16,7 @@
 #
 
 class Rule < ApplicationRecord
+  has_many :decks
   has_and_belongs_to_many :npcs
 
   translates :name, :description

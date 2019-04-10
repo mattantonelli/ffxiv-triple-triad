@@ -44,21 +44,6 @@ img.type {
   }
 }
 
-.card-search {
-  display: inline-block;
-
-  input, select {
-    margin-right: 1rem;
-  }
-
-  @media (max-width: 575px) {
-    select {
-      margin-top: 0.5rem;
-    }
-  }
-}
-
-
 .card-info > div {
   margin-right: 2rem;
 }
