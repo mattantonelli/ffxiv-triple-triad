@@ -7,12 +7,12 @@ class DecksController < ApplicationController
 
   def index
     @q = Deck.ransack(params[:q])
-    @decks = @q.result.includes(:user, :rule, :npc, :cards).paginate(page: params[:page])
+    @decks = @q.result.includes(:user, :rule, :npc, :cards).order(rating: :desc, id: :desc).paginate(page: params[:page])
   end
 
   def mine
     @q = current_user.decks.ransack(params[:q])
-    @decks = @q.result.includes(:user, :rule, :npc, :cards).paginate(page: params[:page])
+    @decks = @q.result.includes(:user, :rule, :npc, :cards).order(rating: :desc, id: :desc).paginate(page: params[:page])
     render :index
   end
 

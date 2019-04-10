@@ -15,4 +15,5 @@ class Vote < ApplicationRecord
   belongs_to :user
 
   validates_uniqueness_of :user_id, scope: :deck_id
+  validates_presence_of :user_id, :deck_id
 end

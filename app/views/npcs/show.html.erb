@@ -25,7 +25,7 @@
   <div class="col-12 col-sm-7 col-md-6">
     <div class="card">
       <div class="card-header">
-        <h6><%= 'Reward'.pluralize(@rewards.length) %></h6>
+        <h5><%= 'Reward'.pluralize(@rewards.length) %></h5>
       </div>
       <div class="card-body pt-0">
         <div class="d-flex flex-wrap card-list-lg">
@@ -38,12 +38,16 @@
 <div class="row mt-4">
   <div class="col-12 col-md-10 offset-md-1">
     <div class="card">
-      <div class="card-header">
-        <h6>Deck
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5>Deck
           <span data-toggle="tooltip" data-html="true"
                                       title="Cards on the left are always used.<br>Cards on the right are chosen at random.">
             <%= fa_icon('question-circle') if @npc.variable_cards.present? %>
           </span>
+        </h5>
+        <% if Deck.exists?(npc_id: @npc.id) %>
+          <%= link_to 'User Decks', decks_path(q: { npc_id_eq: @npc.id }), class: 'btn btn-secondary btn-sm' %>
+        <% end %>
       </div>
       <div class="card-body pl-0">
         <div class="d-flex">
