@@ -3,19 +3,16 @@ class DecksController < ApplicationController
   before_action :set_user_cards, only: [:index, :mine, :show]
   before_action :signed_in?, except: [:index, :show]
   before_action :authenticated?, only: [:edit, :update, :destroy], unless: :admin?
+  before_action :filter_query, only: [:index, :mine]
 
   def index
-    if params[:general].present?
-      params[:q] = params[:q]&.reject { |k, _| k != 's' } || {}
-      params[:q].merge!(rule_id_null: true, npc_id_null: true)
-    end
-
     @q = Deck.ransack(params[:q])
     @decks = @q.result.includes(:user, :rule, :npc, :cards).paginate(page: params[:page])
   end
 
   def mine
-    @decks = current_user.decks.includes(:user, :rule, :npc, :cards).paginate(page: params[:page])
+    @q = current_user.decks.ransack(params[:q])
+    @decks = @q.result.includes(:user, :rule, :npc, :cards).paginate(page: params[:page])
     render :index
   end
 
@@ -145,6 +142,13 @@ class DecksController < ApplicationController
         when 'search' then render 'search_results'
         end
       end
+    end
+  end
+
+  def filter_query
+    if params[:general].present?
+      params[:q] = params[:q]&.reject { |k, _| k != 's' } || {}
+      params[:q].merge!(rule_id_null: true, npc_id_null: true)
     end
   end
 

@@ -15,7 +15,7 @@
         <% end %>
       </div>
       <div class="card-body card-table">
-        <%= search_form_for(@q, enforce_utf8: false, class: 'form form-inline search-form d-flex justify-content-center mx-2 my-3') do |f| %>
+        <%= search_form_for(@q, enforce_utf8: false, url: request.path, class: 'form form-inline search-form d-flex justify-content-center mx-2 my-3') do |f| %>
           <%= f.collection_select :rule_id_eq, Rule.all.sort_by(&:name), :id, :name, { include_blank: 'Filter by Rule' },
             class: 'form-control form-control-sm'%>
           <%= f.grouped_collection_select :npc_id_eq, Location.all.includes(:alphabetical_npcs), :alphabetical_npcs,
