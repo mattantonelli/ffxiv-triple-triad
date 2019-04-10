@@ -64,10 +64,10 @@ rails server
 ```
 
 ## Updating
-When new cards & NPCs become available on patch day, they can be loaded into the database by rerunning the `data:update` rake task.
+When new cards & NPCs become available on patch day, they can be loaded into the database by running the `data:update` rake task.
 
 ```
-bundle exec rake db:schema:load
+bundle exec rake data:update
 ```
 
 This data is available once the [data repository](https://github.com/mattantonelli/ffxiv-triple-triad-data) has been updated with the latest patch data.
