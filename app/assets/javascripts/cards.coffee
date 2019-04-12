@@ -14,6 +14,15 @@ $(document).on 'turbolinks:load', ->
     progress.attr('style', "width: #{completion}%")
     progress.find('b').text("#{current}/#{max} (#{parseInt(completion)}%)")
 
+  updateCollection = (card) ->
+    $.ajax({
+      type: 'POST',
+      url: card.data('path'),
+      data: { authenticity_token: window._token },
+      error: ->
+        alert('There was a problem updating your collection. Please try again.')
+        location.reload()
+    })
 
   if localStorage.getItem('display-owned') == 'false'
     $('.has-card').hide()
@@ -24,11 +33,11 @@ $(document).on 'turbolinks:load', ->
     card = $(this)
 
     if !this.checked
-      $.post(card.data('path'), { authenticity_token: window._token })
+      updateCollection(card)
       path = card.data('path').replace('remove', 'add')
       card.closest('tr').removeClass('has-card')
     else
-      $.post(card.data('path'), { authenticity_token: window._token })
+      updateCollection(card)
       path = card.data('path').replace('add', 'remove')
       row = card.closest('tr')
       row.addClass('has-card')

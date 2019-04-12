@@ -15,6 +15,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def handle_unverified_request
+    head :not_found
+  end
+
   private
   def set_locale
     locale = cookies['locale']
