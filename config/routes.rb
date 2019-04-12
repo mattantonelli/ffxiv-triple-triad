@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   post 'user/settings', to: 'users#update'
 
   namespace :api do
-    %w(npcs cards packs).each do |model|
+    %w(npcs cards packs decks).each do |model|
       resources model, only: [:index, :show], defaults: { format: :json }
     end
 
