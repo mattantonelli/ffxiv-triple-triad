@@ -49,5 +49,18 @@
         </div>
       </div>
     </div>
+    <% if user_signed_in? %>
+      <div class="card mt-3">
+        <h5 class="card-header">Card Finder</h5>
+        <div class="card-body">
+          <% @deck.cards.each_with_index do |card, i| %>
+            <p>
+              <b><%= link_to(card.name, card_path(card), class: 'unstyled') %>:</b>
+              <%= card_position(card, @user_sort_ids) %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>

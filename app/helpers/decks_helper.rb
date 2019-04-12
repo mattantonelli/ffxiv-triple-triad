@@ -23,4 +23,17 @@ module DecksHelper
   def voted?(deck)
     Vote.exists?(deck: deck, user: current_user)
   end
+
+  def card_position(card, user_sort_ids)
+    if index = user_sort_ids.index(card.sort_id)
+      puts "#{card.name}: #{index}"
+      page = (index / 25) + 1
+      row = (index % 25 / 5) + 1
+      column = (index % 25 % 5) + 1
+
+      "Page #{page}, Row #{row}, Column #{column}"
+    else
+      'This card is missing from your collection.'
+    end
+  end
 end
