@@ -10,7 +10,7 @@
     <div class="navbar-nav mr-auto">
       <%= nav_link('My Cards', my_cards_path) %>
       <%= nav_link('All Cards', cards_path) %>
-      <%= nav_link('NPCs', npcs_path) %>
+      <%= nav_link('NPCs', npcs_path, 'npcs') %>
       <%= link_to(decks_path, class: "nav-link#{' active' if controller_name == 'decks'}") do %>
         Decks <span class="badge badge-pill badge-dark">New!</span>
       <% end %>
