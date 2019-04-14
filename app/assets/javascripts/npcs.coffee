@@ -14,6 +14,16 @@ $(document).on 'turbolinks:load', ->
     progress.attr('style', "width: #{completion}%")
     progress.find('b').text("#{current}/#{max} (#{parseInt(completion)}%)")
 
+  updateNPC = (npc) ->
+    $.ajax({
+      type: 'POST',
+      url: npc.data('path'),
+      data: { authenticity_token: window._token },
+      error: ->
+        alert('There was a problem updating your completion. Please try again.')
+        location.reload()
+    })
+
   $('input[name="display"]').change ->
     $('.npc-row').show()
     if $('#show-all').prop('checked')
@@ -38,11 +48,11 @@ $(document).on 'turbolinks:load', ->
     npc = $(this)
 
     if !this.checked
-      $.post(npc.data('path'), { authenticity_token: window._token })
+      updateNPC(npc)
       path = npc.data('path').replace('remove', 'add')
       npc.closest('tr').removeClass('defeated')
     else
-      $.post(npc.data('path'), { authenticity_token: window._token })
+      updateNPC(npc)
       path = npc.data('path').replace('add', 'remove')
       row = npc.closest('tr')
       row.addClass('defeated')
