@@ -1,3 +1,6 @@
+<% title(@npc.name) %>
+<% description("Location: #{location(@npc, inline: true)} | #{'Rule'.pluralize(@npc.rules.size)}: #{format_rules(@npc)}") %>
+
 <div class="row">
   <div class="col-12 col-sm-5 col-md-4 offset-0 offset-md-1 mb-3 mb-sm-0">
     <div class="card">
@@ -11,7 +14,7 @@
           <dt>Patch</dt>
           <dd><%= @npc.patch %></dd>
           <% if @npc.rules.present? %>
-            <dt>Rules</dt>
+            <dt><%= 'Rule'.pluralize(@npc.rules.size) %></dt>
             <dd><%= format_rules(@npc) %></dd>
           <% end %>
           <% if @npc.quest.present? %>
