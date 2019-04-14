@@ -15,9 +15,7 @@
         Decks <span class="badge badge-pill badge-dark">New!</span>
       <% end %>
       <%= nav_link('Packs', packs_path) %>
-      <%= link_to("Play Guide #{fa_icon('external-link')}".html_safe,
-                  'https://na.finalfantasyxiv.com/lodestone/playguide/contentsguide/goldsaucer/tripletriad',
-                  target: '_blank', class: 'nav-link') %>
+      <%= play_guide_link %>
     </div>
     <div class="navbar-nav nav-item dropdown">
       <a class="nav-link dropdown-toggle p-0 pr-3" href="#" id="localeDropdown" role="button" data-toggle="dropdown"
