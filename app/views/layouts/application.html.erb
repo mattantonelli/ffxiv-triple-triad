@@ -18,13 +18,13 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <% if Rails.env.production? %>
-      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109201715-3"></script>
+    <% if Rails.env.production? && ga_tid.present? %>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=<%= ga_tid %>"></script>
       <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'UA-109201715-3');
+        gtag('config', <%= ga_tid %>);
       </script>
     <% end %>
   </head>
