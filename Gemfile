@@ -29,6 +29,8 @@ gem 'traco'
 gem 'rest-client'
 gem 'whenever'
 gem 'sortable-rails'
+gem 'momentjs-rails'
+gem 'rails_bootstrap_sortable'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

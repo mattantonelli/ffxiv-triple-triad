@@ -37,17 +37,17 @@
     </div>
   </div>
 <% end %>
-<table class="table table-striped table-sm shadow p-3 mt-2 mb-5" id="npcs">
+<table class="table table-striped table-sm shadow p-3 mt-2 mb-5 sortable" id="npcs">
   <thead>
     <tr>
-      <th scope="col" class="npc-name"><%= sort_link(@q, :name) %></th>
-      <th scope="col"><%= sort_link(@q, :location) %></th>
+      <th scope="col" class="npc-name">Name</th>
+      <th scope="col">Location</th>
       <th scope="col" class="hide-xs">Rules</th>
       <th scope="col" class="hide-xs quest-name">Quest</th>
       <th scope="col">Rewards</th>
-      <th scope="col" class="hide-xs text-right"><%= sort_link(@q, :patch, [:patch, :id]) %></th>
+      <th scope="col" class="hide-xs text-right pr-3">Patch</th>
       <% if user_signed_in? %>
-        <th scope="col" class="text-center px-1">Won</th>
+        <th scope="col" class="text-center px-1" data-defaultsort="disabled">Won</th>
       <% end %>
     </tr>
   </thead>
@@ -58,7 +58,7 @@
         <td><%= location(npc) %></td>
         <td class="hide-xs"><%= format_rules(npc) %></td>
         <td class="hide-xs quest-name"><%= quest(npc) %></td>
-        <td>
+        <td data-value="<%= npc.rewards.size %>">
           <div class="d-flex flex-wrap card-list">
             <% npc.rewards.each do |card| %>
               <%= link_to card_path(card), class: 'my-1' do %>
@@ -70,7 +70,7 @@
             <% end %>
           </div>
         </td>
-        <td class="hide-xs text-right"><%= npc.patch %></td>
+        <td class="hide-xs text-right" data-value="<%= npc.patch %><%= npc.id %>"><%= npc.patch %></td>
         <% if user_signed_in? %>
           <td class="text-center px-1">
             <% if @defeated.include?(npc.id) %>

@@ -53,15 +53,15 @@
           <%= f.select :stars_eq, rarity_options, { include_blank: 'All Rarities' }, class: 'form-control form-control-sm' %>
           <%= submit_tag 'Search', name: nil, class: 'btn btn-secondary btn-sm' %>
         <% end %>
-        <table class="table table-striped table-sm search-results">
+        <table class="table table-striped table-sm search-results sortable">
           <thead>
             <tr>
-              <th scope="col"></th> <!-- Image -->
+              <th scope="col" data-defaultsort="disabled"></th> <!-- Image -->
               <th scope="col" class="hide-xs">Name</th>
               <th scope="col">Type</th>
               <th scope="col">Rarity</th>
               <th scope="col" class="text-center">Stats</th>
-              <th scope="col"></th> <!-- Add to deck -->
+              <th scope="col" data-defaultsort="disabled"></th> <!-- Add to deck -->
             </tr>
           </thead>
           <tbody>

@@ -45,6 +45,10 @@ class Card < ApplicationRecord
     "#{top} #{right} #{bottom} #{left}".gsub(/10/, 'A')
   end
 
+  def total_stats
+    top + right + bottom + left
+  end
+
   def ownership
     Redis.current.hget(:ownership, id.to_s)
   end

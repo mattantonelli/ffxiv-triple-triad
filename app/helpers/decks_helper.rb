@@ -9,8 +9,12 @@ module DecksHelper
     end
   end
 
+  def missing_cards(deck, user_cards)
+    (deck.cards.pluck(:id) - user_cards).size
+  end
+
   def usable?(deck, user_cards)
-    missing = (deck.cards.pluck(:id) - user_cards).size
+    missing = missing_cards(deck, user_cards)
 
     if missing == 0
       fa_icon('check', data: { toggle: 'tooltip', title: 'You have all of the cards in this deck.' })

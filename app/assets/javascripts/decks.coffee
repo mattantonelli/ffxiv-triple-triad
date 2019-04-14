@@ -12,7 +12,7 @@ $(document).on 'turbolinks:load', ->
       success: ->
         switch(source)
           when 'deck' then $('.card-large').tooltip() && addDeckListeners()
-          when 'search' then addSearchListeners() && $('table').fadeIn(300)
+          when 'search' then addSearchListeners() && $('table').fadeIn(300) && $.bootstrapSortable({ applyLast: true })
         $('.search-form').find(':input').prop('disabled', false)
     })
 

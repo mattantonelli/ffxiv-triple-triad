@@ -8,9 +8,9 @@
     <td class="hide-xs">
       <%= link_to(card.name, card_path(card), class: 'name') %>
     </td>
-    <td><%= type_image(card) %></td>
-    <td><%= stars(card) %></td>
-    <td>
+    <td data-value="<%= card.card_type_id %>"><%= type_image(card) %></td>
+    <td data-value="<%= card.stars %>"><%= stars(card) %></td>
+    <td data-value="<%= card.total_stats %>">
       <div class="d-flex flex-column align-items-center stats">
         <div class="d-flex justify-content-center">
           <span><%= stat(card, :top) %></span>
@@ -37,7 +37,7 @@
       <td class="hide-xs text-right"><%= ownership.fetch(card.id.to_s, '0%') %></td>
     <% end %>
     <% unless local_assigns[:skip_source] %>
-      <td class="text-right"><%= card.patch %></td>
+      <td class="text-right" data-value="<%= card.patch %><%= card.id %>"><%= card.patch %></td>
     <% end %>
     <% if local_assigns[:user_cards] %>
       <td class="text-center pr-0">
