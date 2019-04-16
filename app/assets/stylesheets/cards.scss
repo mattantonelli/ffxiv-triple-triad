@@ -13,35 +13,13 @@ img.large {
   width: 104px;
   height: 128px;
   background: url(asset_path('cards/large.png')) no-repeat;
+  margin: 0.5rem 0;
 }
 
 img.type {
   width: 20px;
   height: 20px;
   background: url(asset_path('cards/types.png')) no-repeat;
-}
-
-.card-large {
-  position: relative;
-  display: inline-flex;
-  width: 104px;
-  height: 128px;
-
-  .stats {
-    position: absolute;
-    bottom: 12px;
-    left: 27px;
-    font-weight: bold;
-
-    div {
-      width: 50px;
-      line-height: 0.8rem;
-    }
-
-    span {
-      text-shadow: -1px -1px 2px #000, 1px -1px 2px #000, -1px 1px 2px #000, 1px 1px 2px #000;
-    }
-  }
 }
 
 .card-info > div {

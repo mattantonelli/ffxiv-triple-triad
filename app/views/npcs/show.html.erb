@@ -30,7 +30,7 @@
       <div class="card-header">
         <h5><%= 'Reward'.pluralize(@rewards.length) %></h5>
       </div>
-      <div class="card-body pt-0">
+      <div class="card-body">
         <div class="d-flex flex-wrap card-list-lg">
           <%= render partial: 'cards/large', collection: @rewards, as: :card %>
         </div>
