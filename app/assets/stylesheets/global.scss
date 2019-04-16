@@ -78,7 +78,9 @@ label, input[type="checkbox"] {
 }
 
 hr {
-  border-top: 1px solid rgba(233, 233, 233, 0.1)
+  border-top: 1px solid rgba(233, 233, 233, 0.1);
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .tooltip-inner {
@@ -110,6 +112,11 @@ hr {
       border-top: 1px solid #bbb;
       margin: 0.3rem 0;
     }
+  }
+
+  .dropdown-item > .fa {
+    width: 1rem;
+    text-align: center;
   }
 }
 

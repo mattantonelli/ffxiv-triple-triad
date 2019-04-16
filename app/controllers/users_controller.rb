@@ -1,5 +1,11 @@
 class UsersController < ApplicationController
-  before_action :set_user!, only: [:edit, :update]
+  before_action :set_user!
+
+  def profile
+    @ownership = Redis.current.hgetall(:ownership)
+    @cards = @user.cards.sort_by { |card| @ownership[card.id.to_s] }
+    @npcs = @user.npcs
+  end
 
   def edit
   end

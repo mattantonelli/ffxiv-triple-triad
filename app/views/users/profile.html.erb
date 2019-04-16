@@ -1,0 +1,37 @@
+<% title('User Profile') %>
+
+<div class="col-12 col-xl-8 offset-xl-2">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="card-title">Profile</h5>
+    </div>
+    <div class="card-body pb-4">
+      <div class="d-flex">
+        <%= avatar(@user) %>
+        <div class="d-flex flex-column flex-grow-1 ml-4">
+          <span><b><%= @user.username %></b>#<%= @user.discriminator %></span>
+          <div>
+            <b>Member since:</b>
+            <%= format_date_short(@user.created_at) %>
+            <% if early_user?(@user) %>
+              <span data-toggle="tooltip" title="Thank you for being one of my very first users!">
+                <%= fa_icon('star', class: 'text-warning') %>
+              </span>
+            <% end %>
+          </div>
+          <hr>
+          <h6>Cards</h6>
+          <%= render 'layouts/progress', value: @cards.size, min: 0, max: Card.count %>
+          <% if @cards.size > 0 %>
+            <span class="my-2">Top 5 Most Rare:</span>
+            <div class="d-flex flex-wrap card-list-lg">
+              <%= render partial: 'cards/large', layout: 'card', collection: @cards.first(5), as: :card %>
+            </div>
+          <% end %>
+          <h6 class="mt-3">NPCs</h6>
+          <%= render 'layouts/progress', value: @npcs.size, min: 0, max: NPC.count %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

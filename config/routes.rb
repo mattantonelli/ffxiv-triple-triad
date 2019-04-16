@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     post 'downvote'
   end
 
+  get 'user/profile', to: 'users#profile'
   get 'user/settings', to: 'users#edit'
   post 'user/settings', to: 'users#update'
 

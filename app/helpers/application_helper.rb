@@ -22,6 +22,10 @@ module ApplicationHelper
     date.in_time_zone('America/New_York').strftime('%e %b %Y %H:%M')
   end
 
+  def format_date_short(date)
+    date.strftime('%b %Y')
+  end
+
   def avatar(user)
     image_tag(user.avatar_url, class: 'avatar')
   end
