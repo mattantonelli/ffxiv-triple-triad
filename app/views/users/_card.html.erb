@@ -1,4 +1,4 @@
 <div class="d-flex flex-column">
   <%= yield %>
-  <span class="text-center"><%= @ownership[card.id.to_s] %></span>
+  <span class="text-center"><%= @ownership.fetch(card.id.to_s, '0%') %></span>
 </div>

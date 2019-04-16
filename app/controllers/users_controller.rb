@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def profile
     @ownership = Redis.current.hgetall(:ownership)
-    @cards = @user.cards.sort_by { |card| @ownership[card.id.to_s] }
+    @cards = @user.cards.sort_by { |card| @ownership.fetch(card.id.to_s, '0%').delete('%').to_i }
     @npcs = @user.npcs
   end
 

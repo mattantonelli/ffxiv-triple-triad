@@ -34,7 +34,9 @@
       </td>
     <% end %>
     <% if local_assigns[:ownership] %>
-      <td class="hide-xs text-right"><%= ownership.fetch(card.id.to_s, '0%') %></td>
+      <td class="hide-xs text-right" data-value="<%= ownership.fetch(card.id.to_s, '0%').delete('%') %>">
+        <%= ownership.fetch(card.id.to_s, '0%') %>
+      </td>
     <% end %>
     <% unless local_assigns[:skip_source] %>
       <td class="text-right" data-value="<%= card.patch %><%= card.id %>"><%= card.patch %></td>
