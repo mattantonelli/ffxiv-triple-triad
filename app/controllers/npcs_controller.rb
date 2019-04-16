@@ -16,9 +16,8 @@ class NPCsController < ApplicationController
       @user_cards = current_user.cards.pluck(:id)
       @incomplete = @npcs.joins(:rewards).where('cards.id not in (?)', @user_cards).pluck(:id).uniq
       @defeated = current_user.npcs.pluck(:id)
-      @total = @npcs.count
-      @count = @defeated.count
-      @completion = (@count / @total.to_f) * 100
+      @total = @npcs.present? ? @npcs.count : NPC.count
+      @count = (@defeated & @npcs.pluck(:id)).count
     else
       @user_cards = []
       @incomplete = []
