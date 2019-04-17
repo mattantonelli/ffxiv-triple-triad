@@ -9,7 +9,7 @@
       <div class="d-flex">
         <%= avatar(@user) %>
         <div class="d-flex flex-column flex-grow-1 ml-4">
-          <span><b><%= @user.username %></b>#<%= @user.discriminator %></span>
+          <span><b><%= @user.username %></b>#<%= @user.discriminator.to_s.rjust(4, '0') %></span>
           <div>
             <b>Member since:</b>
             <%= format_date_short(@user.created_at) %>
