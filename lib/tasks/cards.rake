@@ -30,7 +30,7 @@ namespace :cards do
     # Then create or update them
     cards.each do |id, data|
       if card = Card.find_by(id: data[:id])
-        card.update!(data) if updated?(card, data.except(:sort_id).symbolize_keys)
+        card.update!(data) if updated?(card, data.symbolize_keys)
       else
         card = Card.create!(data) if data[:name_en].present?
       end
