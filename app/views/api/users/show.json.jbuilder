@@ -3,6 +3,7 @@ json.cards do
   json.missing @total_cards - @user_cards.size
   json.total @total_cards
   json.completion "#{@card_completion.to_i}%"
+  json.ids @user_cards.sort
 
   json.random_missing do
     json.partial! '/api/cards/card', collection: @random_cards, as: :card
