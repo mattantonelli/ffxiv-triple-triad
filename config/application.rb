@@ -28,5 +28,12 @@ module FfxivTripleTriad
     config.i18n.enforce_available_locales = false
 
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '/api/*', headers: :any, methods: [:get, :options]
+      end
+    end
   end
 end
