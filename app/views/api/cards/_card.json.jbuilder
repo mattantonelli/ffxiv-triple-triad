@@ -36,7 +36,13 @@ unless local_assigns[:skip_sources]
       end
     end
 
-    json.drops card.sources.pluck(:name).map { |name| I18n.t(name.delete('.*'), default: name) }
+    drops = card.sources.map do |source|
+      origin = "#{source.origin}: " unless %w(Other Eureka FATE Tournament).include?(source.origin)
+      name = I18n.t(source.name.delete('.*'), default: source.name)
+      "#{origin}#{name}"
+    end
+
+    json.drops drops
     json.purchase card.buy_price || nil
   end
 end
