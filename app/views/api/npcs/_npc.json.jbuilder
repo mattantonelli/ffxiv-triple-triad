@@ -18,6 +18,7 @@ json.quest do
 end
 
 json.rules npc.rules.map(&:name)
+json.rule_ids npc.rules.map(&:id)
 
 sets = []
 sets += %i(fixed_cards variable_cards) if local_assigns[:include_deck]

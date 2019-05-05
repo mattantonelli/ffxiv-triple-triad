@@ -9,7 +9,7 @@ class Api::NPCsController < ApiController
   end
 
   def show
-    @npc = add_includes(NPC.all).find_by(id: params[:id])
+    @npc = NPC.includes(fixed_cards: :type, variable_cards: :type, rewards: :type).find_by(id: params[:id])
     render_not_found unless @npc.present?
   end
 
