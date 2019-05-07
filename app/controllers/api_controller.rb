@@ -43,7 +43,8 @@ class ApiController < ApplicationController
 
   def track_request
     if Rails.env.production? && GA_TID.present?
-      RestClient.post(GA_URL, { v: 1, tid: GA_TID, cid: SecureRandom.uuid, t: 'pageview', dp: request.fullpath })
+      RestClient.post(GA_URL, { v: 1, tid: GA_TID, cid: Digest::MD5.hexdigest(request.remote_ip),
+                                t: 'pageview', dp: request.fullpath })
     end
   end
 end
