@@ -1,27 +1,27 @@
 <% title('Decks') %>
 
-<div class="row pb-3 d-flex align-items-stretch">
-  <div class="col-12 col-sm-8 mb-3 mb-sm-0">
-    <div class="card shadow h-100">
-      <h5 class="card-header">Organize Deck</h5>
-      <div class="card-body d-flex flex-column">
-        <div class="d-flex card-list-lg flex-grow-1 flex-wrap" id="deck">
-          <%= render partial: 'builder_card', collection: @deck.cards, as: :card %>
-        </div>
-        <div class="help<%= ' d-none' if @deck.cards.empty? %>">
-          <hr>
-          <p class="mt-3 ml-2">
-            Click cards to remove them from your deck. Drag to reorder.
-          </p>
+<%= form_for(@deck, html: { class: 'form deck-submit' }) do |f| %>
+  <div class="row pb-3 d-flex align-items-stretch">
+    <div class="col-12 col-sm-8 mb-3 mb-sm-0">
+      <div class="card shadow h-100">
+        <h5 class="card-header">Organize Deck</h5>
+        <div class="card-body d-flex flex-column">
+          <div class="d-flex card-list-lg flex-grow-1 flex-wrap" id="deck">
+            <%= render partial: 'builder_card', collection: @deck.cards, as: :card %>
+          </div>
+          <div class="help<%= ' d-none' if @deck.cards.empty? %>">
+            <hr>
+            <p class="mt-3 ml-2">
+              Click cards to remove them from your deck. Drag to reorder.
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="col-12 col-sm-4">
-    <div class="card shadow">
-      <h5 class="card-header">Finalize Deck</h5>
-      <div class="card-body">
-        <%= form_for(@deck, html: { class: 'form deck-submit' }) do |f| %>
+    <div class="col-12 col-sm-4">
+      <div class="card shadow">
+        <h5 class="card-header">Finalize Deck</h5>
+        <div class="card-body">
           <%= f.hidden_field :card_ids, value: @deck.cards.map(&:id).join(',') %>
           <div class="form-group mb-2">
             <%= f.label :rule_id, 'Select a rule', class: 'mb-1' %>
@@ -38,11 +38,23 @@
           <div class="text-right mb-2">
             <%= f.submit 'Publish Deck', class: 'btn btn-primary btn-sm', disabled: @deck.cards.size != 5 %>
           </div>
-        <% end %>
+        </div>
       </div>
     </div>
   </div>
-</div>
+  <div class="row pb-3">
+    <div class="col-12">
+      <div class="card shadow">
+        <h5 class="card-header">Notes</h5>
+        <div class="card-body">
+          <div class="form-group">
+            <%= f.text_area :notes, { rows: 3, maxlength: 1000, class: 'form-control' } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
 <div class="row">
   <div class="col-12">
     <div class="card shadow">

@@ -154,7 +154,7 @@ class DecksController < ApplicationController
   end
 
   def deck_params
-    parms = params.require(:deck).permit(:card_ids, :rule_id, :npc_id)
+    parms = params.require(:deck).permit(:card_ids, :rule_id, :npc_id, :notes)
     parms[:card_ids] = parms[:card_ids].split(',').map(&:to_i)
     parms
   end

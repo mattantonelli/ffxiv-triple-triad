@@ -9,6 +9,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  rating     :integer
+#  notes      :string(1000)
 #
 
 class Deck < ApplicationRecord

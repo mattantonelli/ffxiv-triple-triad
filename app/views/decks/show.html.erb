@@ -52,6 +52,14 @@
         </div>
       </div>
     </div>
+    <% if @deck.notes.present? %>
+      <div class="card mt-3">
+        <h5 class="card-header">Notes</h5>
+        <div class="card-body py-3">
+          <%= @deck.notes.gsub("\r\n", '<br>').html_safe %>
+        </div>
+      </div>
+    <% end %>
     <% if user_signed_in? %>
       <div class="card mt-3">
         <h5 class="card-header">Card Finder</h5>

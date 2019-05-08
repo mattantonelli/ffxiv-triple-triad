@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_09_151711) do
+ActiveRecord::Schema.define(version: 2019_05_08_121433) do
 
   create_table "card_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 2019_04_09_151711) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "rating"
+    t.string "notes", limit: 1000
     t.index ["npc_id"], name: "index_decks_on_npc_id"
     t.index ["rule_id"], name: "index_decks_on_rule_id"
     t.index ["user_id"], name: "index_decks_on_user_id"
