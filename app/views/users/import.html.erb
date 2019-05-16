@@ -1,0 +1,23 @@
+<% title('FFXIV Triad Import') %>
+
+<div class="col-8 offset-2">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="card-title">FFXIV Triad Import</h5>
+    </div>
+    <div class="card-body py-3">
+      <p>
+        If you are migrating from FFXIV Triad and have a collection code, you can enter it below to import your card collection.
+        <b>Please be aware that this will <u>erase</u> your existing card collection on this website.</b>
+      </p>
+      <%= form_for(@user, url: user_import_path, method: :post, html: { class: 'form' }) do |f| %>
+        <%= f.text_area :code, { value: '', placeholder: 'Paste your code here.', rows: 5,
+                                 required: true, class: 'form-control' } %>
+        <div class="text-right mt-2">
+          <%= f.submit 'Import Cards', class: 'btn btn-primary',
+            data: { confirm: 'This will erase your existing collection on this website! Are you sure?' } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

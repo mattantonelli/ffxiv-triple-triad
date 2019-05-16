@@ -20,6 +20,22 @@ class UsersController < ApplicationController
     end
   end
 
+  def import
+  end
+
+  def submit
+    card_ids = import_params[:code].split(',')
+
+    if card_ids.present? && card_ids.all? { |id| id =~ /\A\d+\z/ }
+      current_user.cards = Card.where(id: card_ids)
+      flash[:success] = 'Your card collection has been imported successfully.'
+      redirect_to my_cards_path
+    else
+      flash[:error] = 'There was a problem importing your collection. Please check your code and try again.'
+      render :import
+    end
+  end
+
   private
   def set_user!
     if user_signed_in?
@@ -32,5 +48,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:public_cards)
+  end
+
+  def import_params
+    params.require(:user).permit(:code)
   end
 end

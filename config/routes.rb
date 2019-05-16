@@ -38,6 +38,8 @@ Rails.application.routes.draw do
   get 'user/profile', to: 'users#profile'
   get 'user/settings', to: 'users#edit'
   post 'user/settings', to: 'users#update'
+  get 'user/import', to: 'users#import'
+  post 'user/import', to: 'users#submit'
 
   namespace :api do
     %w(npcs cards packs decks).each do |model|

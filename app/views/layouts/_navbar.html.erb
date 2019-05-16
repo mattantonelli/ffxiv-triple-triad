@@ -42,6 +42,7 @@
           <% end %>
           <%= link_to fa_icon('user', text: 'Profile'), user_profile_path, class: 'dropdown-item' %>
           <%= link_to fa_icon('wrench', text: 'Settings'), user_settings_path, class: 'dropdown-item' %>
+          <%= link_to fa_icon('download', text: 'FFXIV Triad Import'), user_import_path, class: 'dropdown-item' %>
           <%= link_to fa_icon('sign-out', text: 'Sign Out'), destroy_user_session_path, class: 'dropdown-item' %>
         </div>
       </div>
