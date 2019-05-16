@@ -97,7 +97,9 @@ namespace :npcs do
     end
 
     quests.each do |id, quest|
-      Quest.find_or_create_by!(quest.merge(id: id))
+      unless Quest.exists?(id)
+        Quest.create!(quest.merge(id: id))
+      end
     end
 
     # Create the NPCs and their cards
