@@ -1,4 +1,3 @@
 document.addEventListener 'turbolinks:load', (event) ->
-  if typeof ga is 'function'
-    ga('set', 'location', event.data.url)
-    ga('send', 'pageview')
+  if typeof gtag is 'function'
+    gtag('config', window._ga_tid, { 'page_location': event.data.url })
