@@ -1,10 +1,18 @@
 class UsersController < ApplicationController
-  before_action :set_user!
+  before_action :set_user!, except: :show
 
-  def profile
-    @ownership = Redis.current.hgetall(:ownership)
-    @cards = @user.cards.sort_by { |card| @ownership.fetch(card.id.to_s, '0%').delete('%').to_i }
-    @npcs = @user.npcs
+  def show
+    @user = User.find_by(uid: params[:uid])
+    return redirect_to not_found_path unless @user.present?
+
+    if @user.public_cards? || @user == current_user
+      @ownership = Redis.current.hgetall(:ownership)
+      @cards = @user.cards.sort_by { |card| @ownership.fetch(card.id.to_s, '0%').delete('%').to_i }
+      @npcs = @user.npcs
+    else
+      flash[:error] = 'This user has set their collection to private.'
+      redirect_to root_path
+    end
   end
 
   def edit

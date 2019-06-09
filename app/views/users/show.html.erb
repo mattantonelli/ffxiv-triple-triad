@@ -9,12 +9,17 @@
       <div class="d-flex">
         <%= avatar(@user) %>
         <div class="d-flex flex-column flex-grow-1 ml-4">
-          <span><b><%= @user.username %></b>#<%= @user.discriminator.to_s.rjust(4, '0') %></span>
+          <div>
+            <span><b><%= @user.username %></b>#<%= @user.discriminator.to_s.rjust(4, '0') %></span>
+            <% unless @user.public_cards? %>
+              <span class="badge badge-danger">Private</span>
+            <% end %>
+          </div>
           <div>
             <b>Member since:</b>
             <%= format_date_short(@user.created_at) %>
             <% if early_user?(@user) %>
-              <span data-toggle="tooltip" title="Thank you for being one of my very first users!">
+              <span data-toggle="tooltip" title="Early User">
                 <%= fa_icon('star', class: 'text-warning') %>
               </span>
             <% end %>
