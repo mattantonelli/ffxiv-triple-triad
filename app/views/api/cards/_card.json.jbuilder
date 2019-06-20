@@ -20,7 +20,7 @@ json.type do
   json.image card.type.id > 0 ? image_url("cards/types/#{card.type.id}.png", skip_pipeline: true) : nil
 end
 
-json.owned ownership.fetch(card.id.to_s, '0%')
+json.owned @ownership.fetch(card.id.to_s, '0%')
 
 unless local_assigns[:skip_sources]
   json.sources do
