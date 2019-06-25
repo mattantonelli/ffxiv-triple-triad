@@ -21,7 +21,7 @@ class DecksController < ApplicationController
   end
 
   def new
-    @deck = Deck.new
+    @deck = Deck.new(npc_id: params[:npc_id])
     set_search_and_cards
     set_new_edit_responses
   end

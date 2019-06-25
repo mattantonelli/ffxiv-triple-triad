@@ -48,9 +48,13 @@
             <%= fa_icon('question-circle') if @npc.variable_cards.present? %>
           </span>
         </h5>
-        <% if Deck.exists?(npc_id: @npc.id) %>
-          <%= link_to 'User Decks', decks_path(q: { npc_id_eq: @npc.id }), class: 'btn btn-secondary btn-sm' %>
-        <% end %>
+        <div>
+          <%= link_to 'Submit Deck', new_deck_path(npc_id: @npc.id), class: 'btn btn-primary btn-sm',
+            data: { toggle: 'tooltip' }, title: 'Submit a deck to be used against this NPC' %>
+          <%= link_to 'User Decks', decks_path(q: { npc_id_eq: @npc.id }),
+            class: "btn btn-secondary btn-sm#{ ' disabled' unless Deck.exists?(npc_id: @npc.id) }",
+            data: { toggle: 'tooltip' }, title: 'User decks designed to be used against this NPC' %>
+        </div>
       </div>
       <div class="card-body pl-0">
         <div class="d-flex">
