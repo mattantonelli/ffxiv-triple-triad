@@ -68,6 +68,12 @@ When new cards & NPCs become available on patch day, they can be loaded into the
 
 ```
 bundle exec rake data:update
+bundle exec rake assets:precompile
+# Restart the application
+bundle exec rails console
+Card.where('created_at > ?', Date.current.beginning_of_day).update_all(patch: 'CURRENT PATCH')
+NPC.where('created_at > ?', Date.current.beginning_of_day).update_all(patch: 'CURRENT PATCH')
+exit
 ```
 
 This data is available once the [data repository](https://github.com/mattantonelli/ffxiv-triple-triad-data) has been updated with the latest patch data.
