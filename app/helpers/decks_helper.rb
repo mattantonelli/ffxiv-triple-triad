@@ -28,8 +28,8 @@ module DecksHelper
     Vote.exists?(deck: deck, user: current_user)
   end
 
-  def card_position(card, user_sort_ids)
-    if index = user_sort_ids.index(card.sort_id)
+  def card_position(card, user_card_ids)
+    if index = user_card_ids.index(card.id)
       page = (index / 25) + 1
       row = (index % 25 / 5) + 1
       column = (index % 25 % 5) + 1

@@ -67,7 +67,7 @@
           <% @deck.cards.each_with_index do |card, i| %>
             <p>
               <b><%= link_to(card.name, card_path(card), class: 'unstyled') %>:</b>
-              <%= card_position(card, @user_sort_ids) %>
+              <%= card_position(card, @user_card_ids) %>
             </p>
           <% end %>
         </div>

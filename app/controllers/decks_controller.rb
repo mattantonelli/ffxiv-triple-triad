@@ -17,7 +17,7 @@ class DecksController < ApplicationController
   end
 
   def show
-    @user_sort_ids = Card.where(id: @user_cards).order(:sort_id).pluck(:sort_id) if user_signed_in?
+    @user_card_ids = Card.where(id: @user_cards).order(:sort_id, :id).pluck(:id) if user_signed_in?
   end
 
   def new
