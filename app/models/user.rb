@@ -25,7 +25,7 @@ class User < ApplicationRecord
   has_and_belongs_to_many :cards
   has_and_belongs_to_many :npcs
 
-  devise :trackable, :omniauthable, omniauth_providers: [:discord]
+  devise :timeoutable, :trackable, :omniauthable, omniauth_providers: [:discord]
 
   scope :visible, -> { where(public_cards: true) }
   scope :active,  -> { joins(:cards).group(:id).having('count(cards.id) > 5').visible }

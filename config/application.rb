@@ -29,6 +29,8 @@ module FfxivTripleTriad
 
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
 
+    config.session_store :cookie_store, key: '_ffxiv_triple_triad_session', expire_after: 1.month
+
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
