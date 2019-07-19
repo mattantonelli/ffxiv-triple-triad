@@ -9,6 +9,11 @@ module HomeHelper
 
     link_to("Play Guide #{fa_icon('external-link')}".html_safe,
             "https://#{region}.finalfantasyxiv.com/lodestone/playguide/contentsguide/goldsaucer/tripletriad",
-            target: '_blank', class: 'nav-link')
+            target: '_blank', class: 'dropdown-item')
+  end
+
+  def ffxiv_collect_link
+    link_to("FFXIV Collect #{fa_icon('external-link')}".html_safe, 'https://collect.raelys.com/',
+            target: '_blank', class: 'dropdown-item')
   end
 end
