@@ -77,7 +77,7 @@ namespace :npcs do
     CSV.new(open("#{BASE_URL}/csv/TripleTriad.raw.csv")).drop(5).each do |opponent|
       npc = npcs.values.find { |val| val[:id] == opponent[0].to_i }
       next unless npc.present?
-      npc[:quest_id] = opponent[16].to_i if opponent[16] != '0'
+      npc[:quest_id] = opponent[16..18].reject { |quest_id| quest_id == '0'}.last&.to_i
       npc[:fixed_cards] = opponent[1..5].reject { |card| card == '0' }
       npc[:variable_cards] = opponent[6..10].reject { |card| card == '0' }
       npc[:rules] = Rule.where(id: opponent[11..12].reject { |rule| rule == '0' })
