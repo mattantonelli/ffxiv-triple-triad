@@ -13,7 +13,7 @@ module HomeHelper
   end
 
   def ffxiv_collect_link
-    link_to("FFXIV Collect #{fa_icon('external-link')}".html_safe, 'https://collect.raelys.com/',
+    link_to("FFXIV Collect #{fa_icon('external-link')}".html_safe, 'https://ffxivcollect.com/',
             target: '_blank', class: 'dropdown-item')
   end
 end
