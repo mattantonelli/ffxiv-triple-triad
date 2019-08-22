@@ -28,12 +28,8 @@ unless local_assigns[:skip_sources]
       json.partial! '/api/npcs/npc', collection: card.npc_sources, as: :npc
     end
 
-    json.pack do
-      if card.pack
-        json.partial! '/api/packs/pack', pack: card.pack, skip_cards: true
-      else
-        json.merge! nil
-      end
+    json.packs do
+      json.partial! '/api/packs/pack', collection: card.packs, as: :pack, skip_cards: true
     end
 
     drops = card.sources.map do |source|

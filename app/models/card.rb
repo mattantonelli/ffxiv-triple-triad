@@ -32,8 +32,8 @@ class Card < ApplicationRecord
   has_many :sources
   has_many :deck_cards
   has_many :decks, through: :deck_cards
-  has_one :pack_card
-  has_one :pack, through: :pack_card
+  has_many :pack_cards
+  has_many :packs, through: :pack_cards
   has_and_belongs_to_many :users
   has_and_belongs_to_many :decks
 

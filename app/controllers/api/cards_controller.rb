@@ -2,7 +2,7 @@ class Api::CardsController < ApiController
   def index
     @query_params = sanitize_query_params
     query = Card.all.ransack(@query_params)
-    @cards = query.result.includes(:type, :sources, :pack, npc_sources: [:location, :quest, :rules])
+    @cards = query.result.includes(:type, :sources, :packs, npc_sources: [:location, :quest, :rules])
       .order(:patch, :id).limit(params[:limit])
   end
 

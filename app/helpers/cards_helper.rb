@@ -52,7 +52,10 @@ module CardsHelper
       I18n.t(name.delete('.*'), default: name)
     end
 
-    sources << link_to(card.pack.name, packs_path(nil, anchor: card.pack.id)) if card.pack
+    card.packs.each do |pack|
+      sources << link_to(pack.name, packs_path(nil, anchor: pack.id))
+    end
+
     sources << format_price(card.buy_price) if card.buy_price
     sources
   end

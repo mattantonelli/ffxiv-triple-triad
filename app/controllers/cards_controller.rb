@@ -61,7 +61,7 @@ class CardsController < ApplicationController
     when 'NPC'
       cards = Card.joins(:npc_sources)
     when 'Pack'
-      cards = Card.joins(:pack)
+      cards = Card.joins(:packs)
     when 'MGP'
       cards = Card.where.not(buy_price: nil)
     else
@@ -70,7 +70,7 @@ class CardsController < ApplicationController
     end
 
     @q = cards.ransack(query)
-    @cards = @q.result.includes(:npc_sources, :sources, :pack, :type).order(patch: :desc, id: :desc).uniq
+    @cards = @q.result.includes(:npc_sources, :sources, :packs, :type).order(patch: :desc, id: :desc).uniq
     @ownership = Redis.current.hgetall(:ownership)
   end
 
