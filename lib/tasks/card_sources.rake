@@ -134,19 +134,6 @@ namespace :card_sources do
     Card.find_by(name_en: 'Tidus').sources.find_or_create_by(origin: 'Tournament', name: 'Triple Triad Tournament')
     Card.find_by(name_en: 'Lightning').sources.find_or_create_by(origin: 'Tournament', name: 'Triple Triad Tournament')
 
-    # Achievements
-    Card.find_by(name_en: "Heavensward Y'shtola").sources.find_or_create_by(origin: 'Achievement', name: 'Triple Team V')
-    Card.find_by(name_en: 'Midgardsormr').sources.find_or_create_by(origin: 'Achievement', name: 'Triple-Decker IV')
-    Card.find_by(name_en: 'Vidofnir').sources.find_or_create_by(origin: 'Achievement', name: 'Triple-Decker V')
-    Card.find_by(name_en: 'Heavensward Thancred').sources.find_or_create_by(origin: 'Achievement', name: 'Triple-Decker VI')
-    Card.find_by(name_en: 'Krile').sources.find_or_create_by(origin: 'Achievement', name: 'Triple-Decker VII')
-    Card.find_by(name_en: 'Gosetsu').sources.find_or_create_by(origin: 'Achievement', name: 'Triple-Decker VIII')
-    Card.find_by(name_en: 'Shantotto').sources.find_or_create_by(origin: 'Achievement', name: 'Kumite Kumite Kumite')
-    Card.find_by(name_en: 'Squall Leonhart').sources.find_or_create_by(origin: 'Achievement', name: 'Triple Team II')
-    Card.find_by(name_en: 'Haurchefant').sources.find_or_create_by(origin: 'Achievement', name: 'Triple Team III')
-    Card.find_by(name_en: 'Lyse').sources.find_or_create_by(origin: 'Achievement', name: 'Triple Team VI')
-    Card.find_by(name_en: 'Vaan').sources.find_or_create_by(origin: 'Achievement', name: 'Wheel of Fortune V')
-
     # Eureka
     Card.find_by(name_en: 'Happy Bunny').sources.find_or_create_by(origin: 'Eureka', name: 'Eureka Pagos: Silver Coffer')
     Card.find_by(name_en: 'Yukinko').sources.find_or_create_by(origin: 'Eureka', name: 'Eureka Pagos: Eternity FATE')

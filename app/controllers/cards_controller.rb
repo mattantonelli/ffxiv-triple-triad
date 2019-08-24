@@ -64,13 +64,15 @@ class CardsController < ApplicationController
       cards = Card.joins(:packs)
     when 'MGP'
       cards = Card.where.not(buy_price: nil)
+    when 'Achievement'
+      cards = Card.joins(:achievement)
     else
       query[:sources_origin_eq] = @type if @type.present?
       cards = Card.all
     end
 
     @q = cards.ransack(query)
-    @cards = @q.result.includes(:npc_sources, :sources, :packs, :type).order(patch: :desc, id: :desc).uniq
+    @cards = @q.result.includes(:npc_sources, :sources, :packs, :achievement, :type).order(patch: :desc, id: :desc).uniq
     @ownership = Redis.current.hgetall(:ownership)
   end
 

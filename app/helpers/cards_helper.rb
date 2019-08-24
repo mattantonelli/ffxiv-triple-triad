@@ -56,6 +56,11 @@ module CardsHelper
       sources << link_to(pack.name, packs_path(nil, anchor: pack.id))
     end
 
+    if card.achievement.present?
+      sources << link_to(card.achievement.name, "https://ffxivcollect.com/achievements/#{card.achievement.id}",
+                         target: '_blank', data: { toggle: 'tooltip' }, title: card.achievement.description)
+    end
+
     sources << format_price(card.buy_price) if card.buy_price
     sources
   end

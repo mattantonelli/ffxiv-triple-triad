@@ -38,6 +38,10 @@ unless local_assigns[:skip_sources]
       "#{origin}#{name}"
     end
 
+    if card.achievement.present?
+      drops << "Achievement: #{card.achievement.name}"
+    end
+
     json.drops drops
     json.purchase card.buy_price || nil
   end
