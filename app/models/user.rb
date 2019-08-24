@@ -55,7 +55,7 @@ class User < ApplicationRecord
     # those that are available from that NPC and nowhere else
     ids = Card.joins(npc_rewards: :npc)
       .left_joins(:sources).where('sources.id is null')
-      .left_joins(:pack_card).where('pack_cards.id is null')
+      .left_joins(:pack_cards).where('pack_cards.id is null')
       .where(buy_price: nil)
       .group('npc_rewards.card_id').having('count(npc_rewards.npc_id) = 1')
       .where(id: cards).distinct
