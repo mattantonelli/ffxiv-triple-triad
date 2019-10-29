@@ -9,6 +9,8 @@ namespace :card_packs do
   PLATINUM_CARDS = ['Tidus', 'Firion', 'Cecil Harvey', 'Lightning', 'Nanamo Ul Namo', 'Shiva', 'Lahabrea', 'Ultima Weapon'].freeze
   IMPERIAL_CARDS = ['Magitek Gunship', 'Magitek Sky Armor', 'Magitek Vanguard', 'Regula van Hydrus',
                     'Magitek Predator', 'Armored Weapon'].freeze
+  DREAM_CARDS = ['Hobgoblin', 'Fuath', 'Iguana', 'Titania', 'Philia', 'Leannan Sith', 'Storge', 'Eros', 'Oracle of Light',
+                 'Innocence', 'Archaeotania'].freeze
 
 desc 'Create the card packs'
   task create: :environment do
@@ -44,6 +46,11 @@ desc 'Create the card packs'
                                        name_fr: 'Pochette Triple Triade Impériale', name_ja: 'インペリアルトライアドパック', cost: 2160)
     imperial.cards = Card.where(name_en: IMPERIAL_CARDS)
     imperial.save
+
+    dream = Pack.find_or_create_by!(id: 7, name_en: 'Dream Triad Card', name_de: 'Boosterkarte (Traum)',
+                                    name_fr: 'Pochette Triple Triade Onirique', name_ja: 'トライアドパック・ドリーム', cost: 3240)
+    dream.cards = Card.where(name_en: DREAM_CARDS)
+    dream.save
 
     puts "Created #{Pack.count - count} new card packs"
   end
