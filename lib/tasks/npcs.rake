@@ -40,8 +40,8 @@ namespace :npcs do
     # Look up the relevant maps and set the coordinate data
     maps = CSV.new(open("#{BASE_URL}/csv/Map.raw.csv")).drop(4).each_with_object({}) do |map, h|
       if map_ids.include?(map[0])
-        h[map[0]] = { region_id: map[10], location_id: map[11],
-                      x_offset: map[8].to_f, y_offset: map[9].to_f, size_factor: map[7].to_f }
+        h[map[0]] = { region_id: map[11], location_id: map[12],
+                      x_offset: map[9].to_f, y_offset: map[10].to_f, size_factor: map[8].to_f }
       end
     end
 
