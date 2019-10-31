@@ -29,6 +29,9 @@ $(document).on 'turbolinks:load', ->
     $('#toggle-owned').prop('checked', true)
     restripe()
 
+  $('.sortable').on 'sorted', ->
+    restripe()
+
   $('.card-toggle').change ->
     card = $(this)
 
