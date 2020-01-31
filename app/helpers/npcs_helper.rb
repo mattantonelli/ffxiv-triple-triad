@@ -9,7 +9,11 @@ module NPCsHelper
     end
   end
 
-  def format_rules(npc)
-    npc.rules.map(&:name).sort.join(', ')
+  def format_rules(npc, inline: false)
+    npc.rules.map(&:name).sort.join(inline ? ', ' : '<br>').html_safe
+  end
+
+  def difficulty(npc)
+    (fa_icon('star') * npc.difficulty.ceil).html_safe
   end
 end

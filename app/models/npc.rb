@@ -15,6 +15,7 @@
 #  name_fr     :string(255)      not null
 #  name_ja     :string(255)      not null
 #  location_id :integer          not null
+#  difficulty  :decimal(3, 2)
 #
 
 class NPC < ApplicationRecord

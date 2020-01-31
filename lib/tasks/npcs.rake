@@ -128,6 +128,10 @@ namespace :npcs do
         NPCReward.find_or_create_by!(npc_id: npc.id, card_id: card)
       end
 
+      difficulty = weighted_average(npc.fixed_cards, npc.fixed_cards.length) +
+        weighted_average(npc.variable_cards, 5 - npc.fixed_cards.length)
+      npc.update!(difficulty: difficulty)
+
       npc.update!(patch: npc.rewards.pluck(:patch).min) unless npc.patch.present?
     end
 
@@ -142,4 +146,9 @@ def get_coordinate(value, map_offset, size_factor)
   scale = size_factor / 100.0
   offset = (value + map_offset) * scale
   (((41.0 / scale) * ((offset + 1024.0) / 2048.0)) + 1).to_i
+end
+
+def weighted_average(cards, count)
+  return 0 if count == 0
+  cards.average(:stars) * (count / 5.0)
 end

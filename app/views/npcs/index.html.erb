@@ -42,6 +42,7 @@
       <th scope="col" class="npc-name">Name</th>
       <th scope="col">Location</th>
       <th scope="col" class="hide-xs">Rules</th>
+      <th scope="col" class="hide-xs">Difficulty</th>
       <th scope="col" class="hide-xs quest-name">Quest</th>
       <th scope="col">Rewards</th>
       <th scope="col" class="hide-xs text-right pr-3">Patch</th>
@@ -56,6 +57,7 @@
         <td class="npc-name"><%= link_to(npc.name, npc_path(npc), class: 'name') %></td>
         <td><%= location(npc) %></td>
         <td class="hide-xs"><%= format_rules(npc) %></td>
+        <td class="hide-xs" data-value="<%= npc.difficulty %>"><%= difficulty(npc) %></td>
         <td class="hide-xs quest-name"><%= quest(npc) %></td>
         <td data-value="<%= npc.rewards.size %>">
           <div class="d-flex flex-wrap card-list">

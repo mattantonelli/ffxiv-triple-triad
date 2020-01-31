@@ -15,8 +15,10 @@
           <dd><%= @npc.patch %></dd>
           <% if @npc.rules.present? %>
             <dt><%= 'Rule'.pluralize(@npc.rules.size) %></dt>
-            <dd><%= format_rules(@npc) %></dd>
+            <dd><%= format_rules(@npc, inline: true) %></dd>
           <% end %>
+          <dt>Difficulty</dt>
+          <dd><%= difficulty(@npc) %></dd>
           <% if @npc.quest.present? %>
             <dt>Required Quest</dt>
             <dd><%= quest(@npc) %></dd>
