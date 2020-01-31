@@ -45,9 +45,9 @@
       <th scope="col" class="hide-xs">Difficulty</th>
       <th scope="col" class="hide-xs quest-name">Quest</th>
       <th scope="col">Rewards</th>
-      <th scope="col" class="hide-xs text-right pr-3">Patch</th>
+      <th scope="col" class="hide-xs text-center">Patch</th>
       <% if user_signed_in? %>
-        <th scope="col" class="text-center px-1" data-defaultsort="disabled">Won</th>
+        <th scope="col" class="text-center" data-defaultsort="disabled">Won</th>
       <% end %>
     </tr>
   </thead>
@@ -71,9 +71,9 @@
             <% end %>
           </div>
         </td>
-        <td class="hide-xs text-right" data-value="<%= npc.patch %><%= npc.id %>"><%= npc.patch %></td>
+        <td class="hide-xs text-center" data-value="<%= npc.patch %><%= npc.id %>"><%= npc.patch %></td>
         <% if user_signed_in? %>
-          <td class="text-center px-1">
+          <td class="text-center">
             <% if @defeated.include?(npc.id) %>
               <input type="checkbox" class="npc-toggle" data-path="<%= npc_remove_path(npc) %>" checked>
             <% else %>
