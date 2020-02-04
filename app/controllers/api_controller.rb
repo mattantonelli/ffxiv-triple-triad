@@ -11,7 +11,12 @@ class ApiController < ApplicationController
   end
 
   def sanitize_query_params
+    # Construct the search query from the params, excluded meta params
     query = params.except(:format, :controller, :action, :limit)
+
+    # Blacklist all user params except UID which can be used for deck lookups
+    query.reject! { |param| param.match?('user_') && param != 'user_uid_eq' }
+
     query.each do |k, v|
       if k =~ /_in\Z/
         case v
