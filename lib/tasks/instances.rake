@@ -7,14 +7,14 @@ namespace :instances do
     puts 'Creating instance translations'
 
     names = CSV.new(open("#{BASE_URL}/csv/ContentFinderCondition.en.csv")).drop(3).each_with_object({}) do |instance, h|
-      name = instance[35]
+      name = instance[36]
       next unless name.present?
       h[instance[0]] = sanitize_instance_name(name).delete('.')
     end
 
     %w(de fr ja).map do |locale|
       instances = CSV.new(open("#{BASE_URL}/csv/ContentFinderCondition.#{locale}.csv")).drop(3).each_with_object({}) do |instance, h|
-        name = instance[35]
+        name = instance[36]
         next unless name.present?
         h[names[instance[0]]] = sanitize_instance_name(name)
       end

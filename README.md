@@ -68,6 +68,7 @@ When new cards & NPCs become available on patch day, they can be loaded into the
 
 ```
 bundle exec rake data:update
+bundle exec rake instances:translate
 bundle exec rake assets:precompile
 # Restart the application
 bundle exec rails console
