@@ -1,12 +1,13 @@
 <div class="card">
   <div class="card-header">
-    <div class="d-flex">
+    <div class="d-flex flex-wrap">
       <%= link_to :admin_users, class: 'unstyled mr-auto pt-1' do %>
-        <h5>Manage Users</h5>
+        <h5 class="mb-2 mb-md-0">Manage Users</h5>
       <% end %>
       <%= search_form_for(@q, url: admin_users_path, class: 'form form-inline') do |f| %>
-        <%= f.search_field :username_cont, placeholder: 'Username', size: 30, class: 'form-control form-control-sm mr-2' %>
-        <%= f.submit 'Search', class: 'btn btn-secondary btn-sm' %>
+        <%= f.search_field :username_cont, placeholder: 'Username', size: 30,
+          class: 'form-control form-control-sm mr-2' %>
+        <%= f.submit 'Search', class: 'btn btn-secondary btn-sm mt-2 mt-md-0' %>
       <% end %>
     </div>
   </div>
@@ -15,9 +16,9 @@
       <tr>
         <th></th> <!-- Avatar -->
         <th>Username</th>
-        <th>Discord ID</th>
-        <th>Created</th>
-        <th>Last Signed In</th>
+        <th class="hide-xs">Discord ID</th>
+        <th class="hide-xs">Created</th>
+        <th class="hide-xs">Last Signed In</th>
         <th>Cards</th>
         <th>Public</th>
       </tr>
@@ -25,11 +26,11 @@
         <tr>
           <td><%= avatar(user) %></td>
           <td><%= username(user) %></td>
-          <td><%= user.uid %></td>
-          <td><%= format_date(user.created_at) %></td>
-          <td><%= format_date(user.current_sign_in_at) %></td>
+          <td class="hide-xs"><%= user.uid %></td>
+          <td class="hide-xs"><%= format_date(user.created_at) %></td>
+          <td class="hide-xs"><%= format_date(user.current_sign_in_at) %></td>
           <td><%= user.cards.size %></td>
-          <td><%= fa_icon(user.public_cards ? 'check-square' : 'square') %></td>
+          <td class="text-center"><%= fa_icon(user.public_cards ? 'check-square' : 'square') %></td>
         </tr>
       <% end %>
     </table>

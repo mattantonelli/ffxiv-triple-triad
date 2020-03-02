@@ -1,12 +1,13 @@
 <div class="card">
   <div class="card-header">
-    <div class="d-flex">
+    <div class="d-flex flex-wrap">
       <%= link_to :admin_cards, class: 'unstyled mr-auto pt-1' do %>
-        <h5>Manage Cards</h5>
+        <h5 class="mb-2 mb-md-0">Manage Cards</h5>
       <% end %>
       <%= search_form_for(@q, url: admin_cards_path, class: 'form form-inline') do |f| %>
-        <%= f.search_field "name_#{I18n.locale}_cont", placeholder: 'Name', size: 30, class: 'form-control form-control-sm mr-2' %>
-        <%= f.submit 'Search', class: 'btn btn-secondary btn-sm' %>
+        <%= f.search_field "name_#{I18n.locale}_cont", placeholder: 'Name', size: 30,
+          class: 'form-control form-control-sm mr-2' %>
+        <%= f.submit 'Search', class: 'btn btn-secondary btn-sm mt-2 mt-md-0' %>
       <% end %>
     </div>
   </div>

@@ -23,6 +23,14 @@ body {
   .hide-xs {
     display: none;
   }
+
+  .pagination li {
+    display: none;
+
+    &:first-child, &:last-child, &.active {
+      display: inline;
+    }
+  }
 }
 
 // Below md
