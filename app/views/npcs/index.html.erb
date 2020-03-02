@@ -7,8 +7,7 @@
                  class: 'form form-inline search-form d-flex flex-wrap', id: 'npc-search') do %>
       <%= select_tag :location, options_for_select(Location.order(:id).map(&:region).uniq, @location),
         include_blank: 'All Locations', class: 'form-control form-control-sm mt-0' %>
-      <%= select_tag :rule, options_for_select(Rule.order("name_#{I18n.locale}").map(&:name), @rule),
-        include_blank: 'All Rules', class: 'form-control form-control-sm' %>
+      <%= select_tag :rule, npc_rule_options(@rule), include_blank: 'All Rules', class: 'form-control form-control-sm' %>
     <% end %>
     <% if user_signed_in? %>
       <%= link_to 'Update Defeated', update_defeated_npcs_path, method: :post,
