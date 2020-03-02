@@ -35,6 +35,10 @@ body {
 
 // Below md
 @media (max-width: 991px) {
+  .hide-sm {
+    display: none;
+  }
+
   .container {
     width: 100%;
     max-width: 100%;

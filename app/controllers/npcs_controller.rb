@@ -3,10 +3,15 @@ class NPCsController < ApplicationController
 
   def index
     @location = params[:location]
-    query = params[:q]&.reject { |k, _| k != 's' } || {}
+    @rule = params[:rule]
+    query = {}
 
     if @location.present?
       query["location_region_#{I18n.locale}_eq"] = @location
+    end
+
+    if @rule.present?
+      query["rules_name_#{I18n.locale}_matches_any"] = @rule
     end
 
     @q = NPC.all.ransack(query)
