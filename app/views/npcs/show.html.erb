@@ -1,5 +1,6 @@
 <% title(@npc.name) %>
-<% description("Location: #{location(@npc, inline: true)} | #{'Rule'.pluralize(@npc.rules.size)}: #{format_rules(@npc)}") %>
+<% description("Location: #{location(@npc, inline: true)} | " \
+               "#{'Rule'.pluralize(@npc.rules.size)}: #{format_rules(@npc, inline: true)}") %>
 
 <div class="row">
   <div class="col-12 col-sm-5 col-md-4 offset-0 offset-md-1 mb-3 mb-sm-0">
