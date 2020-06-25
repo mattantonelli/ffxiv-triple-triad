@@ -175,7 +175,7 @@ GEM
       activerecord (>= 5.2.1)
     popper_js (1.16.0)
     puma (3.12.4)
-    rack (2.2.2)
+    rack (2.2.3)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
     rack-mini-profiler (2.0.1)
@@ -321,7 +321,7 @@ DEPENDENCIES
   mysql2 (>= 0.4.4, < 0.6.0)
   omniauth-discord
   puma (~> 3.11)
-  rack (>= 2.0.8)
+  rack (>= 2.2.3)
   rack-cors (~> 1.1.0)
   rack-mini-profiler
   rails (= 5.2.4.3)
