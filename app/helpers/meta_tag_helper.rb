@@ -5,7 +5,7 @@ module MetaTagHelper
 
   def yield_title(default)
     if content_for?(:title)
-      "#{content_for(:title)} - #{default}"
+      "#{content_for(:title)} - #{default}".html_safe
     else
       default
     end
