@@ -318,8 +318,6 @@ pre {
 }
 
 table.sortable > thead th:not([data-defaultsort=disabled]) {
-  text-decoration: underline;
-
   &:hover {
     background: none;
     cursor: pointer;
