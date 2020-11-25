@@ -51,7 +51,7 @@
         </div>
       </div>
     <% else %>
-      <%= link_to 'Sign in with Discord', user_discord_omniauth_authorize_path, class: 'btn btn-secondary' %>
+      <%= link_to 'Sign in with Discord', user_discord_omniauth_authorize_path, method: :post, class: 'btn btn-secondary' %>
     <% end %>
   </div>
 </div>
