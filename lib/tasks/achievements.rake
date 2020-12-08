@@ -2,7 +2,7 @@ require 'csv'
 require 'open-uri'
 
 namespace :achievements do
-  TRIAD_ACHIEVEMENT_NAMES = /(Kumite|Triple-Decker|Triple Team|Wheel of Fortune)/i.freeze
+  TRIAD_ACHIEVEMENT_NAMES = /(Kumite|Triple-Decker|Triple Team|Wheel of Fortune|Open and Shut|Open to Victory)/i.freeze
 
   desc 'Create the achievements'
   task create: :environment do
@@ -14,8 +14,10 @@ namespace :achievements do
       # Only create achievements matching known TT achievement names and having rewards
       next unless achievement[2].match?(TRIAD_ACHIEVEMENT_NAMES) && achievement[6].present?
 
-      h[achievement[0]] = { id: achievement[0].to_i, name_en: sanitize_name(achievement[2]), description_en: achievement[3],
-                            card_id: Card.find_by(name_en: achievement[6].gsub(' Card', '')).id }
+      if card = Card.find_by(name_en: achievement[6].gsub(' Card', ''))
+        h[achievement[0]] = { id: achievement[0].to_i, name_en: sanitize_name(achievement[2]),
+                              description_en: achievement[3], card_id: card.id }
+      end
     end
 
     # Add their localized data
