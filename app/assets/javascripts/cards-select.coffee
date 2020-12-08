@@ -12,15 +12,16 @@ $(document).on 'turbolinks:load', ->
 
   page = 1
   dirty = false
-  page_max = Math.ceil(all_cards().length / 25)
+  page_size = 30
+  page_max = Math.ceil(all_cards().length / page_size)
 
   navigate_to = (page) ->
     hide_missing = $('#toggle-missing').prop('checked')
     cards = if hide_missing then owned_cards() else all_cards()
 
-    cards.slice((page - 1) * 25, page * 25).show()
-    cards.slice(page * 25).hide()
-    cards.slice(0, (page - 1) * 25).hide()
+    cards.slice((page - 1) * page_size, page * page_size).show()
+    cards.slice(page * page_size).hide()
+    cards.slice(0, (page - 1) * page_size).hide()
 
     if hide_missing
       missing_cards().hide()

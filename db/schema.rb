@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_31_181442) do
+ActiveRecord::Schema.define(version: 2020_12_08_225013) do
 
   create_table "achievements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name_en"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2020_01_31_181442) do
     t.integer "sell_price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "sort_id"
+    t.integer "order"
     t.string "name_en", null: false
     t.string "name_de", null: false
     t.string "name_fr", null: false
@@ -61,13 +61,15 @@ ActiveRecord::Schema.define(version: 2020_01_31_181442) do
     t.text "description_de", null: false
     t.text "description_fr", null: false
     t.text "description_ja", null: false
+    t.integer "order_group"
     t.index ["card_type_id"], name: "index_cards_on_card_type_id"
     t.index ["id", "patch"], name: "index_cards_on_id_and_patch"
     t.index ["name_de"], name: "index_cards_on_name_de", unique: true
     t.index ["name_en"], name: "index_cards_on_name_en", unique: true
     t.index ["name_fr"], name: "index_cards_on_name_fr", unique: true
     t.index ["name_ja"], name: "index_cards_on_name_ja", unique: true
-    t.index ["sort_id"], name: "index_cards_on_sort_id"
+    t.index ["order"], name: "index_cards_on_order"
+    t.index ["order_group"], name: "index_cards_on_order_group"
     t.index ["stars"], name: "index_cards_on_stars"
   end
 

@@ -1,4 +1,4 @@
-json.(card, :id, :sort_id, :name, :description, :stars, :patch, :sell_price)
+json.(card, :id, :name, :description, :stars, :patch, :sell_price, :order_group, :order)
 json.icon image_url("cards/small/#{card.id}.png", skip_pipeline: true)
 json.image image_url("cards/large/#{card.id}.png", skip_pipeline: true)
 

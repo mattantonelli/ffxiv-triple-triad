@@ -14,7 +14,7 @@
 #  sell_price     :integer          not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  sort_id        :integer
+#  order          :integer
 #  name_en        :string(255)      not null
 #  name_de        :string(255)      not null
 #  name_fr        :string(255)      not null
@@ -23,6 +23,7 @@
 #  description_de :text(65535)      not null
 #  description_fr :text(65535)      not null
 #  description_ja :text(65535)      not null
+#  order_group    :integer
 #
 
 class Card < ApplicationRecord

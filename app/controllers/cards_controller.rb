@@ -17,7 +17,7 @@ class CardsController < ApplicationController
 
   def select
     if user_signed_in?
-      @cards = Card.all.order(:sort_id, :id)
+      @cards = Card.all.order(:order_group, :order)
       @user_cards = current_user.cards.pluck(:id)
     else
       flash[:alert] = 'You must sign in to manage your cards.'
