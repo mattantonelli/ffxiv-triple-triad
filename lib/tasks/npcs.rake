@@ -45,11 +45,16 @@ namespace :npcs do
       end
     end
 
-    npcs.values.each do |npc|
-      map = maps[npc.delete(:map_id)]
-      npc[:location_id] = map[:location_id].to_i
-      npc[:x] = get_coordinate(npc[:x], map[:x_offset], map[:size_factor])
-      npc[:y] = get_coordinate(npc[:y], map[:y_offset], map[:size_factor])
+    npcs.each do |id, npc|
+      if map = maps[npc.delete(:map_id)]
+        npc[:location_id] = map[:location_id].to_i
+        npc[:x] = get_coordinate(npc[:x], map[:x_offset], map[:size_factor])
+        npc[:y] = get_coordinate(npc[:y], map[:y_offset], map[:size_factor])
+      else
+        # Skip and delete weird duplicate Battlehall NPCs with nil locations
+        npcs.delete(id)
+        next
+      end
     end
 
     # Create the NPC locations
