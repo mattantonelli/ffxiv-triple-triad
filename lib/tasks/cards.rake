@@ -40,4 +40,28 @@ namespace :cards do
     puts "Created #{Card.count - count} new cards"
   end
 
+  desc 'Create card sources from in-game Acquisition details'
+  task create_sources: :environment do
+    CSV.new(open("#{BASE_URL}/csv/TripleTriadCardResident.csv")).drop(4).each do |card|
+      type = card[13].to_i
+      acquisition = card[14]
+
+      case type
+      when 2, 3
+        origin = Instance.find_by(name_en: acquisition).duty_type
+      # when 4, 5
+      #   origin = 'FATE'
+      #   acquisition = "FATE: #{acquisition}"
+      when 8, 9
+        next unless acquisition =~ /Triad Card/
+        pack = Pack.find_by(name_en: acquisition)
+        PackCard.find_or_create_by!(pack_id: pack.id, card_id: card[0])
+      end
+
+      if origin.present?
+        card = Card.find(card[0])
+        card.sources.find_or_create_by!(name: acquisition, origin: origin)
+      end
+    end
+  end
 end

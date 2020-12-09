@@ -4,8 +4,10 @@ namespace :data do
   desc 'Initialize all Triple Triad data'
   task initialize: :environment do
     puts 'Loading all Triple Triad data'
+    Rake::Task['instances:create'].invoke
     Rake::Task['card_types:create'].invoke
     Rake::Task['cards:create'].invoke
+    Rake::Task['cards:create_sources'].invoke
     Rake::Task['achievements:create'].invoke
     Rake::Task['patch:set'].invoke
     Rake::Task['rules:create'].invoke
@@ -13,16 +15,16 @@ namespace :data do
     Rake::Task['card_images:download'].invoke
     Rake::Task['card_sources:set'].invoke
     Rake::Task['card_packs:create'].invoke
-    Rake::Task['instances:translate'].invoke
   end
 
   desc 'Updates all Triple Triad data'
   task update: :environment do
     puts 'Loading all Triple Triad data'
+    Rake::Task['instances:create'].invoke
     Rake::Task['cards:create'].invoke
+    Rake::Task['cards:create_sources'].invoke
     Rake::Task['achievements:create'].invoke
     Rake::Task['npcs:create'].invoke
-    Rake::Task['instances:translate'].invoke
     Rake::Task['card_images:download'].invoke
   end
 end
