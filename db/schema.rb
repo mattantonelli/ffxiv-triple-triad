@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_09_122107) do
+ActiveRecord::Schema.define(version: 2020_12_16_001328) do
 
   create_table "achievements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name_en"
@@ -62,7 +62,9 @@ ActiveRecord::Schema.define(version: 2020_12_09_122107) do
     t.text "description_fr", null: false
     t.text "description_ja", null: false
     t.integer "order_group"
+    t.integer "deck_order"
     t.index ["card_type_id"], name: "index_cards_on_card_type_id"
+    t.index ["deck_order"], name: "index_cards_on_deck_order"
     t.index ["id", "patch"], name: "index_cards_on_id_and_patch"
     t.index ["name_de"], name: "index_cards_on_name_de", unique: true
     t.index ["name_en"], name: "index_cards_on_name_en", unique: true

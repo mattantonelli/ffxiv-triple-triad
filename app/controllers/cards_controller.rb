@@ -72,7 +72,8 @@ class CardsController < ApplicationController
     end
 
     @q = cards.ransack(query)
-    @cards = @q.result.includes(:npc_sources, :sources, :packs, :achievement, :type).order(patch: :desc, id: :desc).uniq
+    @cards = @q.result.includes(:npc_sources, :sources, :packs, :achievement, :type)
+      .order(patch: :desc, order_group: :desc, order: :desc).uniq
     @ownership = Redis.current.hgetall(:ownership)
   end
 

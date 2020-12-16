@@ -30,17 +30,11 @@ module DecksHelper
 
   def card_position(card, user_card_ids)
     if index = user_card_ids.index(card.id)
-      if card.order_group == 5
-        page = 'Last Page'
-        row = card.order / 5 + 1
-        column = card.order % 5
-      else
-        page = "Page #{(index / 30) + 1}"
-        row = (index % 30 / 5) + 1
-        column = (index % 30 % 5) + 1
-      end
+      page = (index / 30) + 1
+      row = (index % 30 / 5) + 1
+      column = (index % 30 % 5) + 1
 
-      "#{page}, Row #{row}, Column #{column}"
+      "Page #{page}, Row #{row}, Column #{column}"
     else
       'This card is missing from your collection.'
     end

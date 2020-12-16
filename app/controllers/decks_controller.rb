@@ -17,7 +17,7 @@ class DecksController < ApplicationController
   end
 
   def show
-    @user_card_ids = Card.where(id: @user_cards).order(:order_group, :order).pluck(:id) if user_signed_in?
+    @user_card_ids = Card.where(id: @user_cards).order(:deck_order, :id).pluck(:id) if user_signed_in?
   end
 
   def new
@@ -123,9 +123,9 @@ class DecksController < ApplicationController
       @q = Card.ransack(params[:q])
 
       if params[:source] == 'search'
-        @cards = @q.result.includes(:type).order(patch: :desc, id: :desc)
+        @cards = @q.result.includes(:type).order(patch: :desc, order_group: :desc, order: :desc)
       else
-        @cards = Card.includes(:type).order(patch: :desc, id: :desc).first(5)
+        @cards = Card.includes(:type).order(patch: :desc, order_group: :desc, order: :desc).first(5)
       end
     end
 

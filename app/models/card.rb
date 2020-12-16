@@ -24,6 +24,7 @@
 #  description_fr :text(65535)      not null
 #  description_ja :text(65535)      not null
 #  order_group    :integer
+#  deck_order     :integer
 #
 
 class Card < ApplicationRecord

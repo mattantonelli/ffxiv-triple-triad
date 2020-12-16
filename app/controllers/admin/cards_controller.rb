@@ -3,7 +3,9 @@ class Admin::CardsController < AdminController
 
   def index
     @q = Card.all.ransack(params[:q])
-    @cards = @q.result.includes(:npc_sources, :sources, :packs, :achievement).order(patch: :desc, id: :desc).paginate(page: params[:page])
+    @cards = @q.result.includes(:npc_sources, :sources, :packs, :achievement)
+      .order(patch: :desc, order_group: :desc, order: :desc)
+      .paginate(page: params[:page])
   end
 
   def edit
