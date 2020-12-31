@@ -37,7 +37,6 @@ class Card < ApplicationRecord
   has_many :pack_cards
   has_many :packs, through: :pack_cards
   has_and_belongs_to_many :users
-  has_and_belongs_to_many :decks
   has_one :achievement, required: false
 
   accepts_nested_attributes_for :sources
