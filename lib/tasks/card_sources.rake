@@ -79,7 +79,7 @@ namespace :card_sources do
     Card.find_by(name_en: 'Bismarck').sources.find_or_create_by(origin: 'Trial', name: 'The Limitless Blue (Extreme)')
     Card.find_by(name_en: 'Archbishop Thordan VII').sources
       .find_or_create_by(origin: 'Trial', name: "The Minstrel's Ballad: Thordan's Reign")
-    Card.find_by(name_en: 'Ultima Weapon').sources.find_or_create_by(origin: 'Trial', name: "The Minstrel's Ballad: Ultima's Bane")
+    Card.find_by(name_en: 'The Ultima Weapon').sources.find_or_create_by(origin: 'Trial', name: "The Minstrel's Ballad: Ultima's Bane")
     Card.find_by(name_en: 'Titan').sources.find_or_create_by(origin: 'Trial', name: 'The Navel (Hard)')
     Card.find_by(name_en: 'Titan').sources.find_or_create_by(origin: 'Trial', name: 'The Navel (Extreme)')
     Card.find_by(name_en: 'Ramuh').sources.find_or_create_by(origin: 'Trial', name: 'The Striking Tree (Hard)')
