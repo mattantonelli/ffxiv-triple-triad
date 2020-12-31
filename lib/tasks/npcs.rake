@@ -1,5 +1,4 @@
-require 'csv'
-require 'open-uri'
+require 'xiv_data'
 
 namespace :npcs do
   desc 'Create the NPCs'
@@ -10,44 +9,44 @@ namespace :npcs do
 
     # Find all of the Triple Triad NPC Residents and create the base NPC object
     puts '  Fetching resident data'
-    npcs = CSV.new(open("#{BASE_URL}/csv/ENpcBase.csv")).drop(4).each_with_object({}) do |npc, h|
-      npc[3..34].each do |data|
-        if data&.match(/TripleTriad#(\d+)/) && h.values.find { |val| val[:id] == $1.to_i }.nil?
-          h[npc[0]] = { id: $1.to_i, resident_id: npc[0].to_i }
+    npcs = XIVData.sheet('ENpcBase').each_with_object({}) do |npc, h|
+      npc.each do |k, v|
+        if k&.match?('ENpcData') && v&.match(/TripleTriad#(\d+)/) && h.values.find { |val| val[:id] == $1.to_i }.nil?
+          h[npc['#']] = { id: $1.to_i, resident_id: npc['#'].to_i }
           break
         end
       end
     end
 
     %w(en fr de ja).each do |locale|
-      CSV.new(open("#{BASE_URL}/csv/ENpcResident.#{locale}.csv")).drop(4).each do |npc|
-        if npcs.has_key?(npc[0])
-          npcs[npc[0]]["name_#{locale}"] = sanitize_name(npc[1])
+      XIVData.sheet('ENpcResident', locale: locale).each do |npc|
+        if npcs.has_key?(npc['#'])
+          npcs[npc['#']]["name_#{locale}"] = sanitize_name(npc['Singular'])
         end
       end
     end
 
     # Find the associated Level data for each NPC Resident and add the location data
     puts '  Fetching location coordinate data'
-    CSV.new(open("#{BASE_URL}/csv/Level.raw.csv")).drop(4).each do |level|
-      if npcs.has_key?(level[7])
-        npcs[level[7]].merge!(x: level[1].to_f, y: level[3].to_f, map_id: level[8])
+    XIVData.sheet('Level', raw: true).each do |level|
+      if npcs.has_key?(level['Object'])
+        npcs[level['Object']].merge!(x: level['X'].to_f, y: level['Z'].to_f, map_id: level['Map'])
       end
     end
 
     map_ids = npcs.values.pluck(:map_id).uniq
 
     # Look up the relevant maps and set the coordinate data
-    maps = CSV.new(open("#{BASE_URL}/csv/Map.raw.csv")).drop(4).each_with_object({}) do |map, h|
-      if map_ids.include?(map[0])
-        h[map[0]] = { region_id: map[11], location_id: map[12],
-                      x_offset: map[9].to_f, y_offset: map[10].to_f, size_factor: map[8].to_f }
+    maps = XIVData.sheet('Map', raw: true).each_with_object({}) do |map, h|
+      if map_ids.include?(map['#'])
+        h[map['#']] = { region_id: map['PlaceName{Region}'].to_i, location_id: map['PlaceName'].to_i,
+                        x_offset: map['Offset{X}'].to_f, y_offset: map['Offset{Y}'].to_f, size_factor: map['SizeFactor'].to_f }
       end
     end
 
     npcs.each do |id, npc|
       if map = maps[npc.delete(:map_id)]
-        npc[:location_id] = map[:location_id].to_i
+        npc[:location_id] = map[:location_id]
         npc[:x] = get_coordinate(npc[:x], map[:x_offset], map[:size_factor])
         npc[:y] = get_coordinate(npc[:y], map[:y_offset], map[:size_factor])
       else
@@ -60,10 +59,10 @@ namespace :npcs do
     # Create the NPC locations
     puts '  Fetching location name data'
     locations = %w(en fr de ja).each_with_object(Hash.new({})) do |locale, h|
-      places = CSV.new(open("#{BASE_URL}/csv/PlaceName.#{locale}.csv")).drop(3).map { |place| place[1] }
+      places = XIVData.sheet('PlaceName', locale: locale, drop_zero: false).map { |place| place['Name']}
       maps.values.each do |map|
-        h[map[:location_id]] = h[map[:location_id]].merge("name_#{locale}" => places[map[:location_id].to_i],
-                                                          "region_#{locale}" => places[map[:region_id].to_i])
+        h[map[:location_id]] = h[map[:location_id]].merge("name_#{locale}" => places[map[:location_id]],
+                                                          "region_#{locale}" => places[map[:region_id]])
       end
     end
 
@@ -73,19 +72,36 @@ namespace :npcs do
 
     # Add their opponent data
     puts '  Fetching opponent data'
-    CSV.new(open("#{BASE_URL}/csv/TripleTriad.csv")).drop(5).each do |opponent|
-      npc = npcs.values.find { |val| val[:id] == opponent[0].to_i }
+    XIVData.sheet('TripleTriad').each do |opponent|
+      npc = npcs.values.find { |val| val[:id] == opponent['#'].to_i }
       next unless npc.present?
-      npc[:rewards] = Card.where(name_en: opponent[27..30].compact.map { |card| card.sub(/ Card$/, '') }).pluck(:id)
+
+      npc[:rewards] = opponent.each_with_object([]) do |(k, v), a|
+        if k.match?('Item{PossibleReward}') && v.present?
+          a << Card.find_by(name_en: v.sub(/ Card$/, '')).id
+        end
+      end
     end
 
-    CSV.new(open("#{BASE_URL}/csv/TripleTriad.raw.csv")).drop(5).each do |opponent|
-      npc = npcs.values.find { |val| val[:id] == opponent[0].to_i }
+    XIVData.sheet('TripleTriad', raw: true).each do |opponent|
+      npc = npcs.values.find { |val| val[:id] == opponent['#'].to_i }
       next unless npc.present?
-      npc[:quest_id] = opponent[16..18].reject { |quest_id| quest_id == '0'}.last&.to_i
-      npc[:fixed_cards] = opponent[1..5].reject { |card| card == '0' }
-      npc[:variable_cards] = opponent[6..10].reject { |card| card == '0' }
-      npc[:rules] = Rule.where(id: opponent[11..12].reject { |rule| rule == '0' })
+
+      npc[:fixed_cards] = []
+      npc[:variable_cards] = []
+      npc[:rules] = []
+
+      opponent.each do |k, v|
+        if k.match?('PreviousQuest\[') && v != '0'
+          npc[:quest_id] = v.to_i
+        elsif k.match?('TripleTriadCard{Fixed}') && v != '0'
+          npc[:fixed_cards] << v
+        elsif k.match?('TripleTriadCard{Variable}') && v != '0'
+          npc[:variable_cards] << v
+        elsif k.match?('TripleTriadRule') && v != '0'
+          npc[:rules] << Rule.find_by(id: v)
+        end
+      end
     end
 
     # Create the pre-requisite quests
@@ -93,10 +109,10 @@ namespace :npcs do
     quest_ids = npcs.values.pluck(:quest_id).uniq
 
     quests = %w(en de fr ja).each_with_object(Hash.new({})) do |locale, h|
-      CSV.new(open("#{BASE_URL}/csv/Quest.#{locale}.csv")).drop(4).each do |quest|
-        if quest_ids.include?(quest[0].to_i)
-          name = sanitize_description(quest[1]).sub(/\A[^a-z0-9]/i, '').strip
-          h[quest[0]] = h[quest[0]].merge("name_#{locale}" => name)
+      XIVData.sheet('Quest', locale: locale).each do |quest|
+        if quest_ids.include?(quest['#'].to_i)
+          name = sanitize_description(quest['Name']).sub(/\A[^a-z0-9]/i, '').strip
+          h[quest['#']] = h[quest['#']].merge("name_#{locale}" => name)
         end
       end
     end

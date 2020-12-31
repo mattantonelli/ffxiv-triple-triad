@@ -1,17 +1,19 @@
-require 'open-uri'
+require 'xiv_data'
 
 namespace :card_images do
-  LARGE_DIR = Rails.root.join('public/images/cards/large')
-  SMALL_DIR = Rails.root.join('public/images/cards/small')
-  IMAGES_DIR = Rails.root.join('app/assets/images/cards')
-  BACKGROUND = ChunkyPNG::Image.from_file(IMAGES_DIR.join('background.png'))
-  STAR = ChunkyPNG::Image.from_file(IMAGES_DIR.join('star.png'))
+  LARGE_DIR = Rails.root.join('public/images/cards/large').freeze
+  SMALL_DIR = Rails.root.join('public/images/cards/small').freeze
+  IMAGES_DIR = Rails.root.join('app/assets/images/cards').freeze
+  BACKGROUND = ChunkyPNG::Image.from_file(IMAGES_DIR.join('background.png')).freeze
+  STAR = ChunkyPNG::Image.from_file(IMAGES_DIR.join('star.png')).freeze
+  LARGE_OFFSET = 82100.freeze
+  SMALL_OFFSET = 82500.freeze
 
-  type_sheet = ChunkyPNG::Image.from_file(IMAGES_DIR.join("types.png"))
-  TYPES = (1..4).map { |id| type_sheet.crop(20 * (id - 1), 0, 20, 20) }
+  type_sheet = ChunkyPNG::Image.from_file(IMAGES_DIR.join('types.png'))
+  TYPES = (1..4).map { |id| type_sheet.crop(20 * (id - 1), 0, 20, 20) }.freeze
 
-  number_sheet = ChunkyPNG::Image.from_file(IMAGES_DIR.join("numbers.png"))
-  NUMBERS = (1..10).map { |num| number_sheet.crop(15 * (num - 1), 0, 15, 15) }
+  number_sheet = ChunkyPNG::Image.from_file(IMAGES_DIR.join('numbers.png'))
+  NUMBERS = (1..10).map { |num| number_sheet.crop(15 * (num - 1), 0, 15, 15) }.freeze
 
   desc 'Download the images for each card'
   task download: :environment do
@@ -40,7 +42,7 @@ namespace :card_images do
 end
 
 def download_large(card)
-  image = ChunkyPNG::Image.from_stream(download_image(82100, card.id))
+  image = ChunkyPNG::Image.from_stream(XIVData.image(LARGE_OFFSET + card.id))
   image = BACKGROUND.compose(image)
 
   if card.card_type_id > 0
@@ -67,12 +69,8 @@ end
 
 def download_small(card)
   open(SMALL_DIR.join("#{card.id}.png").to_s, 'wb') do |file|
-    file << download_image(82500, card.id).read
+    file << XIVData.image(SMALL_OFFSET + card.id).read
   end
-end
-
-def download_image(offset, id)
-  open("https://github.com/mattantonelli/ffxiv-triple-triad-data/raw/master/images/0#{offset + id}.png")
 end
 
 def create_sheet(source, destination, width, height)

@@ -77,7 +77,7 @@ NPC.where('created_at > ?', Date.current.beginning_of_day).update_all(patch: 'CU
 exit
 ```
 
-This data is available once the [data repository](https://github.com/mattantonelli/ffxiv-triple-triad-data) has been updated with the latest patch data.
+This data is available once the [data repository](https://github.com/mattantonelli/xiv-data) has been updated with the latest patch data.
 
 More action may be required in the event of complex game updates (e.g. new card types, packs, etc.) Patch data must be populated manually.
 

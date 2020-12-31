@@ -1,5 +1,4 @@
-require 'csv'
-require 'open-uri'
+require 'xiv_data'
 
 namespace :instances do
   VALID_TYPES = %w(Dungeons Trials Raids).freeze
@@ -9,19 +8,20 @@ namespace :instances do
     puts 'Creating instances and their translations'
     count = Instance.count
 
-    instances = CSV.new(open("#{BASE_URL}/csv/ContentFinderCondition.en.csv")).drop(3).each_with_object({}) do |instance, h|
-      id, name, type = instance.values_at(0, 38, 39)
+    instances = XIVData.sheet('ContentFinderCondition', locale: 'en').each_with_object({}) do |instance, h|
+      id, name, type = instance.values_at('#', 'Name', 'ContentType')
 
       if name.present? and VALID_TYPES.include?(type)
-        h[id] = { id: id, name_en: sanitize_instance_name(name), duty_type: type.singularize }
+        h[id] = { id: id.to_i, name_en: sanitize_instance_name(name), duty_type: type.singularize }
       end
     end
 
-    %w(de fr ja).map do |locale|
+    %w(de fr ja).each do |locale|
       key = "name_#{locale}".to_sym
 
-      CSV.new(open("#{BASE_URL}/csv/ContentFinderCondition.#{locale}.csv")).drop(3).each_with_object({}) do |instance, h|
-        id, name = instance.values_at(0, 38)
+      XIVData.sheet('ContentFinderCondition', locale: locale).each_with_object({}) do |instance, h|
+        id = instance['#'].to_i
+        name = instance['Name']
 
         if instances.has_key?(id)
           instances[id][key] = sanitize_instance_name(name)
