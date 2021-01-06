@@ -43,6 +43,9 @@ google_analytics:
   tracking_id: GA-1234567-8
 ```
 
+#### Extract the images
+Extract card images from the game data by following the instructions in the [data repository](https://github.com/mattantonelli/xiv-data#images).
+
 #### Load the database
 ```
 bundle exec rake db:schema:load
@@ -80,6 +83,9 @@ exit
 This data is available once the [data repository](https://github.com/mattantonelli/xiv-data) has been updated with the latest patch data.
 
 More action may be required in the event of complex game updates (e.g. new card types, packs, etc.) Patch data must be populated manually.
+
+### Images
+Images are no longer provided by the data repository and must be extracted from the game data. Click [here](https://github.com/mattantonelli/xiv-data#images) for details.
 
 ---
 
