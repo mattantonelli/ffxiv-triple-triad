@@ -10,7 +10,7 @@ namespace :data do
     Rake::Task['patch:set'].invoke
     Rake::Task['rules:create'].invoke
     Rake::Task['npcs:create'].invoke
-    Rake::Task['card_images:download'].invoke
+    Rake::Task['card_images:create'].invoke
     Rake::Task['card_sources:set'].invoke
     Rake::Task['card_packs:create'].invoke
   end
@@ -25,7 +25,7 @@ namespace :data do
     Rake::Task['achievements:create'].invoke
     Rake::Task['rules:create'].invoke
     Rake::Task['npcs:create'].invoke
-    Rake::Task['card_images:download'].invoke
+    Rake::Task['card_images:create'].invoke
   end
 end
 

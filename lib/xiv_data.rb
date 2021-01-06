@@ -5,6 +5,7 @@ module XIVData
   extend self
 
   BASE_URL = 'https://raw.githubusercontent.com/mattantonelli/xiv-data/master'.freeze
+  IMAGE_PATH = '/var/rails/images/ffxiv'.freeze
 
   def sheet(sheet, locale: nil, raw: false, drop_zero: true)
     if raw
@@ -20,10 +21,9 @@ module XIVData
     CSV.new(data.drop(drop_zero ? 4 : 3).join, headers: headers.split(','))
   end
 
-  def image(id)
+  def image_path(id)
     number = id.to_s.rjust(6, '0')
     directory = number.first(3).ljust(6, '0')
-    url = "#{BASE_URL}/ui/icon/#{directory}/#{number}.png"
-    open(url)
+    "#{IMAGE_PATH}/ui/icon/#{directory}/#{number}.png"
   end
 end

@@ -15,24 +15,29 @@ namespace :card_images do
   number_sheet = ChunkyPNG::Image.from_file(IMAGES_DIR.join('numbers.png'))
   NUMBERS = (1..10).map { |num| number_sheet.crop(15 * (num - 1), 0, 15, 15) }.freeze
 
-  desc 'Download the images for each card'
-  task download: :environment do
-    puts 'Downloading card images'
+  desc 'Create the images for each card'
+  task create: :environment do
+    unless Dir.exist?(XIVData::IMAGE_PATH)
+      puts "ERROR: Could not find image source directory: #{XIVData::IMAGE_PATH}"
+      next
+    end
+
+    puts 'Creating card images'
 
     counts = { large: Dir.entries(LARGE_DIR).size, small: Dir.entries(SMALL_DIR).size }
 
     Card.all.each do |card|
       unless LARGE_DIR.join("#{card.id}.png").exist?
-        download_large(card)
+        create_large(card)
       end
 
       unless SMALL_DIR.join("#{card.id}.png").exist?
-        download_small(card)
+        create_small(card)
       end
     end
 
-    puts "Downloaded #{Dir.entries(LARGE_DIR).size - counts[:large]} large images"
-    puts "Downloaded #{Dir.entries(SMALL_DIR).size - counts[:small]} small images"
+    puts "Created #{Dir.entries(LARGE_DIR).size - counts[:large]} large images"
+    puts "Created #{Dir.entries(SMALL_DIR).size - counts[:small]} small images"
 
     create_sheet(SMALL_DIR, IMAGES_DIR.join('small.png'), 40, 40)
     create_sheet(LARGE_DIR, IMAGES_DIR.join('large.png'), 104, 128)
@@ -41,8 +46,8 @@ namespace :card_images do
   end
 end
 
-def download_large(card)
-  image = ChunkyPNG::Image.from_stream(XIVData.image(LARGE_OFFSET + card.id))
+def create_large(card)
+  image = ChunkyPNG::Image.from_file(XIVData.image_path(LARGE_OFFSET + card.id))
   image = BACKGROUND.compose(image)
 
   if card.card_type_id > 0
@@ -67,9 +72,9 @@ def download_large(card)
   image.save(LARGE_DIR.join("#{card.id}.png").to_s)
 end
 
-def download_small(card)
+def create_small(card)
   open(SMALL_DIR.join("#{card.id}.png").to_s, 'wb') do |file|
-    file << XIVData.image(SMALL_OFFSET + card.id).read
+    file << open(XIVData.image_path(SMALL_OFFSET + card.id)).read
   end
 end
 
