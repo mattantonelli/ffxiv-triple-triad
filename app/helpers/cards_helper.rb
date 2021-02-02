@@ -45,6 +45,14 @@ module CardsHelper
     end
   end
 
+  def formatted_number(card)
+    if card.order_group == 0
+      "No. #{card.order}"
+    else
+      "Ex. #{card.order}"
+    end
+  end
+
   def sources(card)
     sources = card.npc_sources.map { |npc| link_to(npc.name, npc_path(npc)) }
 
