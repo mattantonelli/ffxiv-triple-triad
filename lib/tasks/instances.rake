@@ -20,7 +20,7 @@ namespace :instances do
       key = "name_#{locale}".to_sym
 
       XIVData.sheet('ContentFinderCondition', locale: locale).each_with_object({}) do |instance, h|
-        id = instance['#'].to_i
+        id = instance['#']
         name = instance['Name']
 
         if instances.has_key?(id)
@@ -34,6 +34,7 @@ namespace :instances do
         file.puts({ locale => translations }.to_yaml)
       end
     end
+
 
     instances.each do |id, data|
       if instance = Instance.find_by(id: id)
