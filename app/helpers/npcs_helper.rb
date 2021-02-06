@@ -17,6 +17,10 @@ module NPCsHelper
     (fa_icon('star') * npc.difficulty.ceil).html_safe
   end
 
+  def npc_defeated?(npc)
+    current_user.npcs.include?(npc)
+  end
+
   def npc_rule_options(selected)
     options_for_select(Rule.joins(:npcs).order("name_#{I18n.locale}").uniq.map(&:name), selected)
   end

@@ -20,6 +20,16 @@
           <% end %>
           <dt>Difficulty</dt>
           <dd><%= difficulty(@npc) %></dd>
+          <% if user_signed_in? %>
+            <dt>Defeated</dt>
+            <dd>
+              <% if npc_defeated?(@npc) %>
+                <%= fa_icon('check', text: 'Yes') %>
+              <% else %>
+                <%= fa_icon('times', text: 'No') %>
+              <% end %>
+            </dd>
+          <% end %>
           <% if @npc.quest.present? %>
             <dt>Required Quest</dt>
             <dd><%= quest(@npc) %></dd>

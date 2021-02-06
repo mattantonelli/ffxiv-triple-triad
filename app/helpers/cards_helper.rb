@@ -53,6 +53,16 @@ module CardsHelper
     end
   end
 
+  def user_ownership(card)
+    if user_signed_in?
+      owned = current_user.cards.include?(card)
+
+      content_tag(:span, data: { toggle: 'tooltip' }, title: owned ? 'You own this card.' : 'You do not own this card.') do
+        fa_icon(owned ? 'check' : 'times')
+      end
+    end
+  end
+
   def sources(card)
     sources = card.npc_sources.map { |npc| link_to(npc.name, npc_path(npc)) }
 

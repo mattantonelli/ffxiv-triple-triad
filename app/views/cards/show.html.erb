@@ -31,7 +31,10 @@
               <dt>
                 <%= render 'owned' %>
               </dt>
-              <dd><%= @card.ownership %></dd>
+              <dd>
+                <%= user_ownership(@card) %>
+                <%= @card.ownership %>
+              </dd>
             </div>
             <div>
               <dt>Sale Price</dt>

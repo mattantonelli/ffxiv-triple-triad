@@ -52,6 +52,6 @@ class Card < ApplicationRecord
   end
 
   def ownership
-    Redis.current.hget(:ownership, id.to_s)
+    Redis.current.hget(:ownership, id.to_s) || '0%'
   end
 end
