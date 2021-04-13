@@ -78,7 +78,7 @@ namespace :npcs do
 
       npc[:rewards] = opponent.each_with_object([]) do |(k, v), a|
         if k.match?('Item{PossibleReward}') && v.present?
-          a << Card.find_by(name_en: v.sub(/ Card$/, '')).id
+          a << Card.where('name_en like ?', "%#{v.sub(/ Card$/, '')}%").first.id
         end
       end
     end
