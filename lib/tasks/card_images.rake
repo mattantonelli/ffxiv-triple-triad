@@ -64,10 +64,10 @@ def create_large(card)
     end
   end
 
-  image.compose!(NUMBERS[card.top - 1], 45, 89)
-  image.compose!(NUMBERS[card.right - 1], 59, 96)
+  image.compose!(NUMBERS[card.top - 1], 45, 91)
+  image.compose!(NUMBERS[card.right - 1], 58, 97)
   image.compose!(NUMBERS[card.bottom - 1], 45, 103)
-  image.compose!(NUMBERS[card.left - 1], 31, 96)
+  image.compose!(NUMBERS[card.left - 1], 32, 97)
 
   image.save(LARGE_DIR.join("#{card.id}.png").to_s)
 end
