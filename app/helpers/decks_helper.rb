@@ -24,6 +24,14 @@ module DecksHelper
     end
   end
 
+  def deck_patch(deck)
+    if deck.updated?
+      content_tag(:span, 'After 5.5', class: 'badge badge-primary')
+    else
+      content_tag(:span, 'Before 5.5', class: 'badge badge-secondary')
+    end
+  end
+
   def voted?(deck)
     Vote.exists?(deck: deck, user: current_user)
   end

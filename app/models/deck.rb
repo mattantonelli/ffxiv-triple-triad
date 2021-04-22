@@ -23,6 +23,8 @@ class Deck < ApplicationRecord
   has_many :cards, through: :deck_cards
   has_many :votes, dependent: :delete_all
 
+  scope :updated, -> { where('updated_at > ?', Deck.patch_5_5) }
+
   validates_with DeckValidator
   validates :rule, presence: true, unless: -> { rule_id.blank? }
   validates :npc,  presence: true, unless: -> { npc_id.blank? }
@@ -33,6 +35,15 @@ class Deck < ApplicationRecord
 
   def downvote(user)
     votes.find_by(user: user)&.destroy
+  end
+
+  # Has the deck been updated after Patch 5.5?
+  def updated?
+    updated_at > Deck.patch_5_5
+  end
+
+  def self.patch_5_5
+    '2021-04-11'.freeze
   end
 
   private

@@ -147,9 +147,14 @@ class DecksController < ApplicationController
   end
 
   def filter_query
+    params[:q] ||= {}
+
     if params[:general].present?
-      params[:q] = params[:q]&.reject { |k, _| k != 's' } || {}
       params[:q].merge!(rule_id_null: true, npc_id_null: true)
+    end
+
+    if params[:updated].present?
+      params[:q].merge!(updated_at_gteq: Deck.patch_5_5)
     end
   end
 
