@@ -90,8 +90,11 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    discordrb-webhooks (3.3.0)
+      rest-client (>= 2.1.0.rc1)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
+    ed25519 (1.2.4)
     erubi (1.9.0)
     execjs (2.7.0)
     faraday (1.0.0)
@@ -314,6 +317,8 @@ DEPENDENCIES
   chunky_png
   coffee-rails (~> 4.2)
   devise
+  discordrb-webhooks (= 3.3.0)
+  ed25519
   font-awesome-rails
   jbuilder (~> 2.5)
   jquery-rails

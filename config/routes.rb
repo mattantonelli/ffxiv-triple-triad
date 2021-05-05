@@ -49,6 +49,8 @@ Rails.application.routes.draw do
     resources :users, only: :show
   end
 
+  post 'discord/interactions'
+
   namespace :admin do
     resources :users, only: :index
     resources :npcs, only: [:index, :edit, :update]

@@ -36,6 +36,10 @@ gem 'sortable-rails'
 gem 'momentjs-rails'
 gem 'rails_bootstrap_sortable'
 
+# Discord interactions
+gem 'ed25519'
+gem 'discordrb-webhooks', '3.3.0'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rack-mini-profiler'
