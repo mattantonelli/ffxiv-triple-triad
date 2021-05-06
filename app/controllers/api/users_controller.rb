@@ -3,7 +3,7 @@ class Api::UsersController < ApiController
     @user = User.find_by(uid: params[:id])
 
     if !@user.present?
-      render json: { status: 404, error: 'Not found' }, status: :not_found
+      render json: { status: 404, error: "User not found. Sign up at #{root_url}" }, status: :not_found
     elsif !@user.public_cards
       render json: { status: 403, error: "User's card collection is set to private" }, status: :forbidden
     else
