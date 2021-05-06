@@ -44,9 +44,9 @@ class DiscordController < ApiController
               data = Discord.embed_card(name: value)
             end
           elsif type == 'npc'
-            data = Discord.embed_npc("name_en_cont=#{value}")
+            data = Discord.embed_npc(value)
           elsif type == 'pack'
-            data = Discord.embed_pack("name_en_cont=#{value}")
+            data = Discord.embed_pack(value)
           else
             render json: { type: 4, data: { content: 'Sorry, something broke!' } }
           end

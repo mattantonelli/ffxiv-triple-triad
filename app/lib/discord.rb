@@ -28,13 +28,15 @@ module Discord
     embed.author = Discordrb::Webhooks::EmbedAuthor.new(name: "#{card[:name]} (No. #{card[:order]})",
                                                         url: "#{ROOT_URL}/cards/#{card[:id]}")
 
-    embed.add_field(name: 'Rarity', value: "\u2605" * card[:stars], inline: true)
+    embed.add_field(name: 'Rarity', value: stars(card[:stars]), inline: true)
     embed.add_field(name: 'Owned', value: card[:owned], inline: true)
     embed.add_field(name: 'Patch', value: card[:patch], inline: true)
 
     sources = card[:sources]
     if sources.present?
-      sources[:purchase] = "#{sources[:purchase]} MGP" if sources[:purchase].present?
+      sources[:npcs] = sources[:npcs].map { |npc| "NPC: #{npc[:name]}" }
+      sources[:packs] = sources[:packs].map { |pack| "Pack: #{pack[:name]}" }
+      sources[:purchase] = "Purchase: #{number_with_delimiter(sources[:purchase])} MGP" if sources[:purchase].present?
       embed.add_field(name: 'Source', value: sources.values.flatten.join("\n"))
     end
 
@@ -47,7 +49,7 @@ module Discord
     { embeds: [embed.to_hash] }
   end
 
-  def embed_npc(query)
+  def embed_npc(name)
     results = search_by_name('npcs', name)
     npc = results.first
 
@@ -57,7 +59,20 @@ module Discord
 
     embed = Discordrb::Webhooks::Embed.new(color: EMBED_COLOR)
 
-    # TODO
+    embed.author = Discordrb::Webhooks::EmbedAuthor.new(name: npc[:name], url: "#{ROOT_URL}/npcs/#{npc[:id]}")
+    embed.thumbnail = Discordrb::Webhooks::EmbedThumbnail.new(url: npc[:rewards].sample[:icon])
+
+    location = "#{npc[:location][:name]} (#{npc[:location].values_at(:x, :y).join(', ')})"
+    embed.add_field(name: 'Location', value: location)
+
+    embed.add_field(name: 'Rules', value: npc[:rules].join("\n"), inline: true) if npc[:rules].present?
+    embed.add_field(name: 'Difficulty', value: stars(npc[:difficulty].to_f.ceil), inline: true)
+    embed.add_field(name: 'Patch', value: npc[:patch], inline: true)
+
+    embed.add_field(name: 'Required Quest', value: npc.dig(:quest, :name)) if npc[:quest].present?
+
+    rewards = npc[:rewards].map { |reward| "#{reward[:name]} #{stars(reward[:stars])}" }.join("\n")
+    embed.add_field(name: 'Rewards', value: rewards)
 
     if results.size > 1
       embed.footer = Discordrb::Webhooks::EmbedFooter.new(text: additional_results(results))
@@ -66,7 +81,7 @@ module Discord
     { embeds: [embed.to_hash] }
   end
 
-  def embed_pack(query)
+  def embed_pack(name)
     results = search_by_name('packs', name)
     pack = results.first
 
@@ -76,7 +91,10 @@ module Discord
 
     embed = Discordrb::Webhooks::Embed.new(color: EMBED_COLOR)
 
-    # TODO
+    embed.author = Discordrb::Webhooks::EmbedAuthor.new(name: pack[:name], url: "#{ROOT_URL}/packs##{pack[:id]}")
+
+    embed.add_field(name: 'Cost', value: "#{number_with_delimiter(pack[:cost])} MGP")
+    embed.add_field(name: 'Cards', value: pack[:cards].pluck(:name).join("\n"))
 
     { embeds: [embed.to_hash] }
   end
@@ -92,11 +110,11 @@ module Discord
                                                         url: "#{ROOT_URL}/users/#{profile[:id]}")
 
     cards = user[:cards]
-    embed.add_field(name: "Cards#{star(cards[:owned], cards[:total])}",
+    embed.add_field(name: "Cards#{completion(cards[:owned], cards[:total])}",
                     value: "#{cards[:owned]} / #{cards[:total]} (#{cards[:completion]})")
 
     npcs = user[:npcs]
-    embed.add_field(name: "NPCs#{star(cards[:owned], cards[:total])}",
+    embed.add_field(name: "NPCs#{completion(cards[:owned], cards[:total])}",
                     value: "#{npcs[:defeated]} / #{npcs[:total]} (#{npcs[:completion]})")
 
     { embeds: [embed.to_hash] }
@@ -104,7 +122,7 @@ module Discord
 
   private
   def search_by_name(endpoint, name)
-    url = "#{ROOT_URL}/api/#{endpoint}?name_en_eq=#{name}"
+    url = "#{ROOT_URL}/api/#{endpoint}?name_en_cont=#{name}"
     JSON.parse(RestClient.get(url), symbolize_names: true)[:results].sort_by { |result| result[:name].size }
   end
 
@@ -114,7 +132,11 @@ module Discord
     "Also available: #{names.join(', ')}"
   end
 
-  def star(count, total)
+  def completion(count, total)
     " \u2605" if count == total
+  end
+
+  def stars(count)
+    "\u2605" * count
   end
 end
