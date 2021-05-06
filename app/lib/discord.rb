@@ -114,7 +114,7 @@ module Discord
                     value: "#{cards[:owned]} / #{cards[:total]} (#{cards[:completion]})")
 
     npcs = user[:npcs]
-    embed.add_field(name: "NPCs#{completion(cards[:owned], cards[:total])}",
+    embed.add_field(name: "NPCs#{completion(npcs[:defeated], npcs[:total])}",
                     value: "#{npcs[:defeated]} / #{npcs[:total]} (#{npcs[:completion]})")
 
     { embeds: [embed.to_hash] }
