@@ -1,4 +1,4 @@
-json.(npc, :id, :resident_id, :name, :patch)
+json.(npc, :id, :resident_id, :name, :difficulty, :patch)
 
 json.location do
   json.name npc.location.name
