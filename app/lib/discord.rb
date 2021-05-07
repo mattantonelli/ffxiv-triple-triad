@@ -34,10 +34,10 @@ module Discord
 
     sources = card[:sources]
     if sources.present?
-      sources[:npcs] = sources[:npcs].map { |npc| "NPC: #{npc[:name]}" }
-      sources[:packs] = sources[:packs].map { |pack| "Pack: #{pack[:name]}" }
+      sources[:npcs] = sources[:npcs].map { |npc| "NPC: #{link(npc)}" }
+      sources[:packs] = sources[:packs].map { |pack| "Pack: #{link(pack)}" }
       sources[:purchase] = "Purchase: #{number_with_delimiter(sources[:purchase])} MGP" if sources[:purchase].present?
-      embed.add_field(name: 'Source', value: sources.values.flatten.join("\n"))
+      embed.add_field(name: 'Source', value: sources.values.compact.flatten.join("\n"))
     end
 
     embed.add_field(name: 'Description', value: card[:description])
@@ -69,9 +69,11 @@ module Discord
     embed.add_field(name: 'Difficulty', value: stars(npc[:difficulty].to_f.ceil), inline: true)
     embed.add_field(name: 'Patch', value: npc[:patch], inline: true)
 
-    embed.add_field(name: 'Required Quest', value: npc.dig(:quest, :name)) if npc[:quest].present?
+    if npc[:quest].present?
+      embed.add_field(name: 'Required Quest', value: "[#{npc.dig(:quest, :name)}](#{npc.dig(:quest, :link)})")
+    end
 
-    rewards = npc[:rewards].map { |reward| "#{reward[:name]} #{stars(reward[:stars])}" }.join("\n")
+    rewards = npc[:rewards].map { |card| link_card(card) }.join("\n")
     embed.add_field(name: 'Rewards', value: rewards)
 
     if results.size > 1
@@ -94,7 +96,7 @@ module Discord
     embed.author = Discordrb::Webhooks::EmbedAuthor.new(name: pack[:name], url: "#{ROOT_URL}/packs##{pack[:id]}")
 
     embed.add_field(name: 'Cost', value: "#{number_with_delimiter(pack[:cost])} MGP")
-    embed.add_field(name: 'Cards', value: pack[:cards].pluck(:name).join("\n"))
+    embed.add_field(name: 'Cards', value: pack[:cards].map { |card| link_card(card) }.join("\n"))
 
     { embeds: [embed.to_hash] }
   end
@@ -124,6 +126,14 @@ module Discord
   def search_by_name(endpoint, name)
     url = "#{ROOT_URL}/api/#{endpoint}?name_en_cont=#{name}"
     JSON.parse(RestClient.get(url), symbolize_names: true)[:results].sort_by { |result| result[:name].size }
+  end
+
+  def link(item)
+    "[#{item[:name]}](#{item[:link]})"
+  end
+
+  def link_card(card)
+    "#{link(card)} #{stars(card[:stars])}"
   end
 
   def additional_results(results)
