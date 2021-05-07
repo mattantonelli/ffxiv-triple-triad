@@ -1,4 +1,4 @@
-module HomeHelper
+module StaticHelper
   def play_guide_link
     region = case(I18n.locale)
              when :fr then 'fr'

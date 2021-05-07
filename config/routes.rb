@@ -49,6 +49,7 @@ Rails.application.routes.draw do
     resources :users, only: :show
   end
 
+  get 'commands', to: 'static#commands'
   post 'discord/interactions'
 
   namespace :admin do
@@ -59,7 +60,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get '404', to: 'home#not_found', as: :not_found
+  get '404', to: 'static#not_found', as: :not_found
   match "api/*path", via: :all, to: -> (_) { [404, { 'Content-Type' => 'application/json' },
                                               ['{"status": 404, "error": "Not found"}'] ] }
   match "*path", via: :all, to: redirect('404')
@@ -69,5 +70,5 @@ Rails.application.routes.draw do
     get "/*missing", to: proc { [404, {}, ['']] }
   end
 
-  root 'home#index'
+  root 'static#home'
 end
