@@ -3,7 +3,7 @@ This is yet another application for tracking your Final Fantasy XIV Triple Triad
 
 ## API
 
-All of this application's data is made available through a RESTful JSON API. See the [wiki](https://github.com/mattantonelli/ffxiv-triple-triad/wiki) for details.
+All of this application's data is made available through a RESTful JSON API. See the [documentation](https://documenter.getpostman.com/view/1779678/TzXzDHRR) for details.
 
 ## Dependencies
 * Ruby (2.4.1)
