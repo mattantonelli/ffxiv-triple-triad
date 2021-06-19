@@ -49,6 +49,8 @@ Rails.application.routes.draw do
     resources :users, only: :show
   end
 
+  get 'api/docs', to: redirect('https://documenter.getpostman.com/view/1779678/TzXzDHRR')
+
   get 'commands', to: 'static#commands'
   post 'discord/interactions'
 
