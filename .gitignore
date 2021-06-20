@@ -33,8 +33,7 @@
 /public/images/cards/small/*
 
 # Capistrano
-Capfile
-config/deploy*
+config/deploy/*
 
 # Automatically generated translations
 config/locales/instances/*
