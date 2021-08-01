@@ -62,6 +62,7 @@
       <div class="card-body card-table">
         <%= search_form_for(@q, class: 'form form-inline search-form d-flex justify-content-center mx-2 my-3', url: new_deck_path, enforce_utf8: false) do |f| %>
           <%= f.search_field "name_#{I18n.locale}_cont", placeholder: 'Name', size: 30, class: 'form-control form-control-sm' %>
+          <%= f.search_field 'order_eq', placeholder: 'Number', size: 10, class: 'form-control form-control-sm' %>
           <%= f.collection_select :card_type_id_eq, CardType.all, :id, :name,
             { include_blank: 'All Types' }, class: 'form-control form-control-sm' %>
           <%= f.select :stars_eq, rarity_options, { include_blank: 'All Rarities' }, class: 'form-control form-control-sm' %>

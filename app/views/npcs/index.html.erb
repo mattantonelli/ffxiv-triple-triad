@@ -8,11 +8,11 @@
       <%= select_tag :location, options_for_select(Location.order(:id).map(&:region).uniq, @location),
         include_blank: 'All Locations', class: 'form-control form-control-sm mt-0' %>
       <%= select_tag :rule, npc_rule_options(@rule), include_blank: 'All Rules', class: 'form-control form-control-sm' %>
-    <% end %>
-    <% if user_signed_in? %>
-      <%= link_to 'Update Defeated', update_defeated_npcs_path, method: :post,
-        class: 'btn btn-sm btn-secondary ml-3 ml-sm-0 mt-2 mt-sm-0',
-        data: { confirm: 'All NPCs with exclusive cards you have obtained will be marked as defeated.' } %>
+      <% if user_signed_in? %>
+        <%= link_to 'Update Defeated', update_defeated_npcs_path, method: :post,
+          class: 'btn btn-sm btn-secondary mt-2 mt-sm-0',
+          data: { confirm: 'All NPCs with exclusive cards you have obtained will be marked as defeated.' } %>
+      <% end %>
     <% end %>
   </div>
   <div class="col-12 col-md-6 d-flex justify-content-center justify-content-md-end align-items-center">
