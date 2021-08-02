@@ -328,3 +328,7 @@ table.sortable > thead th:not([data-defaultsort=disabled]) {
     }
   }
 }
+
+.no-wrap {
+  white-space: nowrap;
+}

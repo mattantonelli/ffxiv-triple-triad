@@ -1,13 +1,18 @@
 <% title('My Cards') %>
 
 <%= javascript_tag "window._token = '#{form_authenticity_token}'" %>
-<%= render 'form', url: my_cards_path %>
-<div class="d-flex justify-content-between align-items-end mb-2">
-  <div>
+<div class="d-block d-md-none">
+  <%= render 'form', url: my_cards_path %>
+</div>
+<div class="d-flex justify-content-between align-items-end mb-1">
+  <div class="no-wrap mb-1">
     <%= link_to 'Select Your Cards', select_cards_path,
       class: "btn btn-secondary btn-sm#{' btn-attention' if @user_cards.empty?}" %>
   </div>
-  <div class="d-flex align-items-center">
+  <div class="d-none d-md-block">
+    <%= render 'form', url: my_cards_path %>
+  </div>
+  <div class="d-flex align-items-center no-wrap mb-1">
     <label for="toggle-owned" class="mb-0 mr-1">Hide Owned</label>
     <input type="checkbox" id="toggle-owned" />
   </div>
