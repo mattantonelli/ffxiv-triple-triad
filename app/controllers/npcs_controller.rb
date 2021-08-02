@@ -24,6 +24,7 @@ class NPCsController < ApplicationController
       @total = @npcs.present? ? @npcs.count : NPC.count
       @count = (@defeated & @npcs.pluck(:id)).count
     else
+      render_sign_in_flash
       @user_cards = []
       @incomplete = []
       @defeated = []

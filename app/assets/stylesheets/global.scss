@@ -73,6 +73,10 @@ a.name, a.btn {
   text-decoration: none;
 }
 
+.alert a {
+  color: inherit;
+}
+
 .btn, .btn:hover {
   color: #eee;
 }

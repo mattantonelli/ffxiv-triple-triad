@@ -2,16 +2,12 @@ class CardsController < ApplicationController
   before_action :set_cards, only: [:index, :mine]
 
   def index
-  end
-
-  def mine
     if user_signed_in?
       @user_cards = current_user.cards.pluck(:id)
       @count = (@user_cards & @cards.pluck(:id)).count
       @total = @cards.present? ? @cards.count : Card.count
     else
-      flash[:alert] = 'You must sign in to manage your cards.'
-      redirect_to cards_path
+      render_sign_in_flash
     end
   end
 
@@ -49,7 +45,7 @@ class CardsController < ApplicationController
 
   def set
     current_user.set_cards(set_params[:cards].split(','))
-    redirect_to my_cards_path
+    redirect_to cards_path
   end
 
   private

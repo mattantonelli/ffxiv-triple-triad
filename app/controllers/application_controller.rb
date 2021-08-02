@@ -19,6 +19,11 @@ class ApplicationController < ActionController::Base
     head :not_found
   end
 
+  def render_sign_in_flash
+    link = view_context.link_to('Sign in', user_discord_omniauth_authorize_path, method: :post)
+    flash.now[:notice] = "Want to track your progress? #{link} to get started."
+  end
+
   private
   def set_locale
     locale = cookies['locale']

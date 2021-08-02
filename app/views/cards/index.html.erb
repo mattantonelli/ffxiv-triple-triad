@@ -1,11 +1,28 @@
-<% title('All Cards') %>
+<% title('Cards') %>
+<%= javascript_tag "window._token = '#{form_authenticity_token}'" %>
 
-<div class="row">
-  <div class="col-12 text-center">
+<% if user_signed_in? %>
+  <div class="d-block d-md-none">
     <%= render 'form', url: cards_path %>
   </div>
-</div>
-<table class="table table-striped table-sm shadow p-3 mt-2 mb-5 sortable">
+  <div class="d-flex justify-content-between align-items-end mb-1">
+    <div class="no-wrap mb-1">
+      <%= link_to 'Select Your Cards', select_cards_path,
+        class: "btn btn-secondary btn-sm#{' btn-attention' if @user_cards.empty?}" %>
+    </div>
+    <div class="d-none d-md-block">
+      <%= render 'form', url: cards_path %>
+    </div>
+    <div class="d-flex align-items-center no-wrap mb-1">
+      <label for="toggle-owned" class="mb-0 mr-1">Hide Owned</label>
+      <input type="checkbox" id="toggle-owned" />
+    </div>
+  </div>
+  <%= render 'layouts/progress', value: @count, min: 0, max: @total %>
+<% else %>
+  <%= render 'form', url: cards_path %>
+<% end %>
+<table class="table table-striped table-sm shadow p-3 mt-2 mb-5 sortable my-cards">
   <thead>
     <tr>
       <th scope="col">#</th> <!-- Image -->
@@ -16,9 +33,12 @@
       <th scope="col" class="hide-xs">Source</th>
       <th scope="col" class="text-center hide-xs">Owned</th>
       <th scope="col" class="text-center">Patch</th>
+      <% if user_signed_in? %>
+        <th scope="col" class="text-center" data-defaultsort="disabled"></th> <!-- Checkbox -->
+      <% end %>
     </tr>
   </thead>
   <tbody>
-    <%= render 'table_data', cards: @cards, ownership: @ownership %>
+    <%= render 'table_data', cards: @cards, user_cards: @user_cards, ownership: @ownership %>
   </tbody>
 </table>

@@ -37,7 +37,7 @@ class UsersController < ApplicationController
     if card_ids.present? && card_ids.all? { |id| id =~ /\A\d+\z/ }
       current_user.cards = Card.where(id: card_ids)
       flash[:success] = 'Your card collection has been imported successfully.'
-      redirect_to my_cards_path
+      redirect_to cards_path
     else
       flash[:error] = 'There was a problem importing your collection. Please check your code and try again.'
       render :import

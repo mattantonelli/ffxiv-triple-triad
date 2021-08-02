@@ -1,5 +1,5 @@
 $(document).on 'turbolinks:load', ->
-  return unless $('#my-cards').length > 0
+  return unless $('.my-cards').length > 0
 
   restripe = ->
     $('tbody tr:visible').each (index) ->

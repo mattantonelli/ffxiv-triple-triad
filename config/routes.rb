@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :cards, only: [:index, :show] do
     collection do
-      get 'mine', as: :my
+      get 'mine', to: redirect('cards')
       get 'select'
     end
   end

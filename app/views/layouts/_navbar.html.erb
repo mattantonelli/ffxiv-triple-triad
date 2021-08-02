@@ -8,16 +8,15 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarContent">
     <div class="navbar-nav mr-auto">
-      <%= nav_link('My Cards', my_cards_path) %>
-      <%= nav_link('All Cards', cards_path) %>
+      <%= nav_link('Cards', cards_path, 'cards') %>
       <%= nav_link('NPCs', npcs_path, 'npcs') %>
       <%= nav_link('Decks', decks_path, 'decks') %>
       <%= nav_link('Packs', packs_path) %>
+      <%= nav_link('Discord Commands', commands_path) %>
       <div class="navbar-nav nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="otherDropdown" role="button" data-toggle="dropdown"
            aria-haspopup="true" aria-expanded="false">Other</a>
         <div class="dropdown-menu" aria-labelledBy="otherDropdown">
-          <%= link_to('Discord Commands', commands_path, class: 'dropdown-item') %>
           <%= play_guide_link %>
           <%= ffxiv_collect_link %>
         </div>
