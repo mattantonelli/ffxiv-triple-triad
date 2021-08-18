@@ -41,8 +41,9 @@ namespace :cards do
     puts "Created #{Card.count - count} new cards"
   end
 
-  desc 'Create card sources from in-game Acquisition details'
+  desc 'Create card sources from in-game Acquisition details and shops'
   task create_sources: :environment do
+    puts 'Creating card Acqusition sources'
     XIVData.sheet('TripleTriadCardResident').each do |card|
       type = card['AcquisitionType'].to_i
       acquisition = card['Acquisition']
@@ -62,6 +63,26 @@ namespace :cards do
       if origin.present?
         card = Card.find(card['#'])
         card.sources.find_or_create_by!(name: acquisition, origin: origin)
+      end
+    end
+
+    puts 'Creating SpecialShop sources'
+    XIVData.sheet('SpecialShop', locale: 'en').each do |shop|
+      60.times do |i|
+        item = shop["Item{Receive}[#{i}][0]"]
+        break if item.nil?
+        next unless item.match?(/ Card$/) && card = Card.where('BINARY name_en like ?', "%#{item.sub(/ Card$/, '')}%").first
+
+        price = shop["Count{Cost}[#{i}][0]"]
+        next if price == '0'
+
+        currency = shop["Item{Cost}[#{i}][0]"]
+
+        if currency == 'MGP'
+          card.update!(buy_price: price) unless card.buy_price.present?
+        elsif card.sources.none?
+          card.sources.create!(origin: 'Other', name: "#{price} #{currency.pluralize}")
+        end
       end
     end
   end
