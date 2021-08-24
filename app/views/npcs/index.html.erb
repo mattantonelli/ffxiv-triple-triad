@@ -65,11 +65,18 @@
         <td class="npc-rewards" data-value="<%= npc.rewards.size %>">
           <div class="d-flex flex-wrap card-list">
             <% npc.rewards.each do |card| %>
-              <%= link_to card_path(card), class: 'my-1' do %>
-                <div data-toggle="tooltip" data-placement="top" title="<%= card.name %>"
-                  <%= 'class="owned"'.html_safe if @user_cards.include?(card.id) %>>
+              <% if user_signed_in? %>
+                <div class="card-toggle<%= ' owned' if @user_cards.include?(card.id) %>"
+                  data-path="<%= @user_cards.include?(card.id) ? card_remove_path(card) : card_add_path(card) %>"
+                  data-toggle="tooltip" data-placement="top" title="<%= card.name %>">
                   <%= small_image(card) %>
                 </div>
+              <% else %>
+                <%= link_to card_path(card) do %>
+                  <div data-toggle="tooltip" data-placement="top" title="<%= card.name %>">
+                    <%= small_image(card) %>
+                  </div>
+                <% end %>
               <% end %>
             <% end %>
           </div>

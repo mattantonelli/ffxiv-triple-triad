@@ -24,6 +24,16 @@ $(document).on 'turbolinks:load', ->
         location.reload()
     })
 
+  updateCard = (card) ->
+    $.ajax({
+      type: 'POST',
+      url: card.data('path'),
+      data: { authenticity_token: window._token },
+      error: ->
+        alert('There was a problem updating your collection. Please try again.')
+        location.reload()
+    })
+
   $('input[name="display"]').change ->
     $('.npc-row').show()
     if $('#show-all').prop('checked')
@@ -61,3 +71,17 @@ $(document).on 'turbolinks:load', ->
 
     npc.data('path', path)
     restripe()
+
+  $('.card-toggle').click ->
+    card = $(this)
+
+    if card.hasClass('owned')
+      updateCard(card)
+      card.removeClass('owned')
+      path = card.data('path').replace('remove', 'add')
+    else
+      updateCard(card)
+      card.addClass('owned')
+      path = card.data('path').replace('add', 'remove')
+
+    card.data('path', path)

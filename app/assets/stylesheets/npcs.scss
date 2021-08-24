@@ -1,5 +1,12 @@
-.card-list img {
-  margin-right: 0.5em;
+.card-list {
+  img {
+    margin-top: 0.25rem;
+    margin-right: 0.5em;
+  }
+
+  .card-toggle {
+    cursor: pointer;
+  }
 }
 
 .variable-cards {
