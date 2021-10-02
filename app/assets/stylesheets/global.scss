@@ -93,7 +93,7 @@ label, input[type="checkbox"] {
   cursor: pointer;
 }
 
-input[type="checkbox"] {
+input[type="checkbox"], input[type="radio"] {
   -webkit-filter: grayscale(100%);
 }
 
