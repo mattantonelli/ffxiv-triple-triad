@@ -3,6 +3,7 @@ namespace :data do
   task initialize: :environment do
     puts 'Loading all Triple Triad data'
     Rake::Task['instances:create'].invoke
+    Rake::Task['quests:create'].invoke
     Rake::Task['card_types:create'].invoke
     Rake::Task['cards:create'].invoke
     Rake::Task['cards:create_sources'].invoke
@@ -19,6 +20,7 @@ namespace :data do
   task update: :environment do
     puts 'Loading all Triple Triad data'
     Rake::Task['instances:create'].invoke
+    Rake::Task['quests:create'].invoke
     Rake::Task['card_types:create'].invoke
     Rake::Task['cards:create'].invoke
     Rake::Task['cards:create_sources'].invoke
@@ -50,6 +52,7 @@ def sanitize_name(name)
 end
 
 def updated?(model, data)
+  data.symbolize_keys!
   current = model.attributes.symbolize_keys.select { |k, _| data.keys.include?(k) }
 
   if updated = data != current

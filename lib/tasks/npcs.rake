@@ -5,7 +5,7 @@ namespace :npcs do
   task create: :environment do
     puts 'Creating NPCs'
     counts = { npc: NPC.count, npc_card: NPCCard.count, npc_reward: NPCReward.count,
-               locations: Location.count, quests: Quest.count  }
+               locations: Location.count }
 
     # Find all of the Triple Triad NPC Residents and create the base NPC object
     puts '  Fetching resident data'
@@ -104,25 +104,6 @@ namespace :npcs do
       end
     end
 
-    # Create the pre-requisite quests
-    puts '  Fetching quest data'
-    quest_ids = npcs.values.pluck(:quest_id).uniq
-
-    quests = %w(en de fr ja).each_with_object(Hash.new({})) do |locale, h|
-      XIVData.sheet('Quest', locale: locale).each do |quest|
-        if quest_ids.include?(quest['#'].to_i)
-          name = sanitize_description(quest['Name']).sub(/\A[^a-z0-9]/i, '').strip
-          h[quest['#']] = h[quest['#']].merge("name_#{locale}" => name)
-        end
-      end
-    end
-
-    quests.each do |id, quest|
-      unless Quest.exists?(id)
-        Quest.create!(quest.merge(id: id))
-      end
-    end
-
     # Create the NPCs and their cards
     npcs.values.each do |data|
       fixed_cards = data.delete(:fixed_cards)
@@ -131,7 +112,7 @@ namespace :npcs do
 
       # Create or update the NPC
       if npc = NPC.find_by(id: data[:id])
-        data.except!('name_en', 'name_de', 'name_fr', 'name_ja', :rules)
+        data.except!('name_en', 'name_de', 'name_fr', 'name_ja', :quest_id, :rules)
         npc.update!(data) if updated?(npc, data)
       else
         npc = NPC.create!(data)

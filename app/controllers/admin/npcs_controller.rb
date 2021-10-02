@@ -10,9 +10,24 @@ class Admin::NPCsController < AdminController
   end
 
   def update
-    if @npc.update(npc_params)
+    paramz = npc_params
+
+    if quest = paramz.delete(:quest)
+      quest_id = Quest.find_by(name_en: quest)&.id
+
+      if quest_id.present?
+        paramz[:quest_id] = quest_id
+      else
+        flash[:error] = "Could not find quest \"#{quest}\"."
+        return render :edit
+      end
+    else
+      paramz[:quest_id] = nil
+    end
+
+    if @npc.update(paramz)
       flash[:success] = 'NPC has been updated.'
-      redirect_to admin_npcs_path
+      redirect_to edit_admin_npc_path(@npc)
     else
       flash[:error] = 'There was a problem updating the NPC.'
       render :edit
@@ -25,6 +40,6 @@ class Admin::NPCsController < AdminController
   end
 
   def npc_params
-    params.require(:npc).permit(:name, :x, :y, :patch)
+    params.require(:npc).permit(:name, :quest, :x, :y, :patch)
   end
 end

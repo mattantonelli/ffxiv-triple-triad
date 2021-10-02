@@ -10,6 +10,10 @@
             <%= f.label :name %>
             <%= f.text_field :name, class: 'form-control' %>
           </div>
+          <div class="form-group">
+            <%= f.label :quest %>
+            <%= f.text_field :quest, value: @npc.quest&.name_en, class: 'form-control' %>
+          </div>
           <div class="form-row mb-3 align-items-end">
             <div class="col-3">
               <%= f.label :location %>
