@@ -10,7 +10,8 @@ module Discord
   def embed_card(name: nil, number: nil)
     if number.present?
       url = "#{ROOT_URL}/api/cards?order_eq=#{number}"
-      results = JSON.parse(RestClient.get(url), symbolize_names: true)[:results]
+      response = RestClient::Request.execute(url: url, method: :get, verify_ssl: false)
+      results = JSON.parse(response, symbolize_names: true)[:results]
     else
       results = search_by_name('cards', name)
     end
@@ -103,7 +104,8 @@ module Discord
 
   def embed_user(profile)
     url = "#{ROOT_URL}/api/users/#{profile[:id]}"
-    user = JSON.parse(RestClient.get(url), symbolize_names: true)
+    response = RestClient::Request.execute(url: url, method: :get, verify_ssl: false)
+    user = JSON.parse(response, symbolize_names: true)
 
     embed = Discordrb::Webhooks::Embed.new(color: 0xcaa665)
 
@@ -125,7 +127,8 @@ module Discord
   private
   def search_by_name(endpoint, name)
     url = "#{ROOT_URL}/api/#{endpoint}?name_en_cont=#{name}"
-    JSON.parse(RestClient.get(url), symbolize_names: true)[:results].sort_by { |result| result[:name].size }
+    response = RestClient::Request.execute(url: url, method: :get, verify_ssl: false)
+    JSON.parse(response, symbolize_names: true)[:results].sort_by { |result| result[:name].size }
   end
 
   def link(item)
