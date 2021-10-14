@@ -43,6 +43,22 @@ class Card < ApplicationRecord
 
   translates :name, :description
 
+  scope :standard, -> { where(order_group: 0) }
+  scope :ex,       -> { where.not(order_group: 0) }
+
+  def ex?
+    order_group != 0
+  end
+
+  def formatted_number
+    ex? ? "Ex. #{order}" : "No. #{order}"
+  end
+
+  def stat(side)
+    value = self[side]
+    value == 10 ? 'A' : value
+  end
+
   def stats
     "#{top} #{right} #{bottom} #{left}".gsub(/10/, 'A')
   end

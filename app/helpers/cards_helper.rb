@@ -22,11 +22,6 @@ module CardsHelper
     (1..5).to_a.reverse.map { |x| ["\u2605" * x, x] }
   end
 
-  def stat(card, side)
-    value = card[side]
-    value == 10 ? 'A' : value
-  end
-
   def select_tooltip_delay
     '{"show": 500, "hide": 0 }'
   end
@@ -42,14 +37,6 @@ module CardsHelper
       "#{number_with_delimiter(price)} MGP"
     else
       'N/A'
-    end
-  end
-
-  def formatted_number(card)
-    if card.order_group == 0
-      "No. #{card.order}"
-    else
-      "Ex. #{card.order}"
     end
   end
 
