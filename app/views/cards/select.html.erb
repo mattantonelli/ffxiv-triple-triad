@@ -8,21 +8,16 @@
 <div class="card card-page mx-auto pl-2 pt-2">
   <div class="d-flex flex-wrap align-items-start">
     <% @cards.each do |card| %>
-      <div class="card-select<%= ' missing' unless @user_cards.include?(card.id) %>" data-id="<%= card.id %>"
-        data-toggle="tooltip" data-placement="top" data-delay="<%= select_tooltip_delay %>" title="<%= card.name %>">
+      <div class="card-select<%= ' missing' unless @user_cards.include?(card.id) %><%= ' ex' if card.ex? %>"
+           data-id="<%= card.id %>" data-toggle="tooltip" data-placement="top" data-delay="<%= select_tooltip_delay %>"
+           title="<%= card.name %>">
         <%= small_image(card) %>
       </div>
     <% end %>
   </div>
 </div>
 <div class="card-buttons d-flex flex-column mx-auto mt-1 px-1">
-  <div class="d-flex mb-1">
-    <div class="d-flex align-items-center mr-auto">
-      <input type="checkbox" id="toggle-missing" />
-      <label for="toggle-missing" class="mb-0 ml-1">Hide Missing</label>
-    </div>
-    <span class="font-weight-bold" id="total">Total: <%= @user_cards.size %></span>
-  </div>
+  <span class="font-weight-bold ml-auto mb-1" id="total">Total: <%= @user_cards.size %> / <%= Card.count %></span>
   <div class="d-flex">
     <button type="button" class="btn btn-success btn-sm w-50 mr-1" id="add-all">Add All</button>
     <button type="button" class="btn btn-danger btn-sm w-50 ml-1" id="remove-all">Remove All</button>
@@ -33,21 +28,10 @@
     <h5>How To Use</h5>
   </div>
   <div class="card-body">
-    <h5>I have more than half the cards</h5>
-    <ol>
-      <li>Click the <b>Add All</b> button.</li>
-      <li>Click cards to remove them until the page matches the one in-game.</li>
-      <li>Continue until each page and the <b>Total</b> match your in-game list.</li>
-      <ul>
-        <li>If you made a mistake, you can uncheck the <b>Hide Missing</b> box and click the card to re-add it.</li>
-      </ul>
-      <li>Click <b>Save Cards</b>.</li>
-    </ol>
-    <h5>I have less than half the cards</h5>
-    <ol>
-      <li>Click the cards you see on your in-game list to add them.</li>
-      <li>Once your <b>Total</b> matches your total in-game, check the <b>Hide Missing</b> box.</li>
-      <li>Double check that each page looks like the ones in-game.</li>
+    <ol class="my-2">
+      <li>If you own more than half the cards, click the <b>Add All</b> button.</li>
+      <li>For each page, add/remove cards until it matches your in-game <b>Card List</b>.</li>
+      <li>Confirm that your <b>Total</b> matches your in-game Card List.</li>
       <li>Click <b>Save Cards</b>.</li>
     </ol>
   </div>

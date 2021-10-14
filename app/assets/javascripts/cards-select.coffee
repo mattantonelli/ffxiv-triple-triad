@@ -4,32 +4,39 @@ $(document).on 'turbolinks:load', ->
   all_cards = ->
     $('.card-select')
 
+  standard_cards = ->
+    $('.card-select:not(.ex)')
+
+  ex_cards = ->
+    $('.card-select.ex')
+
   owned_cards = ->
     $('.card-select:not(.missing)')
-
-  missing_cards = ->
-    $('.card-select.missing')
 
   page = 1
   dirty = false
   page_size = 30
-  page_max = Math.ceil(all_cards().length / page_size)
+  standard_page_max = Math.ceil(standard_cards().length / page_size)
+  ex_page_max       = Math.ceil(ex_cards().length / page_size)
+  page_max = standard_page_max + ex_page_max
 
   navigate_to = (page) ->
-    hide_missing = $('#toggle-missing').prop('checked')
-    cards = if hide_missing then owned_cards() else all_cards()
+    # Grab the standard or EX cards, depending on the page
+    if page <= standard_page_max
+      cards = standard_cards()
+      slicePage = page
+    else
+      cards = ex_cards()
+      slicePage = page - standard_page_max
 
-    cards.slice((page - 1) * page_size, page * page_size).show()
-    cards.slice(page * page_size).hide()
-    cards.slice(0, (page - 1) * page_size).hide()
-
-    if hide_missing
-      missing_cards().hide()
+    # Display only cards visible on the page
+    all_cards().hide()
+    cards.slice((slicePage - 1) * page_size, page * page_size).show()
 
     $('#page').text('Page ' + page)
 
   update_cards = ->
-    $('#total').text('Total: ' + owned_cards().length)
+    $('#total').text('Total: ' + owned_cards().length + ' / ' + all_cards().length)
     ids = $.map owned_cards(), (card) -> $(card).data('id')
     $('#card-ids').val(ids.toString())
     dirty = true
@@ -50,20 +57,14 @@ $(document).on 'turbolinks:load', ->
   $('#add-all').click ->
     if !dirty || confirm('Are you sure you want to add all cards to your collection?')
       all_cards().removeClass('missing')
-      $('#toggle-missing').prop('checked', true)
       update_cards()
       reset_page()
 
   $('#remove-all').click ->
     if !dirty || confirm('Are you sure you want to remove all cards from your collection?')
       owned_cards().addClass('missing')
-      $('#toggle-missing').prop('checked', false)
       update_cards()
       reset_page()
-
-  $('#toggle-missing').change ->
-    missing_cards().toggle()
-    navigate_to(page)
 
   $('.card-select').click ->
     card = $(this)
