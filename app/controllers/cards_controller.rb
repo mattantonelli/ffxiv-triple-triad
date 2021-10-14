@@ -48,6 +48,14 @@ class CardsController < ApplicationController
     redirect_to cards_path
   end
 
+  def no
+    redirect_to card_path(Card.find_by(order: params[:id], order_group: 0))
+  end
+
+  def ex
+    redirect_to card_path(Card.find_by(order: params[:id], order_group: 5))
+  end
+
   private
   def set_cards
     @type = params[:source_type]

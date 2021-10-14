@@ -15,6 +15,9 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'cards/no/:id', to: 'cards#no'
+  get 'cards/ex/:id', to: 'cards#ex'
+
   get 'packs', to: 'card_packs#index'
 
   resources :npcs, only: [:index, :show] do
