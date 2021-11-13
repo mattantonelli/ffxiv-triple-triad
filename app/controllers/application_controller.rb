@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
     new_user_session_path
   end
 
+  def set_permanent_cookie(key, value)
+    cookies[key] = { value: value, expires: 20.years.from_now, same_site: :lax }
+  end
+
   def flash_errors(record)
     if record.errors.any?
       flash.now[:error] = record.errors.messages.values.flatten.join('<br>').html_safe
@@ -26,7 +30,7 @@ class ApplicationController < ActionController::Base
 
   private
   def set_locale
-    locale = cookies['locale']
+    locale = cookies[:locale]
 
     unless locale.present?
       locale = request.env['HTTP_ACCEPT_LANGUAGE']&.scan(/^[a-z]{2}/)&.first&.downcase
@@ -35,9 +39,9 @@ class ApplicationController < ActionController::Base
         locale = I18n.default_locale
       end
 
-      cookies['locale'] = locale
+      set_permanent_cookie(:locale, locale)
     end
 
-    I18n.locale = cookies['locale']
+    I18n.locale = cookies[:locale]
   end
 end
