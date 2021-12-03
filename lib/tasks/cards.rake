@@ -50,7 +50,7 @@ namespace :cards do
 
       case type
       when 2, 3
-        origin = Instance.find_by(name_en: acquisition).duty_type
+        origin = Instance.find_by(name_en: acquisition)&.duty_type
       # when 4, 5
       #   origin = 'FATE'
       #   acquisition = "FATE: #{acquisition}"
