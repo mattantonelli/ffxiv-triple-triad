@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_16_001328) do
+ActiveRecord::Schema.define(version: 2022_01_20_005732) do
 
   create_table "achievements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name_en"
@@ -269,6 +269,7 @@ ActiveRecord::Schema.define(version: 2020_12_16_001328) do
     t.datetime "updated_at", null: false
     t.boolean "public_cards", default: true
     t.boolean "admin", default: false
+    t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
   end
 
   create_table "votes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
