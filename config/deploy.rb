@@ -1,4 +1,4 @@
-lock "~> 3.10.0"
+lock "~> 3.16.0"
 
 set :application, 'triad'
 set :repo_url,    'https://github.com/mattantonelli/ffxiv-triple-triad'
@@ -8,7 +8,7 @@ set :default_env, { path: '$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH' }
 
 # rbenv
 set :rbenv_type, :user
-set :rbenv_ruby, '2.4.1'
+set :rbenv_ruby, '3.1.0'
 
 namespace :deploy do
   desc 'Symlink database configuration and secret key'
@@ -36,8 +36,10 @@ namespace :deploy do
         with rails_env: fetch(:rails_env) do
           execute :rake, 'app:update:bin'
           execute :rake, 'card_images:create'
-          execute :ln, '-s', release_path.join('app/assets/images/cards/large.png'), release_path.join('public/images/cards/large.png')
-          execute :ln, '-s', release_path.join('app/assets/images/cards/small.png'), release_path.join('public/images/cards/small.png')
+          execute :ln, '-s', release_path.join('app/assets/images/cards/large.png'),
+            release_path.join('public/images/cards/large.png')
+          execute :ln, '-s', release_path.join('app/assets/images/cards/small.png'),
+            release_path.join('public/images/cards/small.png')
         end
       end
     end
