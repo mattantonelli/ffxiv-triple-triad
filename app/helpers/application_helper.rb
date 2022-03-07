@@ -27,7 +27,7 @@ module ApplicationHelper
   end
 
   def avatar(user)
-    image_tag(user.avatar_url, class: 'avatar')
+    image_tag(user.avatar_url, class: 'avatar') if user.avatar_url.present?
   end
 
   def ga_tid
