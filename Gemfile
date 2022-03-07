@@ -40,6 +40,8 @@ gem 'ed25519'
 gem 'discordrb-webhooks', '3.3.0'
 
 # Compatibility fix for Rails 6 / Ruby 3.1. Should be resolved in Rails 7.0.1
+gem 'net-imap', require: false
+gem 'net-pop', require: false
 gem 'net-smtp', require: false
 
 group :development, :test do

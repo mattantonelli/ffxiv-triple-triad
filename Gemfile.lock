@@ -166,6 +166,14 @@ GEM
     multi_json (1.15.0)
     multi_xml (0.6.0)
     mysql2 (0.5.3)
+    net-imap (0.2.3)
+      digest
+      net-protocol
+      strscan
+    net-pop (0.1.1)
+      digest
+      net-protocol
+      timeout
     net-protocol (0.1.2)
       io-wait
       timeout
@@ -298,6 +306,7 @@ GEM
     sshkit (1.21.2)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    strscan (3.0.1)
     thor (1.2.1)
     tilt (2.0.10)
     timeout (0.2.0)
@@ -354,6 +363,8 @@ DEPENDENCIES
   lograge
   momentjs-rails
   mysql2 (>= 0.4.4, < 0.6.0)
+  net-imap
+  net-pop
   net-smtp
   omniauth-discord
   omniauth-rails_csrf_protection (~> 1.0)
