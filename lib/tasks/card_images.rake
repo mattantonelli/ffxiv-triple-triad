@@ -73,8 +73,8 @@ def create_large(card)
 end
 
 def create_small(card)
-  open(SMALL_DIR.join("#{card.id}.png").to_s, 'wb') do |file|
-    file << open(XIVData.image_path(SMALL_OFFSET + card.id)).read
+  URI.open(SMALL_DIR.join("#{card.id}.png").to_s, 'wb') do |file|
+    file << URI.open(XIVData.image_path(SMALL_OFFSET + card.id)).read
   end
 end
 
