@@ -1,4 +1,4 @@
-json.(npc, :id, :resident_id, :name, :difficulty, :patch)
+json.(npc, :id, :resident_id, :name, :difficulty, :excluded, :patch)
 json.link npc_url(npc)
 
 json.location do

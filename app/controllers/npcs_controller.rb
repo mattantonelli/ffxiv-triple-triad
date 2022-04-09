@@ -16,13 +16,14 @@ class NPCsController < ApplicationController
 
     @q = NPC.all.ransack(query)
     @npcs = @q.result.includes(:rewards, :rules, :location, :quest).order(patch: :desc, id: :desc)
+    @valid_npcs = @npcs.valid
 
     if user_signed_in?
       @user_cards = current_user.cards.pluck(:id)
       @incomplete = @npcs.joins(:rewards).where('cards.id not in (?)', @user_cards).pluck(:id).uniq
       @defeated = current_user.npcs.pluck(:id)
-      @total = @npcs.present? ? @npcs.count : NPC.count
-      @count = (@defeated & @npcs.pluck(:id)).count
+      @total = @valid_npcs.present? ? @valid_npcs.count : NPC.count
+      @count = (@defeated & @valid_npcs.pluck(:id)).count
     else
       render_sign_in_flash
       @user_cards = []

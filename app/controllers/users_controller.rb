@@ -8,7 +8,8 @@ class UsersController < ApplicationController
     if @user.public_cards? || @user == current_user
       @ownership = Redis.current.hgetall(:ownership)
       @cards = @user.cards.sort_by { |card| @ownership.fetch(card.id.to_s, '0%').delete('%').to_i }
-      @npcs = @user.npcs
+      @defeated_npcs = @user.npcs.valid
+      @total_npcs = NPC.valid.count
     else
       flash[:error] = 'This user has set their collection to private.'
       redirect_to root_path

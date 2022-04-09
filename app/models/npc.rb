@@ -31,5 +31,7 @@ class NPC < ApplicationRecord
   belongs_to :location
   belongs_to :quest, optional: true
 
+  scope :valid, -> { where(excluded: false) }
+
   translates :name
 end

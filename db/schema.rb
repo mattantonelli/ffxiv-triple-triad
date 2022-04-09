@@ -2,17 +2,17 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_20_005732) do
+ActiveRecord::Schema.define(version: 2022_04_09_040812) do
 
-  create_table "achievements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "achievements", charset: "utf8", force: :cascade do |t|
     t.string "name_en"
     t.string "name_de"
     t.string "name_fr"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2022_01_20_005732) do
     t.index ["card_id"], name: "index_achievements_on_card_id"
   end
 
-  create_table "card_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "card_types", charset: "utf8", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name_en", null: false
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2022_01_20_005732) do
     t.index ["name_ja"], name: "index_card_types_on_name_ja", unique: true
   end
 
-  create_table "cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "cards", charset: "utf8", force: :cascade do |t|
     t.string "patch"
     t.integer "card_type_id", null: false
     t.integer "stars", null: false
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 2022_01_20_005732) do
     t.index ["stars"], name: "index_cards_on_stars"
   end
 
-  create_table "cards_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "cards_users", charset: "utf8", force: :cascade do |t|
     t.integer "user_id"
     t.integer "card_id"
     t.index ["card_id"], name: "index_cards_users_on_card_id"
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 2022_01_20_005732) do
     t.index ["user_id"], name: "index_cards_users_on_user_id"
   end
 
-  create_table "deck_cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "deck_cards", charset: "utf8", force: :cascade do |t|
     t.integer "deck_id"
     t.integer "card_id"
     t.integer "position"
@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 2022_01_20_005732) do
     t.index ["deck_id"], name: "index_deck_cards_on_deck_id"
   end
 
-  create_table "decks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "decks", charset: "utf8", force: :cascade do |t|
     t.integer "user_id"
     t.integer "rule_id"
     t.integer "npc_id"
@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 2022_01_20_005732) do
     t.index ["user_id"], name: "index_decks_on_user_id"
   end
 
-  create_table "instances", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "instances", charset: "utf8", force: :cascade do |t|
     t.string "name_en"
     t.string "name_de"
     t.string "name_fr"
@@ -117,7 +117,7 @@ ActiveRecord::Schema.define(version: 2022_01_20_005732) do
     t.index ["name_en"], name: "index_instances_on_name_en"
   end
 
-  create_table "locations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "locations", charset: "utf8", force: :cascade do |t|
     t.string "name_en", null: false
     t.string "name_de", null: false
     t.string "name_fr", null: false
@@ -138,7 +138,7 @@ ActiveRecord::Schema.define(version: 2022_01_20_005732) do
     t.index ["region_ja"], name: "index_locations_on_region_ja"
   end
 
-  create_table "npc_cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "npc_cards", charset: "utf8", force: :cascade do |t|
     t.integer "npc_id", null: false
     t.integer "card_id", null: false
     t.boolean "fixed", default: true, null: false
@@ -148,7 +148,7 @@ ActiveRecord::Schema.define(version: 2022_01_20_005732) do
     t.index ["npc_id"], name: "index_npc_cards_on_npc_id"
   end
 
-  create_table "npc_rewards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "npc_rewards", charset: "utf8", force: :cascade do |t|
     t.integer "npc_id", null: false
     t.integer "card_id", null: false
     t.datetime "created_at", null: false
@@ -157,7 +157,7 @@ ActiveRecord::Schema.define(version: 2022_01_20_005732) do
     t.index ["npc_id"], name: "index_npc_rewards_on_npc_id"
   end
 
-  create_table "npcs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "npcs", charset: "utf8", force: :cascade do |t|
     t.integer "x"
     t.integer "y"
     t.integer "resident_id", null: false
@@ -171,6 +171,7 @@ ActiveRecord::Schema.define(version: 2022_01_20_005732) do
     t.string "name_ja", null: false
     t.integer "location_id", null: false
     t.decimal "difficulty", precision: 3, scale: 2
+    t.boolean "excluded", default: false
     t.index ["location_id"], name: "index_npcs_on_location_id"
     t.index ["name_de"], name: "index_npcs_on_name_de", unique: true
     t.index ["name_en"], name: "index_npcs_on_name_en", unique: true
@@ -179,7 +180,7 @@ ActiveRecord::Schema.define(version: 2022_01_20_005732) do
     t.index ["patch"], name: "index_npcs_on_patch"
   end
 
-  create_table "npcs_rules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "npcs_rules", charset: "utf8", force: :cascade do |t|
     t.integer "npc_id"
     t.integer "rule_id"
     t.index ["npc_id", "rule_id"], name: "index_npcs_rules_on_npc_id_and_rule_id", unique: true
@@ -187,7 +188,7 @@ ActiveRecord::Schema.define(version: 2022_01_20_005732) do
     t.index ["rule_id"], name: "index_npcs_rules_on_rule_id"
   end
 
-  create_table "npcs_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "npcs_users", charset: "utf8", force: :cascade do |t|
     t.integer "user_id"
     t.integer "npc_id"
     t.index ["npc_id"], name: "index_npcs_users_on_npc_id"
@@ -195,7 +196,7 @@ ActiveRecord::Schema.define(version: 2022_01_20_005732) do
     t.index ["user_id"], name: "index_npcs_users_on_user_id"
   end
 
-  create_table "pack_cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "pack_cards", charset: "utf8", force: :cascade do |t|
     t.integer "pack_id", null: false
     t.integer "card_id", null: false
     t.datetime "created_at", null: false
@@ -204,7 +205,7 @@ ActiveRecord::Schema.define(version: 2022_01_20_005732) do
     t.index ["pack_id"], name: "index_pack_cards_on_pack_id"
   end
 
-  create_table "packs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "packs", charset: "utf8", force: :cascade do |t|
     t.integer "cost", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -218,7 +219,7 @@ ActiveRecord::Schema.define(version: 2022_01_20_005732) do
     t.index ["name_ja"], name: "index_packs_on_name_ja", unique: true
   end
 
-  create_table "quests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "quests", charset: "utf8", force: :cascade do |t|
     t.string "name_en"
     t.string "name_de"
     t.string "name_fr"
@@ -227,7 +228,7 @@ ActiveRecord::Schema.define(version: 2022_01_20_005732) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "rules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "rules", charset: "utf8", force: :cascade do |t|
     t.string "name_en", null: false
     t.string "name_de", null: false
     t.string "name_fr", null: false
@@ -244,7 +245,7 @@ ActiveRecord::Schema.define(version: 2022_01_20_005732) do
     t.index ["name_ja"], name: "index_rules_on_name_ja", unique: true
   end
 
-  create_table "sources", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "sources", charset: "utf8", force: :cascade do |t|
     t.integer "card_id"
     t.string "origin"
     t.string "name"
@@ -254,7 +255,7 @@ ActiveRecord::Schema.define(version: 2022_01_20_005732) do
     t.index ["origin"], name: "index_sources_on_origin"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "users", charset: "utf8", force: :cascade do |t|
     t.string "username"
     t.integer "discriminator"
     t.string "avatar_url"
@@ -272,7 +273,7 @@ ActiveRecord::Schema.define(version: 2022_01_20_005732) do
     t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
   end
 
-  create_table "votes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "votes", charset: "utf8", force: :cascade do |t|
     t.integer "deck_id"
     t.integer "user_id"
     t.integer "score", default: 1

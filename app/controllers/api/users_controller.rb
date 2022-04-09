@@ -16,8 +16,8 @@ class Api::UsersController < ApiController
       @random_cards = Card.includes(:type, :sources, :packs, :achievement, npc_sources: [:location, :quest, :rules])
         .where(id: random_ids).order(:patch, :id)
 
-      @total_npcs = NPC.count
-      @defeated_npcs = @user.npcs.size
+      @total_npcs = NPC.valid.count
+      @defeated_npcs = @user.npcs.valid.count
       @npc_completion = (@defeated_npcs / @total_npcs.to_f) * 100
     end
   end

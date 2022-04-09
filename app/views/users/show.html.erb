@@ -38,9 +38,9 @@
           <% end %>
           <h6 class="mt-3">
             NPCs
-            <%= fa_icon('star', class: 'text-warning') if @npcs.size == NPC.count %>
+            <%= fa_icon('star', class: 'text-warning') if @defeated_npcs.size == @total_npcs %>
           </h6>
-          <%= render 'layouts/progress', value: @npcs.size, min: 0, max: NPC.count %>
+          <%= render 'layouts/progress', value: @defeated_npcs.size, min: 0, max: @total_npcs %>
         </div>
       </div>
     </div>

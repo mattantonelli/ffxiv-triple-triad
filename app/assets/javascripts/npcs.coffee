@@ -6,8 +6,8 @@ $(document).on 'turbolinks:load', ->
       $(this).css('background-color', if index % 2 == 0 then 'rgba(0, 0, 0, 0.1)' else 'rgba(0, 0, 0, 0.2)')
 
     progress = $('.progress-bar')
-    current = $('.defeated').length
-    max = $('.npc-row').length
+    current = $('.defeated:not(.excluded)').length
+    max = $('.npc-row:not(.excluded)').length
     completion = (current / max) * 100
 
     progress.attr('aria-valuenow', current)

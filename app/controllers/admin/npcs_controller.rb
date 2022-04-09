@@ -39,6 +39,6 @@ class Admin::NPCsController < AdminController
   end
 
   def npc_params
-    params.require(:npc).permit(:name, :quest, :x, :y, :patch)
+    params.require(:npc).permit(:name, :quest, :x, :y, :patch, :excluded)
   end
 end
