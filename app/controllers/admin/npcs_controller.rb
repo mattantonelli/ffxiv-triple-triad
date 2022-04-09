@@ -11,8 +11,9 @@ class Admin::NPCsController < AdminController
 
   def update
     paramz = npc_params
+    quest = paramz.delete(:quest)
 
-    if quest = paramz.delete(:quest)
+    if quest.present?
       quest_id = Quest.find_by(name_en: quest)&.id
 
       if quest_id.present?
@@ -21,8 +22,6 @@ class Admin::NPCsController < AdminController
         flash[:error] = "Could not find quest \"#{quest}\"."
         return render :edit
       end
-    else
-      paramz[:quest_id] = nil
     end
 
     if @npc.update(paramz)
