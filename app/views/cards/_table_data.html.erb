@@ -1,7 +1,9 @@
 <% cards.each do |card| %>
   <tr class="card-row<%= ' has-card' if local_assigns[:user_cards]&.include?(card.id) %>">
-    <td data-value="<%= card.order_group %><%= card.order.to_s.rjust(3, '0') %>"
-      <%= 'class="owned"'.html_safe if local_assigns[:owned_cards]&.include?(card.id) %>>
+    <td class="hide-xs px-2">
+      <%= card_number_badge(card) %>
+    </td>
+    <td <%= 'class="owned"'.html_safe if local_assigns[:owned_cards]&.include?(card.id) %>>
       <%= link_to(card_path(card)) do %>
         <%= small_image(card) %>
       <% end %>

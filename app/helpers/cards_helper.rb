@@ -14,6 +14,10 @@ module CardsHelper
     end
   end
 
+  def card_number_badge(card)
+    content_tag(:span, card.formatted_number, class: 'badge badge-secondary')
+  end
+
   def stars(card)
     (fa_icon('star') * card.stars).html_safe
   end

@@ -54,6 +54,10 @@ class Card < ApplicationRecord
     ex? ? "Ex. #{order}" : "No. #{order}"
   end
 
+  def ownership
+    Redis.current.hget(:ownership, id.to_s) || '0%'
+  end
+
   def stat(side)
     value = self[side]
     value == 10 ? 'A' : value
@@ -67,7 +71,11 @@ class Card < ApplicationRecord
     top + right + bottom + left
   end
 
-  def ownership
-    Redis.current.hget(:ownership, id.to_s) || '0%'
+  def self.no(number)
+    Card.find_by(formatted_number: "No. #{number}")
+  end
+
+  def self.ex(number)
+    Card.find_by(formatted_number: "Ex. #{number}")
   end
 end

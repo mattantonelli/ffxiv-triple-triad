@@ -23,10 +23,13 @@ namespace :cards do
     XIVData.sheet('TripleTriadCardResident').each do |card|
       stars = card['TripleTriadCardRarity'].scan(/\d$/).first.to_i
       type_id = CardType.find_by(name_en: card['TripleTriadCardType'])&.id || 0
+      formatted_number = card['UIPriority'] == '0' ? "No. #{card['Order']}" : "Ex. #{card['Order']}"
+
       cards[card['#']].merge!(top: card['Top'].to_i, bottom: card['Bottom'].to_i,
                               left: card['Left'].to_i, right: card['Right'].to_i,
                               stars: stars, card_type_id: type_id.to_i, sell_price: card['SaleValue'].to_i,
-                              deck_order: card['SortKey'].to_i, order_group: card['UIPriority'].to_i, order: card['Order'].to_i)
+                              deck_order: card['SortKey'].to_i, order_group: card['UIPriority'].to_i,
+                              order: card['Order'].to_i, formatted_number: formatted_number)
     end
 
     # Then create or update them

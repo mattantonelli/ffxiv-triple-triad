@@ -49,11 +49,21 @@ class CardsController < ApplicationController
   end
 
   def no
-    redirect_to card_path(Card.find_by(order: params[:id], order_group: 0))
+    if card = Card.no(params[:id])
+      redirect_to card_path(card)
+    else
+      flash[:error] = 'That page could not be found.'
+      redirect_to cards_path
+    end
   end
 
   def ex
-    redirect_to card_path(Card.find_by(order: params[:id], order_group: 5))
+    if card = Card.ex(params[:id])
+      redirect_to card_path(card)
+    else
+      flash[:error] = 'That page could not be found.'
+      redirect_to cards_path
+    end
   end
 
   private
