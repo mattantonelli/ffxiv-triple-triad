@@ -17,6 +17,9 @@ namespace :deploy do
       # Application credentials
       execute :ln, '-s', shared_path.join('master.key'), release_path.join('config/master.key')
 
+      # Persisted logs
+      execute :ln, '-s', shared_path.join("log/#{fetch(:rails_env)}.log"), release_path.join("log/#{fetch(:rails_env)}.log")
+
       # Individual card images
       execute :rm, '-rf', release_path.join('public/images/cards/large')
       execute :rm, '-rf', release_path.join('public/images/cards/small')
