@@ -13,7 +13,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'lograge'
 gem 'rack-cors', '~> 1.1.0'
-gem 'rack', '>= 2.2.3'
+gem 'rack', '>= 2.2.3.1'
 gem "websocket-extensions", ">= 0.1.5"
 
 gem 'devise'
