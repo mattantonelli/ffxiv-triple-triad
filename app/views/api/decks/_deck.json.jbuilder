@@ -1,4 +1,6 @@
 json.user deck.user.username
+json.(deck, :notes, :rating)
+json.updated deck.updated?
 
 if deck.npc_id.present?
   json.purpose do
@@ -17,8 +19,6 @@ else
     json.name 'General'
   end
 end
-
-json.rating deck.rating
 
 json.cards do
   json.partial! '/api/cards/card', collection: deck.cards, as: :card, skip_sources: true
