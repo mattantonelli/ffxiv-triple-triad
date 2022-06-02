@@ -26,9 +26,8 @@
             <dt>Usable</dt>
             <dd><%= usable?(@deck, @user_cards) %></dd>
           <% end %>
-          <dt>Last Updated</dt>
+          <dt>Updated</dt>
           <dd>
-            <%= format_date(@deck.updated_at) %>
             <%= deck_patch(@deck) %>
           </dd>
           <dt>Created by</dt>

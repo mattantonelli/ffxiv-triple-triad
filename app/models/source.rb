@@ -11,7 +11,7 @@
 #
 
 class Source < ApplicationRecord
-  belongs_to :card
+  belongs_to :card, touch: true
 
   def self.origins
     %w(NPC Dungeon Trial Raid Pack Eureka FATE Achievement Tournament MGP Other)

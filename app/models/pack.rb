@@ -16,5 +16,12 @@ class Pack < ApplicationRecord
   has_many :pack_cards
   has_many :cards, through: :pack_cards
 
+  after_save :touch_related
+
   translates :name
+
+  private
+  def touch_related
+    cards.touch_all
+  end
 end

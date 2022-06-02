@@ -30,6 +30,8 @@ module FfxivTripleTriad
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*{.yml}')]
     config.i18n.enforce_available_locales = false
 
+    config.cache_store = :file_store, 'tmp/cache'
+
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
 
     config.session_store :cookie_store, key: '_ffxiv_triple_triad_session', expire_after: 1.month, same_site: :lax

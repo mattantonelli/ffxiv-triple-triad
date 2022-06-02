@@ -32,7 +32,15 @@ class NPC < ApplicationRecord
   belongs_to :location
   belongs_to :quest, optional: true
 
+  after_save :touch_related
+
   scope :valid, -> { where(excluded: false) }
 
   translates :name
+
+  private
+  def touch_related
+    decks.touch_all
+    rewards.touch_all
+  end
 end

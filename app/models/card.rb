@@ -30,6 +30,8 @@
 
 class Card < ApplicationRecord
   belongs_to :type, class_name: 'CardType', foreign_key: :card_type_id
+  has_many :npc_cards
+  has_many :npcs, through: :npc_cards
   has_many :npc_rewards
   has_many :npc_sources, through: :npc_rewards, source: :npc
   has_many :sources
@@ -39,6 +41,8 @@ class Card < ApplicationRecord
   has_many :packs, through: :pack_cards
   has_and_belongs_to_many :users
   has_one :achievement, required: false
+
+  after_save :touch_related
 
   accepts_nested_attributes_for :sources
 
@@ -78,5 +82,13 @@ class Card < ApplicationRecord
 
   def self.ex(number)
     Card.find_by(formatted_number: "Ex. #{number}")
+  end
+
+  private
+  def touch_related
+    npcs.touch_all
+    npc_sources.touch_all
+    decks.touch_all
+    packs.touch_all
   end
 end
