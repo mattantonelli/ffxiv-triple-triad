@@ -56,7 +56,7 @@ class DiscordController < ApiController
       rescue RestClient::ExceptionWithResponse => e
         # Return API error messages when they are provided
         render json: { type: 4, data: { content: JSON.parse(e.response)['error'] } }
-      rescue Exception => e
+      rescue StandardError => e
         Rails.logger.error(e.inspect)
         e.backtrace.first(3).each { |line| Rails.logger.error(line) }
         render json: { type: 4, data: { content: 'Sorry, something broke!' } }
