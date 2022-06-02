@@ -9,6 +9,16 @@ module NPCsHelper
     end
   end
 
+  def format_npc_name(npc)
+    if npc.excluded?
+      tooltip = content_tag(:span, fa_icon('exclamation-circle'), data: { toggle: 'tooltip' },
+                            title: 'Does not count for Triple Team achievements')
+      "#{npc.name} #{tooltip}".html_safe
+    else
+      npc.name
+    end
+  end
+
   def format_rules(npc, inline: false)
     npc.rules.map(&:name).sort.join(inline ? ', ' : '<br>').html_safe
   end
