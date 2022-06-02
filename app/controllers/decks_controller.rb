@@ -154,7 +154,7 @@ class DecksController < ApplicationController
     end
 
     if params[:updated].present?
-      params[:q].merge!(updated_at_gteq: Deck.patch_5_5)
+      params[:q].merge!(updated_true: 1)
     end
   end
 

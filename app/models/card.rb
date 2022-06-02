@@ -2,29 +2,30 @@
 #
 # Table name: cards
 #
-#  id             :bigint(8)        not null, primary key
-#  patch          :string(255)
-#  card_type_id   :integer          not null
-#  stars          :integer          not null
-#  top            :integer          not null
-#  right          :integer          not null
-#  bottom         :integer          not null
-#  left           :integer          not null
-#  buy_price      :integer
-#  sell_price     :integer          not null
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  order          :integer
-#  name_en        :string(255)      not null
-#  name_de        :string(255)      not null
-#  name_fr        :string(255)      not null
-#  name_ja        :string(255)      not null
-#  description_en :text(65535)      not null
-#  description_de :text(65535)      not null
-#  description_fr :text(65535)      not null
-#  description_ja :text(65535)      not null
-#  order_group    :integer
-#  deck_order     :integer
+#  id               :bigint(8)        not null, primary key
+#  patch            :string(255)
+#  card_type_id     :integer          not null
+#  stars            :integer          not null
+#  top              :integer          not null
+#  right            :integer          not null
+#  bottom           :integer          not null
+#  left             :integer          not null
+#  buy_price        :integer
+#  sell_price       :integer          not null
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  order            :integer
+#  name_en          :string(255)      not null
+#  name_de          :string(255)      not null
+#  name_fr          :string(255)      not null
+#  name_ja          :string(255)      not null
+#  description_en   :text(65535)      not null
+#  description_de   :text(65535)      not null
+#  description_fr   :text(65535)      not null
+#  description_ja   :text(65535)      not null
+#  order_group      :integer
+#  deck_order       :integer
+#  formatted_number :string(255)      not null
 #
 
 class Card < ApplicationRecord
