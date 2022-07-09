@@ -75,6 +75,7 @@ $(document).on 'turbolinks:load', ->
   $('.card-toggle').click ->
     card = $(this)
 
+    # Update the users' card collection and toggle the card
     if card.hasClass('owned')
       updateCard(card)
       card.removeClass('owned')
@@ -85,3 +86,11 @@ $(document).on 'turbolinks:load', ->
       path = card.data('path').replace('add', 'remove')
 
     card.data('path', path)
+
+    # Update the NPC's completion status
+    cardList = card.parent()
+
+    if cardList.find('.owned').length == cardList.children().length
+      card.closest('tr').addClass('completed')
+    else
+      card.closest('tr').removeClass('completed')
