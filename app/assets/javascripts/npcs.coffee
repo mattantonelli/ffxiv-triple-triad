@@ -44,6 +44,9 @@ $(document).on 'turbolinks:load', ->
     else if $('#hide-defeated').prop('checked')
       $('.defeated').hide()
       localStorage.setItem('npc-display', 'hide-defeated')
+    else if $('#hide-finished').prop('checked')
+      $('.completed.defeated').hide()
+      localStorage.setItem('npc-display', 'hide-finished')
 
     restripe()
 
