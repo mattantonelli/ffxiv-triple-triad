@@ -3,8 +3,8 @@
 # Table name: npcs
 #
 #  id          :bigint(8)        not null, primary key
-#  x           :integer
-#  y           :integer
+#  x           :decimal(3, 1)
+#  y           :decimal(3, 1)
 #  resident_id :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

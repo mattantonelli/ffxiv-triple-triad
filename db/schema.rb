@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_01_234328) do
+ActiveRecord::Schema.define(version: 2022_07_20_183925) do
 
   create_table "achievements", charset: "utf8", force: :cascade do |t|
     t.string "name_en"
@@ -161,8 +161,8 @@ ActiveRecord::Schema.define(version: 2022_06_01_234328) do
   end
 
   create_table "npcs", charset: "utf8", force: :cascade do |t|
-    t.integer "x"
-    t.integer "y"
+    t.decimal "x", precision: 3, scale: 1
+    t.decimal "y", precision: 3, scale: 1
     t.integer "resident_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -11,8 +11,10 @@ namespace :npcs do
     puts '  Fetching resident data'
     npcs = XIVData.sheet('ENpcBase').each_with_object({}) do |npc, h|
       npc.each do |k, v|
-        if k&.match?('ENpcData') && v&.match(/TripleTriad#(\d+)/) && h.values.find { |val| val[:id] == $1.to_i }.nil?
-          h[npc['#']] = { id: $1.to_i, resident_id: npc['#'].to_i }
+        if k&.match?('ENpcData') && v&.match(/TripleTriad#(\d+)/)
+          id = $1.to_i
+          h.delete_if { |_, npc| npc[:id] == id } # Delete duplicates to ensure we use the last NPC in the data
+          h[npc['#']] = { id: id, resident_id: npc['#'].to_i }
           break
         end
       end
@@ -147,7 +149,7 @@ end
 def get_coordinate(value, map_offset, size_factor)
   scale = size_factor / 100.0
   offset = (value + map_offset) * scale
-  (((41.0 / scale) * ((offset + 1024.0) / 2048.0)) + 1).to_i
+  (((41.0 / scale) * ((offset + 1024.0) / 2048.0)) + 1).round(1)
 end
 
 def weighted_average(cards, count)
