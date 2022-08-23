@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_20_183925) do
+ActiveRecord::Schema.define(version: 2022_08_23_104724) do
 
   create_table "achievements", charset: "utf8", force: :cascade do |t|
     t.string "name_en"
@@ -67,10 +67,10 @@ ActiveRecord::Schema.define(version: 2022_07_20_183925) do
     t.index ["card_type_id"], name: "index_cards_on_card_type_id"
     t.index ["deck_order"], name: "index_cards_on_deck_order"
     t.index ["id", "patch"], name: "index_cards_on_id_and_patch"
-    t.index ["name_de"], name: "index_cards_on_name_de", unique: true
-    t.index ["name_en"], name: "index_cards_on_name_en", unique: true
-    t.index ["name_fr"], name: "index_cards_on_name_fr", unique: true
-    t.index ["name_ja"], name: "index_cards_on_name_ja", unique: true
+    t.index ["name_de"], name: "index_cards_on_name_de"
+    t.index ["name_en"], name: "index_cards_on_name_en"
+    t.index ["name_fr"], name: "index_cards_on_name_fr"
+    t.index ["name_ja"], name: "index_cards_on_name_ja"
     t.index ["order"], name: "index_cards_on_order"
     t.index ["order_group"], name: "index_cards_on_order_group"
     t.index ["stars"], name: "index_cards_on_stars"
