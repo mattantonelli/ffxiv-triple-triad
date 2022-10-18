@@ -1,7 +1,7 @@
 require 'xiv_data'
 
 namespace :instances do
-  VALID_TYPES = %w(Dungeons Trials Raids).freeze
+  VALID_TYPES = ['Dungeon', 'Trial', 'Raid', 'Treasure Hunt', 'V&C Dungeon Finder'].freeze
 
   desc 'Create instances and their translations'
   task create: :environment do
@@ -11,7 +11,7 @@ namespace :instances do
     instances = XIVData.sheet('ContentFinderCondition', locale: 'en').each_with_object({}) do |instance, h|
       id, name, type = instance.values_at('#', 'Name', 'ContentType')
 
-      if name.present? and VALID_TYPES.include?(type)
+      if name.present? and VALID_TYPES.include?(type.singularize)
         h[id] = { id: id.to_i, name_en: sanitize_instance_name(name), duty_type: type.singularize }
       end
     end
