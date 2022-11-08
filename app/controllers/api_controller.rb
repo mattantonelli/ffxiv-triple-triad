@@ -1,10 +1,8 @@
 class ApiController < ApplicationController
   skip_before_action :set_locale
-  before_action :set_default_format, :set_language, :set_ownership, :track_request
+  before_action :set_default_format, :set_language, :set_ownership
 
   SUPPORTED_LOCALES = %w(en de fr ja).freeze
-  GA_URL = 'www.google-analytics.com/collect'.freeze
-  GA_TID = Rails.application.credentials.dig(:google_analytics, :tracking_id).freeze
 
   def render_not_found
     render json: { status: 404, error: 'Not found' }, status: :not_found
@@ -48,12 +46,5 @@ class ApiController < ApplicationController
 
   def set_ownership
     @ownership = Redis.current.hgetall(:ownership)
-  end
-
-  def track_request
-    if Rails.env.production? && GA_TID.present?
-      RestClient.post(GA_URL, { v: 1, tid: GA_TID, cid: Digest::MD5.hexdigest(request.remote_ip),
-                                t: 'pageview', dp: request.fullpath })
-    end
   end
 end

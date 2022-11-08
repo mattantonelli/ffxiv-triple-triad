@@ -29,8 +29,4 @@ module ApplicationHelper
   def avatar(user)
     image_tag(user.avatar_url, class: 'avatar') if user.avatar_url.present?
   end
-
-  def ga_tid
-    Rails.application.credentials.dig(:google_analytics, :tracking_id)
-  end
 end
