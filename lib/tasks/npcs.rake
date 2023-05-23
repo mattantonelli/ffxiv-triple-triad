@@ -79,7 +79,7 @@ namespace :npcs do
       next unless npc.present?
 
       npc[:rewards] = opponent.each_with_object([]) do |(k, v), a|
-        if k.match?('Item{PossibleReward}') && v.present?
+        if k.match?('Item{PossibleReward}') && v.present? && v != 'Diadochos Sword'
           a << Card.where('BINARY name_en like ?', "%#{v.sub(/ Card$/, '')}%").first.id
         end
       end
