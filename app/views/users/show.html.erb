@@ -10,7 +10,7 @@
         <%= avatar(@user) %>
         <div class="d-flex flex-column flex-grow-1 ml-4">
           <div>
-            <span><b><%= @user.username %></b>#<%= @user.discriminator.to_s.rjust(4, '0') %></span>
+            <span><b><%= @user.username %></b></span>
             <% unless @user.public_cards? %>
               <span class="badge badge-danger">Private</span>
             <% end %>

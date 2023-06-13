@@ -25,7 +25,7 @@
       <% @users.each do |user| %>
         <tr>
           <td><%= avatar(user) %></td>
-          <td><%= username(user) %></td>
+          <td><%= user.username %></td>
           <td class="hide-xs"><%= user.uid %></td>
           <td class="hide-xs"><%= format_date(user.created_at) %></td>
           <td class="hide-xs"><%= format_date(user.current_sign_in_at) %></td>
