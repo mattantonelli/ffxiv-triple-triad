@@ -22,7 +22,13 @@ class CardsController < ApplicationController
   end
 
   def show
-    @card = Card.find(params[:id])
+    if params[:id].match?(/\A\d+\z/)
+      @card = Card.find(params[:id])
+    else
+      @card = Card.find_by(name_en: params[:id])
+    end
+
+    redirect_to not_found_path unless @card.present?
   end
 
   def add

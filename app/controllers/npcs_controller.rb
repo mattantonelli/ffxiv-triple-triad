@@ -1,6 +1,4 @@
 class NPCsController < ApplicationController
-  before_action :set_npc, only: :show
-
   def index
     @location = params[:location]
     @rule = params[:rule]
@@ -33,6 +31,14 @@ class NPCsController < ApplicationController
   end
 
   def show
+    if params[:id].match?(/\A\d+\z/)
+      @npc = NPC.find(params[:id])
+    else
+      @npc = NPC.find_by(name_en: params[:id])
+    end
+
+    return redirect_to not_found_path unless @npc.present?
+
     @rewards = @npc.rewards
   end
 
@@ -60,10 +66,6 @@ class NPCsController < ApplicationController
   end
 
   private
-  def set_npc
-    @npc = NPC.find(params[:id])
-  end
-
   def set_params
     params.permit(:npcs)
   end
