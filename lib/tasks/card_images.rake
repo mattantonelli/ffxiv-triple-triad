@@ -6,8 +6,8 @@ namespace :card_images do
   IMAGES_DIR = Rails.root.join('app/assets/images/cards').freeze
   BACKGROUND = ChunkyPNG::Image.from_file(IMAGES_DIR.join('background.png')).freeze
   STAR = ChunkyPNG::Image.from_file(IMAGES_DIR.join('star.png')).freeze
-  LARGE_OFFSET = 82100.freeze
-  SMALL_OFFSET = 82500.freeze
+  LARGE_OFFSET = 87000.freeze
+  SMALL_OFFSET = 88000.freeze
 
   type_sheet = ChunkyPNG::Image.from_file(IMAGES_DIR.join('types.png'))
   TYPES = (1..4).map { |id| type_sheet.crop(20 * (id - 1), 0, 20, 20) }.freeze
