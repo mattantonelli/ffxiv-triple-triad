@@ -4,7 +4,13 @@ namespace :card_images do
   LARGE_DIR = Rails.root.join('public/images/cards/large').freeze
   SMALL_DIR = Rails.root.join('public/images/cards/small').freeze
   IMAGES_DIR = Rails.root.join('app/assets/images/cards').freeze
+
   BACKGROUND = ChunkyPNG::Image.from_file(IMAGES_DIR.join('background.png')).freeze
+  COLORED_BACKGROUNDS = {
+    red: ChunkyPNG::Image.from_file(IMAGES_DIR.join('background_red.png')),
+    blue: ChunkyPNG::Image.from_file(IMAGES_DIR.join('background_blue.png'))
+  }.freeze
+
   STAR = ChunkyPNG::Image.from_file(IMAGES_DIR.join('star.png')).freeze
   LARGE_OFFSET = 87000.freeze
   SMALL_OFFSET = 88000.freeze
@@ -27,8 +33,16 @@ namespace :card_images do
     counts = { large: Dir.entries(LARGE_DIR).size, small: Dir.entries(SMALL_DIR).size }
 
     Card.all.each do |card|
+      # Create the standard large cards displayed on the site
       unless LARGE_DIR.join("#{card.id}.png").exist?
         create_large(card)
+      end
+
+      # Also create red/blue variants provided by the API
+      %i(red blue).each do |color|
+        unless LARGE_DIR.join(color.to_s, "#{card.id}.png").exist?
+          create_large(card, color)
+        end
       end
 
       unless SMALL_DIR.join("#{card.id}.png").exist?
@@ -46,9 +60,14 @@ namespace :card_images do
   end
 end
 
-def create_large(card)
+def create_large(card, color = nil)
   image = ChunkyPNG::Image.from_file(XIVData.image_path(LARGE_OFFSET + card.id))
-  image = BACKGROUND.compose(image)
+
+  if color.present?
+    image = COLORED_BACKGROUNDS[color].compose(image)
+  else
+    image = BACKGROUND.compose(image)
+  end
 
   if card.card_type_id > 0
     image.compose!(TYPES[card.card_type_id - 1], 80, 3)
@@ -69,7 +88,7 @@ def create_large(card)
   image.compose!(NUMBERS[card.bottom - 1], 45, 103)
   image.compose!(NUMBERS[card.left - 1], 32, 97)
 
-  image.save(LARGE_DIR.join("#{card.id}.png").to_s)
+  image.save(LARGE_DIR.join(color.to_s, "#{card.id}.png").to_s)
 end
 
 def create_small(card)
