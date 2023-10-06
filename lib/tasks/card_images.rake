@@ -55,6 +55,8 @@ namespace :card_images do
 
     create_sheet(SMALL_DIR, IMAGES_DIR.join('small.png'), 40, 40)
     create_sheet(LARGE_DIR, IMAGES_DIR.join('large.png'), 104, 128)
+    create_sheet(LARGE_DIR.join('red'), IMAGES_DIR.join('large_red.png'), 104, 128)
+    create_sheet(LARGE_DIR.join('blue'), IMAGES_DIR.join('large_blue.png'), 104, 128)
 
     puts 'Created spritesheets for the latest card images'
   end

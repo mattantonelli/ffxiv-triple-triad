@@ -39,8 +39,14 @@ namespace :deploy do
         with rails_env: fetch(:rails_env) do
           execute :rake, 'app:update:bin'
           execute :rake, 'card_images:create'
+
+          # Make card spritesheets available at static paths for external use
           execute :ln, '-s', release_path.join('app/assets/images/cards/large.png'),
             release_path.join('public/images/cards/large.png')
+          execute :ln, '-s', release_path.join('app/assets/images/cards/large_red.png'),
+            release_path.join('public/images/cards/large_red.png')
+          execute :ln, '-s', release_path.join('app/assets/images/cards/large_blue.png'),
+            release_path.join('public/images/cards/large_blue.png')
           execute :ln, '-s', release_path.join('app/assets/images/cards/small.png'),
             release_path.join('public/images/cards/small.png')
         end
