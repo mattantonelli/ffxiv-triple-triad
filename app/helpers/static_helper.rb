@@ -12,6 +12,11 @@ module StaticHelper
             target: '_blank', class: 'dropdown-item')
   end
 
+  def play_online_link
+    link_to("Triple Triad Online #{fa_icon('external-link')}".html_safe, 'https://play.ffxivtriad.com/play',
+            target: '_blank', class: 'dropdown-item')
+  end
+
   def ffxiv_collect_link
     link_to("FFXIV Collect #{fa_icon('external-link')}".html_safe, 'https://ffxivcollect.com/',
             target: '_blank', class: 'dropdown-item')
