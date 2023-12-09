@@ -6,8 +6,8 @@ This is yet another application for tracking your Final Fantasy XIV Triple Triad
 All of this application's data is made available through a RESTful JSON API. See the [documentation](https://triad.raelys.com/api/docs) for details.
 
 ## Dependencies
-* Ruby (2.4.1)
-* Rails (5.2.1)
+* Ruby (3.1)
+* Rails (6.1)
 * MySQL
 * Redis
 
