@@ -15,4 +15,5 @@ json.npcs do
   json.undefeated @total_npcs - @defeated_npcs
   json.total @total_npcs
   json.completion "#{@npc_completion.to_i}%"
+  json.ids @user_npcs.pluck(:id).sort
 end
