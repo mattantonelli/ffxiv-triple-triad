@@ -45,6 +45,6 @@ class Deck < ApplicationRecord
   end
 
   def add_vote
-    votes.create!(user_id: self.user_id)
+    votes.create!(user_id: user.id)
   end
 end
