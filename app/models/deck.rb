@@ -11,13 +11,14 @@
 #  rating     :integer
 #  notes      :string(1000)
 #  updated    :boolean          default(TRUE)
+#  user_uid   :string(255)
 #
 
 class Deck < ApplicationRecord
   before_create :set_order
   after_create :add_vote
 
-  belongs_to :user
+  belongs_to :user, primary_key: :uid, foreign_key: :user_uid
   belongs_to :rule, required: false
   belongs_to :npc, required: false
   has_many :deck_cards, dependent: :delete_all

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_23_104724) do
+ActiveRecord::Schema.define(version: 2024_01_21_222553) do
 
   create_table "achievements", charset: "utf8", force: :cascade do |t|
     t.string "name_en"
@@ -103,10 +103,12 @@ ActiveRecord::Schema.define(version: 2022_08_23_104724) do
     t.integer "rating"
     t.string "notes", limit: 1000
     t.boolean "updated", default: true
+    t.string "user_uid"
     t.index ["npc_id"], name: "index_decks_on_npc_id"
     t.index ["rule_id"], name: "index_decks_on_rule_id"
     t.index ["updated"], name: "index_decks_on_updated"
     t.index ["user_id"], name: "index_decks_on_user_id"
+    t.index ["user_uid"], name: "index_decks_on_user_uid"
   end
 
   create_table "instances", charset: "utf8", force: :cascade do |t|
