@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :set_locale
+  before_action :set_locale, :display_announcements
 
   SUPPORTED_LOCALES = %w(en de fr ja).freeze
 
@@ -43,5 +43,13 @@ class ApplicationController < ActionController::Base
     end
 
     I18n.locale = cookies[:locale]
+  end
+
+  def display_announcements
+    message = "Another Triple Triad Tracker has migrated to #{view_context.link_to('FFXIV Collect', 'https://ffxivcollect.com/triad/cards', target: '_blank')}!"
+    message += ' <b>Please import your progress on the new site at your earliest convenience.</b>' if user_signed_in?
+    message += " This site will remain online until Dec 31, 2024, but it will <b>not</b> be updated aside from security patches. If you have any questions, feel free to ask on #{view_context.link_to('Discord', 'https://discord.gg/QVypqNn2cg', target: '_blank')}."
+
+    flash.now[:announcement_fixed] = message
   end
 end

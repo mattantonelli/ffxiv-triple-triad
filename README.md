@@ -1,6 +1,9 @@
 # Another Triple Triad Tracker
 This is yet another application for tracking your Final Fantasy XIV Triple Triad card collection written in [Ruby on Rails](https://rubyonrails.org/) and powered by [Saint Coinach](https://github.com/ufx/SaintCoinach). This application strives to be as autonomous as possible by pulling its card and NPC data from the game files via [Saint Coinach](https://github.com/ufx/SaintCoinach). This ensures that manual data entry is only required for data not available on the client side, such as instance drop locations. Even if the card source is unknown, the cards themselves will still be created and the source can easily be updated later when it becomes known.
 
+## Notice
+The functionality of this application has been migrated to [ffxiv-collect](https://github.com/mattantonelli/ffxiv-collect).
+
 ## API
 
 All of this application's data is made available through a RESTful JSON API. See the [documentation](https://triad.raelys.com/api/docs) for details.
