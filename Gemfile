@@ -15,6 +15,7 @@ gem 'lograge'
 gem 'rack-cors', '~> 2.0.1'
 gem 'rack', '>= 2.2.6.3'
 gem "websocket-extensions", ">= 0.1.5"
+gem 'base64', '0.1.1' # Passenger requirement
 
 gem 'devise'
 gem 'omniauth-discord'
